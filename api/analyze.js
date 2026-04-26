@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.ANTHROPIC_API_KEY}`
+        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
       },
       body: JSON.stringify({
         model: 'llama-3.3-70b-versatile',
@@ -25,8 +25,8 @@ export default async function handler(req, res) {
         messages: [
           {
             role: 'system',
-            content: `Tu es un psychologue bienveillant. Analyse cette confession et réponds UNIQUEMENT en JSON sans markdown:
-{"emotions":["emoji + émotion","emoji + émotion","emoji + émotion"],"conseil":"Conseil empathique 2-3 phrases en français.","intensite":"faible|modérée|forte|critique"}`
+            content: `Tu es un psychologue bienveillant. Analyse cette confession (peut être en français, wolof, ou mélange) et réponds UNIQUEMENT en JSON sans markdown:
+{"emotions":["emoji + émotion","emoji + émotion","emoji + émotion"],"conseil":"Conseil empathique 2-3 phrases en français. Parle directement à la personne (tu/toi).","intensite":"faible|modérée|forte|critique"}`
           },
           {
             role: 'user',
@@ -36,8 +36,19 @@ export default async function handler(req, res) {
       })
     });
 
+    if (!response.ok) {
+      const error = await response.json();
+      console.error('Groq API Error:', error);
+      return res.status(response.status).json({ error: 'Erreur API Groq' });
+    }
+
     const data = await response.json();
     const raw = data.choices?.[0]?.message?.content || '';
+    
+    if (!raw) {
+      return res.status(500).json({ error: 'Réponse vide du serveur' });
+    }
+
     const parsed = JSON.parse(raw.replace(/```json|```/g, '').trim());
 
     return res.status(200).json({
@@ -47,6 +58,7 @@ export default async function handler(req, res) {
     });
 
   } catch (err) {
-    return res.status(500).json({ error: 'Erreur serveur' });
+    console.error('Error:', err);
+    return res.status(500).json({ error: 'Erreur serveur: ' + err.message });
   }
 }
