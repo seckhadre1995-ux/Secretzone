@@ -462,28 +462,16 @@ async function fetchAIAnalysis(confessionText, confessionId) {
   if (c?.aiCache) { renderAIResult(box, c.aiCache); return; }
 
   try {
-    // ✅ PRODUCTION : remplace par '/api/analyze' quand ton backend est déployé
-    // Pour la démo, on appelle l'API directement (prototype uniquement)
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    // ✅ Appel sécurisé vers le backend proxy Vercel — clé API cachée côté serveur
+    const response = await fetch("/api/analyze", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 400,
-        system: `Tu es un psychologue bienveillant. Analyse cette confession (peut être en français, wolof, ou mélange des deux) et réponds UNIQUEMENT en JSON sans markdown:
-{
-  "emotions": ["emoji + émotion", "emoji + émotion", "emoji + émotion"],
-  "conseil": "Conseil empathique de 2-3 phrases. Parle directement à la personne (tu/toi). Réponds en français.",
-  "intensite": "faible|modérée|forte|critique"
-}`,
-        messages: [{ role: "user", content: `Confession: "${confessionText}"` }]
-      })
+      body: JSON.stringify({ text: confessionText })
     });
 
-    const data = await response.json();
-    const rawText = data.content?.map(b => b.text || '').join('') || '';
-    const clean = rawText.replace(/```json|```/g, '').trim();
-    const parsed = JSON.parse(clean);
+    if (!response.ok) throw new Error('Erreur API ' + response.status);
+
+    const parsed = await response.json();
     if (c) c.aiCache = parsed;
     renderAIResult(box, parsed);
 
@@ -491,7 +479,7 @@ async function fetchAIAnalysis(confessionText, confessionId) {
     box.innerHTML = `
       <div class="ai-header">🤖 Analyse IA <span class="ai-badge">⚡ CLAUDE</span></div>
       <div style="font-size:0.8rem; color: var(--muted); font-style: italic;">
-        💡 En production : configure /api/analyze dans ton backend Vercel pour sécuriser la clé API.
+        Service temporairement indisponible. Réessaie dans quelques secondes.
       </div>
     `;
   }
