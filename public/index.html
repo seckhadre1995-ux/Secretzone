@@ -9,6 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="SecretZone">
+<!-- PWA Manifest inline via JS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -309,6 +310,7 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
 </head>
 <body>
 
+<!-- ONBOARDING -->
 <div id="onboarding-overlay">
   <div class="onboard-card">
     <div class="onboard-title">SECRETZONE</div>
@@ -323,6 +325,7 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   </div>
 </div>
 
+<!-- HOME -->
 <div id="home-view">
   <header class="header-home">
     <div class="logo">SecretZone</div>
@@ -343,6 +346,7 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
       <div class="stat"><span class="stat-number">∞</span><span class="stat-label">Anonymat</span></div>
     </div>
 
+    <!-- STREAK HOME -->
     <div class="streak-home" id="streakHome">
       <span style="font-size:1.4rem;">🔥</span>
       <div class="streak-home-text" id="streakHomeText"></div>
@@ -352,6 +356,7 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
     <button class="btn-ghost" onclick="openConfessSheet()">✍️ Lâcher mon secret maintenant</button>
   </section>
 
+  <!-- SEARCH HOME -->
   <div class="home-search-wrap">
     <div class="home-search-inner">
       <span class="home-search-icon">🔍</span>
@@ -402,6 +407,7 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   </footer>
 </div>
 
+<!-- FEED -->
 <div id="feed-view">
   <div class="feed-header">
     <div class="feed-logo">SZ</div>
@@ -413,6 +419,7 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
     </div>
   </div>
 
+  <!-- FILTER -->
   <div class="filter-bar" id="filterBar">
     <button class="filter-chip active" data-cat="all" onclick="setFilter('all',this)">✨ Tout</button>
     <button class="filter-chip" data-cat="amour" onclick="setFilter('amour',this)">❤️ Amour</button>
@@ -423,12 +430,14 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
     <button class="filter-chip" data-cat="wolof" onclick="setFilter('wolof',this)">🇸🇳 Sénégal</button>
   </div>
 
+  <!-- SORT -->
   <div class="sort-bar">
     <button class="sort-chip active" data-sort="hot" onclick="setSort('hot',this)">🔥 Tendances</button>
     <button class="sort-chip" data-sort="new" onclick="setSort('new',this)">🆕 Récent</button>
     <button class="sort-chip" data-sort="top" onclick="setSort('top',this)">👑 Top likes</button>
   </div>
 
+  <!-- SEARCH -->
   <div class="search-bar-wrap" id="searchBarWrap">
     <div class="search-bar-inner">
       <input type="text" class="search-input" id="feedSearchInput" placeholder="Rechercher dans les confessions..." oninput="onFeedSearch(this.value)">
@@ -440,6 +449,7 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   <button class="floating-confess" onclick="openConfessSheet()">＋</button>
 </div>
 
+<!-- SHARE CARD -->
 <div id="shareCardOverlay">
   <div class="share-card" id="shareCardEl">
     <div class="share-card-header">
@@ -460,6 +470,7 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   <button class="sc-close" onclick="closeShareCard()">✕ Fermer</button>
 </div>
 
+<!-- PWA BANNER -->
 <div class="pwa-banner" id="pwaBanner">
   <span style="font-size:1.6rem;">📲</span>
   <div class="pwa-banner-text"><strong>Installer SecretZone</strong><br>Accès rapide depuis ton écran d'accueil.</div>
@@ -467,8 +478,10 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   <button class="pwa-dismiss" onclick="dismissPWA()">✕</button>
 </div>
 
+<!-- SHEETS -->
 <div class="sheet-overlay" id="sheetOverlay" onclick="closeAllSheets()"></div>
 
+<!-- CONFESSER -->
 <div class="bottom-sheet" id="sheetConfess">
   <div class="sheet-handle"></div>
   <div class="sheet-header">Lâche ton secret 🔒</div>
@@ -491,6 +504,7 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   </div>
 </div>
 
+<!-- COMMENTAIRES -->
 <div class="bottom-sheet" id="sheetComments">
   <div class="sheet-handle"></div>
   <div class="sheet-header" id="commentCountTitle">Commentaires</div>
@@ -501,6 +515,7 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   </div>
 </div>
 
+<!-- SCRIPT -->
 <div class="bottom-sheet" id="sheetScript">
   <div class="sheet-handle"></div>
   <div class="sheet-header">🎥 Script TikTok / Reels</div>
@@ -511,12 +526,14 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   </div>
 </div>
 
+<!-- TOP VIRAL -->
 <div class="bottom-sheet" id="sheetTopViral">
   <div class="sheet-handle"></div>
   <div class="sheet-header">🔥 Top 5 Viral</div>
   <div class="sheet-content" id="viralList"></div>
 </div>
 
+<!-- SIGNALEMENT -->
 <div class="bottom-sheet" id="sheetReport">
   <div class="sheet-handle"></div>
   <div class="sheet-header">🚩 Signaler</div>
@@ -533,12 +550,14 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   </div>
 </div>
 
+<!-- NOTIFICATIONS -->
 <div class="bottom-sheet" id="sheetNotif">
   <div class="sheet-handle"></div>
   <div class="sheet-header">🔔 Notifications</div>
   <div class="sheet-content" id="notifList"></div>
 </div>
 
+<!-- PREMIUM -->
 <div class="bottom-sheet" id="sheetBoost">
   <div class="sheet-handle"></div>
   <div class="sheet-header">👑 SecretZone Premium</div>
@@ -560,35 +579,17 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
 
 <div class="toast" id="toast"></div>
 
-<script type="module">
+<script>
 'use strict';
-
 /* ══════════════════════════════════════════
-   1. CONFIGURATION FIREBASE
-══════════════════════════════════════════ */
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBR_lxfXzsr2keK6a-bTeXcFyA_CbZgQm8",
-  authDomain: "secretzone-dab0a.firebaseapp.com",
-  projectId: "secretzone-dab0a",
-  storageBucket: "secretzone-dab0a.firebasestorage.app",
-  messagingSenderId: "588878004907",
-  appId: "1:588878004907:web:bf2a8ae8799d7d626aedee"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-/* ══════════════════════════════════════════
-   2. DONNÉES LOCALES ET ÉTATS
+   STORAGE KEYS & HELPERS
 ══════════════════════════════════════════ */
 const K={USER:'sz_u6',CONF:'sz_c6',NOTIF:'sz_n6',ONBOARD:'sz_ob1',STREAK:'sz_sk1',REPORT:'sz_rp1',PWA:'sz_pwa1'};
 
 function load(key,fb){try{const r=localStorage.getItem(key);if(r==null)return fb;const p=JSON.parse(r);return p??fb;}catch{return fb;}}
 function save(key,val){try{localStorage.setItem(key,JSON.stringify(val));}catch{}}
 
+/* ══ USER STATE ══ */
 let U=load(K.USER,{liked:[],voted:{},lastPost:0,isPremium:false,myPostIds:[],lang:'fr'});
 if(!Array.isArray(U.liked))U.liked=[];
 if(!U.voted||typeof U.voted!=='object')U.voted={};
@@ -599,101 +600,70 @@ let notifications=load(K.NOTIF,[]);
 if(!Array.isArray(notifications))notifications=[];
 
 let streak=load(K.STREAK,{count:0,lastDate:null,scrolled:0});
-let reported=load(K.REPORT,{});
+let reported=load(K.REPORT,{});// {id: reason}
 
 function saveU(){save(K.USER,U);}
 function saveN(){save(K.NOTIF,notifications);}
 function saveStreak(){save(K.STREAK,streak);}
 
-let C = load(K.CONF, []); 
+/* ══ DEFAULT DATA ══ */
+const DEF=[
+  {id:101,text:"Suis une fille de 25 ans et je sors avec un homme marié de 38 ans qui vit aux USA. On se parle par appels vocaux et vidéo, on passe de bons moments ensemble. Mais parfois il me dit que si je viens à l'hôtel au Sénégal, il ne veut pas que je reste vierge… c'est quelque chose que je ne ferai jamais. À chaque fois qu'il dit ça je suis déçue, il s'excuse — puis le sujet revient. Ce qui me fait le plus mal : depuis le début du Ramadan il ne m'a plus parlé. Je l'aime mais j'ai peur qu'un jour il me tourne la tête. Selon vous, est-ce qu'il m'aime vraiment ?",cat:'amour',isWolof:true,likes:5142,ts:1700000000,comments:[{id:1001,a:'Anon_442',t:"Un homme qui t'aime vraiment ne remet pas en cause tes valeurs.",emoji:'💜',replies:[]},{id:1002,a:'Anon_880',t:"Le silence pendant le Ramadan est un signal.",emoji:'🤍',replies:[]},{id:1003,a:'Anon_330',t:"Fais attention à toi. Un homme marié qui presse = red flag majeur.",emoji:'⚠️',replies:[]}],vRight:412,vWrong:4102},
+  {id:102,text:"Je suis une fille de 26 ans, j'ai subi un mariage arrangé à 13 ans. Mon mari avait de l'argent mais il m'a donné une misère. Ma mère a accepté. J'ai quand même obtenu mon Bac+2 en me battant seule. Quand j'ai demandé le divorce, ma mère m'a dit que je n'avais nulle part où aller. Ma maison c'est chez une amie maintenant. Je veux me reconstruire.",cat:'dark',isWolof:true,likes:8903,ts:1700100000,comments:[{id:1004,a:'Anon_771',t:"Ton courage est énorme. Bac+2 malgré tout ça.",emoji:'🔥',replies:[]},{id:1005,a:'Anon_993',t:"La société t'a faillie mais toi tu ne t'es jamais abandonnée.",emoji:'💪',replies:[]}],vRight:8201,vWrong:143},
+  {id:103,text:"Salam, j'ai 22 ans et je suis marié. Hier nuit je me suis réveillé et j'ai vu que j'avais fait pipi dans le lit. J'ai réveillé ma femme et je lui ai dit que c'est elle qui avait fait ça… elle a pleuré, elle a cru que c'était vrai. Je l'ai laissée appeler sa mère. Je suis trop honteux. Vos conseils ?",cat:'drole',isWolof:true,likes:12480,ts:1700200000,comments:[{id:1006,a:'Anon_440',t:"HAHAHAHA mon frère il faut avouer tout de suite 😭",emoji:'💀',replies:[]},{id:1007,a:'Anon_773',t:"Ta femme a appelé SA MÈRE 💀 avoue maintenant !",emoji:'😭',replies:[]}],vRight:234,vWrong:11890},
+  {id:104,text:"Je suis tombée amoureuse de mon beau-frère. Hier soir, quand ma sœur dormait dans la chambre d'à côté, il m'a rejointe dans le salon et on a franchi la limite. Je sais que c'est mal mais je ne regrette rien.",cat:'18+',isWolof:false,likes:9800,ts:1700300000,comments:[],vRight:12,vWrong:5000},
+  {id:105,text:"J'ai trompé mon copain… et aujourd'hui il m'a demandé de l'aider à choisir une bague pour ma propre demande en mariage. Je me dégoûte.",cat:'trahison',isWolof:false,likes:4217,ts:1700400000,comments:[{id:1008,a:'Anon_330',t:"Mon Dieu... comment tu vis avec ça ?",emoji:'😮',replies:[]}],vRight:124,vWrong:3891},
+  {id:106,text:"Mon meilleur ami sort avec mon ex… mais il ne sait pas que je l'aime encore secrètement.",cat:'amour',isWolof:false,likes:3104,ts:1700500000,comments:[{id:1009,a:'Anon_004',t:"Parle lui. Vraiment.",emoji:'❤️',replies:[]}],vRight:589,vWrong:1823},
+  {id:107,text:"J'ai menti à toute ma famille sur ma vie… en réalité je suis complètement perdu, je n'ai ni diplôme ni travail stable.",cat:'dark',isWolof:false,likes:5672,ts:1700600000,comments:[{id:1010,a:'Anon_782',t:"T'es pas seul dans ce cas. Force à toi.",emoji:'🤝',replies:[]}],vRight:4201,vWrong:312},
+  {id:108,text:"Une fille m'aime sincèrement depuis 2 ans… mais je préfère courir derrière celle qui me détruit mentalement.",cat:'amour',isWolof:false,likes:6891,ts:1700700000,comments:[],vRight:832,vWrong:5241},
+  {id:109,text:"Je souris tous les jours… mais personne ne sait que je suis au bout du rouleau. J'ai tout pour être heureux mais je ne ressens plus rien.",cat:'dark',isWolof:false,likes:9412,ts:1700800000,comments:[{id:1011,a:'Anon_900',t:"Je te vois. Tu comptes. Tiens bon 💜",emoji:'💜',replies:[]}],vRight:7890,vWrong:234}
+];
+
+let C=load(K.CONF,null);
+if(!Array.isArray(C)||C.length===0){
+  C=DEF.map(c=>({...c,comments:c.comments.map(cm=>({...cm,replies:[]}))}));
+  saveC();
+}
+// patch: ensure ts, replies on old data
+C.forEach(c=>{
+  if(!c.ts)c.ts=100000+c.id;
+  if(!Array.isArray(c.comments))c.comments=[];
+  c.comments.forEach(cm=>{if(!Array.isArray(cm.replies))cm.replies=[];});
+});
+
 function saveC(){save(K.CONF,C);}
 function findC(id){return C.find(x=>x.id===id)||null;}
 
+/* ══ POLEMICS ══ */
 const POL={amour:["Tu pardonnes ?","Il/elle t'aime vraiment ?","Tu ferais pareil ?"],trahison:["C'est impardonnable ?","Vengeance ou pardon ?","Tu aurais fait pareil ?"],drole:["C'est honteux ? 😭","On rigole ou c'est chaud ?","Tu aurais fait quoi à sa place ?"],dark:["On juge ou on soutient ?","Force à lui/elle ?","Ça t'inspire quoi ?"],'18+':["C'est malsain ?","Tu valides ?","Choquant ou pas ?"]};
 function getPol(cat){const l=POL[cat]||["Qu'en penses-tu ?"];return l[Math.floor(Math.random()*l.length)];}
 
-let activeFilter='all', activeSort='hot', feedQuery='', activeReportId=null, activePostId=null;
-let shareCardConf=null, confLang='fr', selCat='amour', loadedCount=0;
+/* ══ FEED STATE ══ */
+let activeFilter='all';
+let activeSort='hot';
+let feedQuery='';
+let activeReportId=null;
+let activePostId=null;
+let shareCardConf=null;
+let confLang='fr';
+let selCat='amour';
+let loadedCount=0;
 const PAGE=8;
 
-/* ══════════════════════════════════════════
-   3. CHARGEMENT & SYNCHRONISATION FIREBASE
-══════════════════════════════════════════ */
-async function loadConfessionsFromFirebase() {
-    try {
-        const q = query(collection(db, "confessions"), orderBy("ts", "desc"));
-        const querySnapshot = await getDocs(q);
-        
-        let loadedConfessions = [];
-        querySnapshot.forEach((doc) => {
-            let data = doc.data();
-            data.firebaseId = doc.id;
-            if(!Array.isArray(data.comments)) data.comments = [];
-            data.comments.forEach(cm=>{if(!Array.isArray(cm.replies))cm.replies=[];});
-            loadedConfessions.push(data);
-        });
-
-        if(loadedConfessions.length > 0) {
-            C = loadedConfessions; 
-            saveC(); 
-        }
-        
-        renderFeed();
-        renderPreviewCards();
-        refreshHomeStats();
-    } catch (error) {
-        console.error("Erreur Firebase:", error);
-        showToast("Mode hors-ligne : Serveur inaccessible.");
-    }
-}
-
-async function submitConfession(){
-  const now=Date.now();
-  const cool=60000;
-  if(now-(U.lastPost||0)<cool){ showToast(`⏳ Attends encore ${Math.ceil((cool-(now-U.lastPost))/1000)}s.`);return; }
-  
-  const ta=document.getElementById('confessText');
-  const text=ta.value.trim();
-  if(!text){showToast('⚠️ Écris quelque chose !');return;}
-  if(text.length<10){showToast('⚠️ Trop court — donne plus de détails.');return;}
-  
-  const nc={ id:now, text, cat:selCat, isWolof:confLang==='wol', likes:0, ts:Math.floor(now/1000), comments:[], vRight:0, vWrong:0 };
-  
-  try {
-      // ENVOI AU SERVEUR FIREBASE
-      await addDoc(collection(db, "confessions"), nc);
-      
-      // MISE À JOUR LOCALE
-      C.unshift(nc);
-      U.myPostIds.push(now); U.lastPost=now;
-      saveC(); saveU();
-      ta.value=''; updateCharCount(); closeAllSheets();
-      renderFeed();
-      showToast('🔥 Confession publiée sur le serveur !');
-      
-      const container=document.getElementById('feed-container');
-      if(container)container.scrollTo({top:0,behavior:'smooth'});
-      refreshHomeStats(); renderPreviewCards();
-  } catch(error) {
-      console.error(error);
-      showToast("❌ Erreur de connexion au serveur.");
-  }
-}
-
-/* ══════════════════════════════════════════
-   4. LOGIQUE DE L'APPLICATION (ORIGINALE)
-══════════════════════════════════════════ */
+/* ══ FILTER / SORT / SEARCH ══ */
 function getFiltered(){
   let list=[...C];
+  // FIX: 'wolof' filter uses isWolof boolean, not cat
   if(activeFilter==='wolof') list=list.filter(c=>c.isWolof===true);
   else if(activeFilter!=='all') list=list.filter(c=>c.cat===activeFilter);
   if(feedQuery.trim()){
     const q=feedQuery.toLowerCase();
     list=list.filter(c=>c.text.toLowerCase().includes(q));
   }
+  // Sort
   if(activeSort==='new') list.sort((a,b)=>(b.ts||0)-(a.ts||0));
   else if(activeSort==='top') list.sort((a,b)=>(b.likes||0)-(a.likes||0));
-  else {
+  else { // hot: weighted score — likes + votes, recency bonus
     const now=Date.now()/1000;
     list.sort((a,b)=>{
       const sa=(a.likes||0)+(a.vRight||0)+(a.vWrong||0)-Math.max(0,(now-(a.ts||0))/86400)*5;
@@ -704,32 +674,98 @@ function getFiltered(){
   return list;
 }
 
-function setFilter(cat,btn){ activeFilter=cat; document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderFeed(); }
-function setSort(sort,btn){ activeSort=sort; document.querySelectorAll('.sort-chip').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderFeed(); }
-function goToFeed(){ document.getElementById('home-view').style.display='none'; document.getElementById('feed-view').style.display='block'; renderFeed(); updateStreak(); }
-function goToFeedFiltered(cat){ activeFilter=cat; document.querySelectorAll('.filter-chip').forEach(b=>{ b.classList.toggle('active',b.dataset.cat===cat); }); goToFeed(); }
-function goToHome(){ document.getElementById('feed-view').style.display='none'; document.getElementById('home-view').style.display='flex'; }
-function goToFeedSearch(){ feedQuery=document.getElementById('homeSearchInput').value.trim(); activeFilter='all'; document.querySelectorAll('.filter-chip').forEach(b=>b.classList.toggle('active',b.dataset.cat==='all')); goToFeed(); const wrap=document.getElementById('searchBarWrap'); wrap.classList.add('open'); const fi=document.getElementById('feedSearchInput'); fi.value=feedQuery; }
-function onHomeSearch(v){ feedQuery=v; }
-function toggleSearch(){ const wrap=document.getElementById('searchBarWrap'); if(wrap.classList.contains('open')){closeSearch();} else{wrap.classList.add('open');document.getElementById('feedSearchInput').focus();} }
-function closeSearch(){ document.getElementById('searchBarWrap').classList.remove('open'); feedQuery=''; document.getElementById('feedSearchInput').value=''; renderFeed(); }
-let searchTimer;
-function onFeedSearch(v){ clearTimeout(searchTimer); searchTimer=setTimeout(()=>{feedQuery=v;renderFeed();},280); }
+function setFilter(cat,btn){
+  activeFilter=cat;
+  document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderFeed();
+}
+function setSort(sort,btn){
+  activeSort=sort;
+  document.querySelectorAll('.sort-chip').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderFeed();
+}
 
+/* ══ NAVIGATION ══ */
+function goToFeed(){
+  document.getElementById('home-view').style.display='none';
+  document.getElementById('feed-view').style.display='block';
+  renderFeed();
+  updateStreak();
+}
+function goToFeedFiltered(cat){
+  activeFilter=cat;
+  // Sync filter chips
+  document.querySelectorAll('.filter-chip').forEach(b=>{
+    b.classList.toggle('active',b.dataset.cat===cat);
+  });
+  goToFeed();
+}
+function goToHome(){
+  document.getElementById('feed-view').style.display='none';
+  document.getElementById('home-view').style.display='flex';
+}
+function goToFeedSearch(){
+  feedQuery=document.getElementById('homeSearchInput').value.trim();
+  activeFilter='all';
+  document.querySelectorAll('.filter-chip').forEach(b=>b.classList.toggle('active',b.dataset.cat==='all'));
+  goToFeed();
+  // open search bar
+  const wrap=document.getElementById('searchBarWrap');
+  wrap.classList.add('open');
+  const fi=document.getElementById('feedSearchInput');
+  fi.value=feedQuery;
+}
+let homeSearchQ='';
+function onHomeSearch(v){homeSearchQ=v;}
+
+/* ══ FEED SEARCH ══ */
+function toggleSearch(){
+  const wrap=document.getElementById('searchBarWrap');
+  if(wrap.classList.contains('open')){closeSearch();}
+  else{wrap.classList.add('open');document.getElementById('feedSearchInput').focus();}
+}
+function closeSearch(){
+  const wrap=document.getElementById('searchBarWrap');
+  wrap.classList.remove('open');
+  feedQuery='';
+  document.getElementById('feedSearchInput').value='';
+  renderFeed();
+}
+let searchTimer;
+function onFeedSearch(v){
+  clearTimeout(searchTimer);
+  searchTimer=setTimeout(()=>{feedQuery=v;renderFeed();},280);
+}
+
+/* ══ RENDER FEED ══ */
 function renderFeed(){
-  const container=document.getElementById('feed-container'); if(!container)return;
-  loadedCount=PAGE; container.innerHTML=''; const filtered=getFiltered();
+  const container=document.getElementById('feed-container');
+  if(!container)return;
+  loadedCount=PAGE;
+  container.innerHTML='';
+  const filtered=getFiltered();
   if(filtered.length===0){
-    container.innerHTML=`<div class="empty-feed"><span style="font-size:3rem;">🔍</span><h3>Rien trouvé</h3><p>Sois le premier à confesser ici !</p><button class="btn-primary" style="max-width:260px;margin-top:8px;" onclick="openConfessSheet()">✍️ Confesser</button></div>`;
+    const e=document.createElement('div');
+    e.className='empty-feed';
+    e.innerHTML=`<span style="font-size:3rem;">🔍</span><h3>Rien trouvé</h3><p>Essaie un autre filtre ou sois le premier à confesser dans cette catégorie !</p><button class="btn-primary" style="max-width:260px;margin-top:8px;" onclick="openConfessSheet()">✍️ Confesser</button>`;
+    container.appendChild(e);
     return;
   }
   buildSlides(filtered.slice(0,loadedCount),container);
   if(filtered.length>loadedCount) attachSentinel(filtered,container);
+  // track scroll for streak
   container.addEventListener('scroll',onScroll,{passive:true});
 }
 
 let lastScrollTop=0;
-function onScroll(){ const container=document.getElementById('feed-container'); if(!container)return; const st=container.scrollTop; if(st>lastScrollTop+50){streak.scrolled=(streak.scrolled||0)+1;lastScrollTop=st;saveStreak();} }
+function onScroll(){
+  const container=document.getElementById('feed-container');
+  if(!container)return;
+  const st=container.scrollTop;
+  if(st>lastScrollTop+50){streak.scrolled=(streak.scrolled||0)+1;lastScrollTop=st;saveStreak();}
+}
 
 function buildSlides(list,container){
   list.forEach((c,i)=>{
@@ -741,30 +777,47 @@ function buildSlides(list,container){
 
 function attachSentinel(filtered,container){
   const s=document.createElement('div');
+  // Important: give sentinel its own snap height so it doesn't cause jank
   s.style.cssText='height:100dvh;width:100vw;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;';
-  s.id='sz-sentinel'; s.innerHTML='<div style="color:var(--muted);font-family:var(--fm);font-size:.8rem;text-align:center;"><div style="font-size:2rem;margin-bottom:8px;">⏳</div>Chargement...</div>';
+  s.id='sz-sentinel';
+  s.innerHTML='<div style="color:var(--muted);font-family:var(--fm);font-size:.8rem;text-align:center;"><div style="font-size:2rem;margin-bottom:8px;">⏳</div>Chargement...</div>';
   container.appendChild(s);
   const obs=new IntersectionObserver(entries=>{
     if(entries[0].isIntersecting){
-      obs.disconnect(); s.remove(); const prev=loadedCount; loadedCount=Math.min(loadedCount+PAGE,filtered.length);
-      buildSlides(filtered.slice(prev,loadedCount),container); if(loadedCount<filtered.length) attachSentinel(filtered,container);
+      obs.disconnect();
+      s.remove();
+      const prev=loadedCount;
+      loadedCount=Math.min(loadedCount+PAGE,filtered.length);
+      buildSlides(filtered.slice(prev,loadedCount),container);
+      if(loadedCount<filtered.length) attachSentinel(filtered,container);
     }
   },{threshold:.1,root:container});
   obs.observe(s);
 }
 
 function createSlide(c){
-  const div=document.createElement('div'); div.className=`slide bg-${(c.cat||'dark').replace('+','')}`; div.dataset.id=String(c.id);
-  const isLiked=U.liked.includes(c.id), userVote=U.voted[c.id]||null, polemic=getPol(c.cat);
-  const total=(c.vRight||0)+(c.vWrong||0), yesPct=total>0?Math.round(((c.vRight||0)/total)*100):50;
-  const isLocked=c.cat==='18+'&&!U.isPremium, isReported=!!reported[c.id];
+  const div=document.createElement('div');
+  div.className=`slide bg-${(c.cat||'dark').replace('+','')}`;
+  div.dataset.id=String(c.id);
+  const isLiked=U.liked.includes(c.id);
+  const userVote=U.voted[c.id]||null;
+  const polemic=getPol(c.cat);
+  const total=(c.vRight||0)+(c.vWrong||0);
+  const yesPct=total>0?Math.round(((c.vRight||0)/total)*100):50;
+  const isLocked=c.cat==='18+'&&!U.isPremium;
+  const isReported=!!reported[c.id];
 
   div.innerHTML=`
-    <div class="slide-badges"><div class="slide-badge">${catE(c.cat)} ${(c.cat||'?').toUpperCase()}</div>${c.isWolof?'<div class="slide-badge wolof">🇸🇳 SÉNÉGAL</div>':''}</div>
+    <div class="slide-badges">
+      <div class="slide-badge">${catE(c.cat)} ${(c.cat||'?').toUpperCase()}</div>
+      ${c.isWolof?'<div class="slide-badge wolof">🇸🇳 SÉNÉGAL</div>':''}
+    </div>
     ${isReported?'':'<button class="slide-report" onclick="openReport('+c.id+')">🚩 Signaler</button>'}
     <div class="slide-content">
-      ${isLocked?`<div style="position:relative;"><div class="slide-text blurred-content">${esc(c.text.substring(0,80))}...</div><div class="locked-overlay"><span style="font-size:2.5rem;">🔞</span><p style="font-size:.85rem;color:rgba(255,255,255,.6);margin-bottom:12px;">Contenu Premium</p><button class="locked-btn" onclick="openBoost()">Débloquer — 2 500 FCFA</button></div></div>`
-        :`<div class="slide-text-scroll"><div class="slide-text">${esc(c.text)}</div><div class="slide-author">@Anonyme_${anonId(c.id)}</div></div>`}
+      ${isLocked
+        ?`<div style="position:relative;"><div class="slide-text blurred-content">${esc(c.text.substring(0,80))}...</div><div class="locked-overlay"><span style="font-size:2.5rem;">🔞</span><p style="font-size:.85rem;color:rgba(255,255,255,.6);margin-bottom:12px;">Contenu réservé aux membres Premium</p><button class="locked-btn" onclick="openBoost()">Débloquer — 2 500 FCFA</button></div></div>`
+        :`<div class="slide-text-scroll"><div class="slide-text">${esc(c.text)}</div><div class="slide-author">@Anonyme_${anonId(c.id)}</div></div>`
+      }
     </div>
     <div class="polemic-box">
       <div class="polemic-q">🔥 ${esc(polemic)}</div>
@@ -775,66 +828,191 @@ function createSlide(c){
       <div class="vote-bar${userVote?' show':''}" id="bar-${c.id}"><div class="vote-bar-fill" style="width:${yesPct}%"></div></div>
     </div>
     <div class="sidebar">
-      <button class="side-btn${isLiked?' liked':''}" onclick="toggleLike(${c.id},this)"><div class="side-icon">❤️</div><span class="side-text lc-${c.id}">${fmt(c.likes)}</span></button>
-      <button class="side-btn" onclick="openComments(${c.id})"><div class="side-icon">💬</div><span class="side-text cc-${c.id}">${fmt(c.comments?c.comments.length:0)}</span></button>
-      <button class="side-btn" onclick="openShareCard(${c.id})"><div class="side-icon" style="background:rgba(37,211,102,.2);border-color:#25D366;">📤</div><span class="side-text">Viral</span></button>
-      <button class="side-btn" onclick="openScript(${c.id})"><div class="side-icon" style="background:rgba(106,0,255,.2);border-color:var(--violet);">🎥</div><span class="side-text">Script</span></button>
+      <button class="side-btn${isLiked?' liked':''}" onclick="toggleLike(${c.id},this)">
+        <div class="side-icon">❤️</div>
+        <span class="side-text lc-${c.id}">${fmt(c.likes)}</span>
+      </button>
+      <button class="side-btn" onclick="openComments(${c.id})">
+        <div class="side-icon">💬</div>
+        <span class="side-text cc-${c.id}">${fmt(c.comments.length)}</span>
+      </button>
+      <button class="side-btn" onclick="openShareCard(${c.id})">
+        <div class="side-icon" style="background:rgba(37,211,102,.2);border-color:#25D366;">📤</div>
+        <span class="side-text">Viral</span>
+      </button>
+      <button class="side-btn" onclick="openScript(${c.id})">
+        <div class="side-icon" style="background:rgba(106,0,255,.2);border-color:var(--violet);">🎥</div>
+        <span class="side-text">Script</span>
+      </button>
     </div>
   `;
   return div;
 }
 
 function createAdSlide(){
-  const div=document.createElement('div'); div.className='ad-slide';
-  div.innerHTML=`<span style="font-size:2.5rem;">💸</span><h3 style="font-family:var(--fd);font-size:2.5rem;color:var(--cyan);letter-spacing:2px;">ESPACE PUB</h3><p style="color:var(--muted);max-width:280px;line-height:1.6;margin:0 auto;font-size:1rem;">Passe en Premium pour retirer toutes les pubs.</p><button class="btn-primary" style="max-width:280px;" onclick="openBoost()">👑 Devenir Premium</button>`;
+  const div=document.createElement('div');
+  div.className='ad-slide';
+  div.innerHTML=`<span style="font-size:2.5rem;">💸</span><h3 style="font-family:var(--fd);font-size:2.5rem;color:var(--cyan);letter-spacing:2px;">ESPACE PUB</h3><p style="color:var(--muted);max-width:280px;line-height:1.6;margin:0 auto;font-size:1rem;">Passe en Premium pour retirer toutes les pubs.</p><button class="btn-primary" style="max-width:280px;" onclick="openBoost()">👑 Devenir Premium</button><p style="font-size:.7rem;color:rgba(255,255,255,.2);font-family:var(--fm);">PUBLICITÉ</p>`;
   return div;
 }
 
+/* ══ LIKE ══ */
 function toggleLike(id,btn){
   const c=findC(id);if(!c)return;
-  if(U.liked.includes(id)){ U.liked=U.liked.filter(x=>x!==id); c.likes=Math.max(0,(c.likes||0)-1); btn.classList.remove('liked'); } 
-  else { U.liked.push(id); c.likes=(c.likes||0)+1; btn.classList.add('liked'); if(U.myPostIds.includes(id)) addNotif('❤️ Quelqu\'un a aimé ta confession !'); }
-  document.querySelectorAll(`.lc-${id}`).forEach(el=>el.textContent=fmt(c.likes)); saveU();saveC();
+  if(U.liked.includes(id)){
+    U.liked=U.liked.filter(x=>x!==id);
+    c.likes=Math.max(0,(c.likes||0)-1);
+    btn.classList.remove('liked');
+  } else {
+    U.liked.push(id);
+    c.likes=(c.likes||0)+1;
+    btn.classList.add('liked');
+    const icon=btn.querySelector('.side-icon');
+    if(icon){icon.style.animation='heartPop .3s ease';setTimeout(()=>icon.style.animation='',300);}
+    if(U.myPostIds.includes(id)) addNotif('❤️ Quelqu\'un a aimé ta confession !');
+  }
+  document.querySelectorAll(`.lc-${id}`).forEach(el=>el.textContent=fmt(c.likes));
+  saveU();saveC();
 }
 
+/* ══ VOTE ══ */
 function vote(id,side,btn){
-  if(U.voted[id]){showToast('Tu as déjà voté !');return;}
+  if(U.voted[id]){showToast('Tu as déjà voté sur cette confession !');return;}
   const c=findC(id);if(!c)return;
-  if(side==='yes')c.vRight=(c.vRight||0)+1; else c.vWrong=(c.vWrong||0)+1;
+  if(side==='yes')c.vRight=(c.vRight||0)+1;
+  else c.vWrong=(c.vWrong||0)+1;
   U.voted[id]=side;saveU();saveC();
   const pb=btn.closest('.polemic-box');
   if(pb){
     const yb=pb.querySelector('.vote-btn.yes'),nb=pb.querySelector('.vote-btn.no');
     if(yb){yb.textContent=`✅ C'est clair (${fmt(c.vRight)})`;yb.classList.add('voted');}
     if(nb){nb.textContent=`❌ Abusé (${fmt(c.vWrong)})`;nb.classList.add('voted');}
-    if(side==='yes'&&yb)yb.classList.add('voted-yes'); if(side==='no'&&nb)nb.classList.add('voted-no');
+    if(side==='yes'&&yb)yb.classList.add('voted-yes');
+    if(side==='no'&&nb)nb.classList.add('voted-no');
     const bar=pb.querySelector('.vote-bar'),fill=pb.querySelector('.vote-bar-fill');
-    if(bar&&fill){ const t=(c.vRight||0)+(c.vWrong||0),p=t>0?Math.round((c.vRight/t)*100):50; bar.classList.add('show');fill.style.width=p+'%'; }
+    if(bar&&fill){
+      const t=(c.vRight||0)+(c.vWrong||0),p=t>0?Math.round((c.vRight/t)*100):50;
+      bar.classList.add('show');fill.style.width=p+'%';
+    }
   }
-  showToast('✅ Vote enregistré !');
+  if(U.myPostIds.includes(id)) addNotif('⚖️ Quelqu\'un a voté sur ta confession !');
+  showToast(side==='yes'?'✅ Vote enregistré !':'❌ Vote enregistré !');
 }
 
-function openShareCard(id){ const c=findC(id);if(!c)return; shareCardConf=c; document.getElementById('scBadge').textContent=`${catE(c.cat)} ${(c.cat||'').toUpperCase()}`; document.getElementById('scText').textContent=c.text.length>160?c.text.substring(0,160)+'...':c.text; document.getElementById('scLikes').textContent=`❤️ ${fmt(c.likes)}`; document.getElementById('scComments').textContent=`💬 ${fmt(c.comments?c.comments.length:0)}`; document.getElementById('shareCardOverlay').classList.add('open'); }
+/* ══ SHARE CARD ══ */
+function openShareCard(id){
+  const c=findC(id);if(!c)return;
+  shareCardConf=c;
+  document.getElementById('scBadge').textContent=`${catE(c.cat)} ${(c.cat||'').toUpperCase()}`;
+  document.getElementById('scText').textContent=c.text.length>160?c.text.substring(0,160)+'...':c.text;
+  document.getElementById('scLikes').textContent=`❤️ ${fmt(c.likes)}`;
+  document.getElementById('scComments').textContent=`💬 ${fmt(c.comments.length)}`;
+  // Show native share if supported
+  document.getElementById('scNativeBtn').style.display=navigator.share?'flex':'none';
+  document.getElementById('shareCardOverlay').classList.add('open');
+}
 function closeShareCard(){document.getElementById('shareCardOverlay').classList.remove('open');shareCardConf=null;}
-function getShareText(c){ return `🤫 *SecretZone*\n\n"${c.text.length>120?c.text.substring(0,120)+'...':c.text}"\n\n👉 secretzone.app`; }
-function shareCardWA(){ if(!shareCardConf)return; window.open('https://wa.me/?text='+encodeURIComponent(getShareText(shareCardConf)),'_blank'); closeShareCard(); }
-async function shareNative(){ if(!shareCardConf||!navigator.share)return; try{ await navigator.share({title:'SecretZone',text:getShareText(shareCardConf),url:'https://secretzone.app'}); closeShareCard(); }catch(e){} }
-function shareCardCopy(){ if(!shareCardConf)return; navigator.clipboard.writeText(getShareText(shareCardConf)).then(()=>{showToast('📋 Copié !');closeShareCard();}); }
+function getShareText(c){
+  const short=c.text.length>120?c.text.substring(0,120)+'...':c.text;
+  return `🤫 *SecretZone — Confession Anonyme*\n\n"${short}"\n\n⚖️ Tu ferais quoi à sa place ?\n👉 secretzone.app`;
+}
+function shareCardWA(){
+  if(!shareCardConf)return;
+  window.open('https://wa.me/?text='+encodeURIComponent(getShareText(shareCardConf)),'_blank');
+  closeShareCard();
+}
+async function shareNative(){
+  if(!shareCardConf||!navigator.share)return;
+  try{
+    await navigator.share({title:'SecretZone',text:getShareText(shareCardConf),url:'https://secretzone.app'});
+    closeShareCard();
+  }catch(e){}
+}
+function shareCardCopy(){
+  if(!shareCardConf)return;
+  navigator.clipboard.writeText(getShareText(shareCardConf)).then(()=>{showToast('📋 Copié !');closeShareCard();}).catch(()=>showToast('Copie manuelle nécessaire.'));
+}
 
-function openScript(id){ const c=findC(id);if(!c)return; document.getElementById('scriptContent').innerHTML=`<div class="script-part"><div class="script-label">🎣 Hook</div><div class="script-text">😳 "Vous n'allez JAMAIS y croire..."</div></div><div class="script-part"><div class="script-label">📖 L'Histoire</div><div class="script-text">"${esc(c.text)}"</div></div><div class="script-part"><div class="script-label">🎯 Action</div><div class="script-text">👇 "Vous auriez fait quoi ?"</div></div>`; openSheet('sheetScript'); }
-function copyScript(){ navigator.clipboard.writeText(document.getElementById('scriptContent').innerText).then(()=>{closeAllSheets();showToast('📋 Script copié !');}); }
+/* ══ SCRIPT ══ */
+function openScript(id){
+  const c=findC(id);if(!c)return;
+  document.getElementById('scriptContent').innerHTML=`
+    <div class="script-part"><div class="script-label">🎣 Hook (0-3 sec)</div><div class="script-text">😳 "Vous n'allez JAMAIS y croire ce que quelqu'un m'a confessé..."</div></div>
+    <div class="script-part"><div class="script-label">📖 L'Histoire</div><div class="script-text">"${esc(c.text)}"</div></div>
+    <div class="script-part"><div class="script-label">🎯 Call to Action</div><div class="script-text">👇 "Commentez — vous auriez fait quoi à sa place ?"</div></div>
+  `;
+  openSheet('sheetScript');
+}
+function copyScript(){
+  const text=document.getElementById('scriptContent').innerText;
+  navigator.clipboard.writeText(text).then(()=>{closeAllSheets();showToast('📋 Script copié ! Go faire 1M de vues 🔥');}).catch(()=>showToast('Sélectionne le texte et copie manuellement.'));
+}
 
-function openReport(id){ if(reported[id]){showToast('✅ Déjà signalé.');return;} activeReportId=id; openSheet('sheetReport'); }
-function submitReport(reason){ if(!activeReportId)return; reported[activeReportId]=reason; save(K.REPORT,reported); closeAllSheets(); showToast('🚩 Signalement envoyé. Merci !'); activeReportId=null; }
+/* ══ REPORT ══ */
+function openReport(id){
+  if(reported[id]){showToast('✅ Tu as déjà signalé cette confession.');return;}
+  activeReportId=id;
+  openSheet('sheetReport');
+}
+function submitReport(reason){
+  if(!activeReportId)return;
+  reported[activeReportId]=reason;
+  save(K.REPORT,reported);
+  closeAllSheets();
+  showToast('🚩 Signalement envoyé. Merci !');
+  activeReportId=null;
+}
 
-function addNotif(text){ notifications.unshift({text,time:Date.now(),read:false}); if(notifications.length>50)notifications=notifications.slice(0,50); saveN();updateNotifBadge(); }
-function updateNotifBadge(){ const unread=notifications.filter(n=>!n.read).length; const dot=document.getElementById('notif-dot-feed'), badge=document.getElementById('notif-badge-home'); if(dot)dot.style.display=unread>0?'block':'none'; if(badge){badge.style.display=unread>0?'inline':'none';badge.textContent=unread>9?'9+':unread;} }
-function openNotifications(){ const list=document.getElementById('notifList'); if(notifications.length===0) list.innerHTML='<p style="text-align:center;padding:40px;color:var(--muted);">Aucune notification.</p>'; else list.innerHTML=notifications.map(n=>`<div class="notif-item"><div class="notif-icon">${n.text[0]}</div><div class="notif-body"><div class="notif-text">${esc(n.text)}</div></div></div>`).join(''); notifications.forEach(n=>n.read=true);saveN();updateNotifBadge(); openSheet('sheetNotif'); }
+/* ══ NOTIFICATIONS ══ */
+function addNotif(text){
+  notifications.unshift({text,time:Date.now(),read:false});
+  if(notifications.length>50)notifications=notifications.slice(0,50);
+  saveN();updateNotifBadge();
+}
+function updateNotifBadge(){
+  const unread=notifications.filter(n=>!n.read).length;
+  const dot=document.getElementById('notif-dot-feed');
+  const badge=document.getElementById('notif-badge-home');
+  if(dot)dot.style.display=unread>0?'block':'none';
+  if(badge){badge.style.display=unread>0?'inline':'none';badge.textContent=unread>9?'9+':unread;}
+}
+function openNotifications(){
+  const list=document.getElementById('notifList');
+  if(notifications.length===0){
+    list.innerHTML='<div style="text-align:center;padding:40px 20px;color:var(--muted);"><p style="font-size:2rem;margin-bottom:12px;">🔔</p><p>Aucune notification.<br>Publie une confession pour en recevoir !</p></div>';
+  } else {
+    list.innerHTML=notifications.map(n=>`
+      <div class="notif-item">
+        <div class="notif-icon">${n.text[0]==='❤'?'❤️':n.text[0]==='💬'?'💬':'⚖️'}</div>
+        <div class="notif-body"><div class="notif-text">${esc(n.text)}</div><div class="notif-time">${timeAgo(n.time)}</div></div>
+      </div>
+    `).join('');
+    notifications.forEach(n=>n.read=true);saveN();updateNotifBadge();
+  }
+  openSheet('sheetNotif');
+}
+function timeAgo(ts){
+  const d=Date.now()-ts;
+  if(d<60000)return 'À l\'instant';
+  if(d<3600000)return `Il y a ${Math.floor(d/60000)}min`;
+  if(d<86400000)return `Il y a ${Math.floor(d/3600000)}h`;
+  return `Il y a ${Math.floor(d/86400000)}j`;
+}
 
-function openComments(id){ const c=findC(id);if(!c)return; activePostId=id; document.getElementById('commentCountTitle').textContent=`${c.comments?c.comments.length:0} Commentaire(s)`; renderComments(c); openSheet('sheetComments'); }
-function renderComments(c){ 
-  const list=document.getElementById('commentList');if(!list)return; 
-  if(!c.comments || c.comments.length===0){ list.innerHTML='<p style="color:var(--muted);text-align:center;padding:40px;">Sois le premier à juger 👀</p>'; return; } 
+/* ══ COMMENTS ══ */
+function openComments(id){
+  const c=findC(id);if(!c)return;
+  activePostId=id;
+  document.getElementById('commentCountTitle').textContent=`${c.comments.length} Commentaire${c.comments.length!==1?'s':''}`;
+  renderComments(c);
+  openSheet('sheetComments');
+}
+function renderComments(c){
+  const list=document.getElementById('commentList');if(!list)return;
+  if(c.comments.length===0){
+    list.innerHTML='<p style="color:var(--muted);text-align:center;padding:40px 20px;">Aucun commentaire — sois le premier à juger 👀</p>';
+    return;
+  }
   list.innerHTML=c.comments.map(cm=>`
     <div class="comment-item">
       <div class="c-avatar">${cm.emoji||'👤'}</div>
@@ -847,16 +1025,16 @@ function renderComments(c){
         </div>
         ${(cm.replies||[]).map(r=>`<div class="reply-item"><div class="c-avatar">${r.emoji||'😈'}</div><div class="c-body"><div class="c-name">@${esc(r.a)}</div><div class="c-text">${esc(r.t)}</div></div></div>`).join('')}
       </div>
-    </div>`).join(''); 
-  requestAnimationFrame(()=>{list.scrollTop=list.scrollHeight;}); 
+    </div>
+  `).join('');
+  // FIX: use requestAnimationFrame to scroll after DOM paint
+  requestAnimationFrame(()=>{list.scrollTop=list.scrollHeight;});
 }
-
 function toggleReply(cmId){
   document.querySelectorAll('.reply-input-area').forEach(el=>{if(el.id!==`ri-${cmId}`)el.classList.remove('open');});
   const el=document.getElementById(`ri-${cmId}`);
   if(el){el.classList.toggle('open');if(el.classList.contains('open'))el.querySelector('input').focus();}
 }
-
 function postReply(cmId,inputEl){
   const text=inputEl.value.trim();if(!text||!activePostId)return;
   const c=findC(activePostId);if(!c)return;
@@ -868,58 +1046,196 @@ function postReply(cmId,inputEl){
   renderComments(c);
   if(U.myPostIds.includes(activePostId)) addNotif('💬 Quelqu\'un a répondu à un commentaire sur ta confession !');
 }
+function postComment(){
+  const input=document.getElementById('commentInput');
+  const text=input.value.trim();if(!text||!activePostId)return;
+  const c=findC(activePostId);if(!c)return;
+  c.comments.push({id:Date.now(),a:'Anon_'+Math.floor(Math.random()*9999),t:text,emoji:'😈',replies:[]});
+  saveC();input.value='';
+  document.getElementById('commentCountTitle').textContent=`${c.comments.length} Commentaire${c.comments.length!==1?'s':''}`;
+  renderComments(c);
+  document.querySelectorAll(`.cc-${activePostId}`).forEach(el=>el.textContent=fmt(c.comments.length));
+  if(U.myPostIds.includes(activePostId)) addNotif('💬 Quelqu\'un a commenté ta confession !');
+}
 
-function postComment(){ const input=document.getElementById('commentInput'); const text=input.value.trim();if(!text||!activePostId)return; const c=findC(activePostId);if(!c)return; if(!c.comments) c.comments=[]; c.comments.push({id:Date.now(),a:'Anon_'+Math.floor(Math.random()*9999),t:text,emoji:'😈',replies:[]}); saveC();input.value=''; document.getElementById('commentCountTitle').textContent=`${c.comments.length} Commentaire(s)`; renderComments(c); document.querySelectorAll(`.cc-${activePostId}`).forEach(el=>el.textContent=fmt(c.comments.length)); }
-
-function setLang(lang,btn){ confLang=lang; document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); document.getElementById('confessText').placeholder=lang==='wol'?'Dëkk sa xibaar...':'Personne ne saura que c\'est toi...'; }
-function selectCat(btn,cat){ document.querySelectorAll('.cat-tag').forEach(b=>b.classList.remove('active')); btn.classList.add('active');selCat=cat; }
-function updateCharCount(){ document.getElementById('charCount').textContent=document.getElementById('confessText').value.length; }
+/* ══ CONFESS ══ */
+function setLang(lang,btn){
+  confLang=lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('confessText').placeholder=lang==='wol'?'Dëkk sa xibaar, dara du xam ko...':'Personne ne saura que c\'est toi. Vas-y, lâche tout...';
+}
+function selectCat(btn,cat){
+  document.querySelectorAll('.cat-tag').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');selCat=cat;
+}
+function updateCharCount(){
+  document.getElementById('charCount').textContent=document.getElementById('confessText').value.length;
+}
 function openConfessSheet(){openSheet('sheetConfess');}
+function submitConfession(){
+  const now=Date.now();
+  const cool=60000;
+  if(now-(U.lastPost||0)<cool){
+    showToast(`⏳ Attends encore ${Math.ceil((cool-(now-U.lastPost))/1000)}s.`);return;
+  }
+  const ta=document.getElementById('confessText');
+  const text=ta.value.trim();
+  if(!text){showToast('⚠️ Écris quelque chose !');return;}
+  if(text.length<10){showToast('⚠️ Trop court — donne plus de détails.');return;}
+  const nc={id:now,text,cat:selCat,isWolof:confLang==='wol',likes:0,ts:Math.floor(now/1000),comments:[],vRight:0,vWrong:0};
+  C.unshift(nc);
+  U.myPostIds.push(now);U.lastPost=now;
+  saveC();saveU();
+  ta.value='';updateCharCount();closeAllSheets();
+  renderFeed();
+  showToast('🔥 Confession publiée ! Prépare-toi à être jugé.');
+  const container=document.getElementById('feed-container');
+  if(container)container.scrollTo({top:0,behavior:'smooth'});
+  refreshHomeStats();renderPreviewCards();
+  // Simulated reaction notif
+  setTimeout(()=>addNotif('🔥 Ta confession commence à faire parler !'),5000);
+}
 
-function openTopViral(){ const sorted=[...C].sort((a,b)=>(b.likes||0)-(a.likes||0)).slice(0,5); document.getElementById('viralList').innerHTML=sorted.map((c,i)=>`<div class="viral-item"><div class="viral-rank">#${i+1}</div><div class="viral-text">${esc(c.text)}</div><div class="viral-likes">❤️ ${fmt(c.likes)}</div></div>`).join(''); openSheet('sheetTopViral'); }
+/* ══ TOP VIRAL ══ */
+function openTopViral(){
+  const sorted=[...C].sort((a,b)=>(b.likes||0)-(a.likes||0)).slice(0,5);
+  document.getElementById('viralList').innerHTML=sorted.map((c,i)=>`
+    <div class="viral-item" onclick="closeAllSheets();showToast('Fais défiler le feed pour la trouver !')">
+      <div class="viral-rank">#${i+1}</div>
+      <div class="viral-text">${esc(c.text)}</div>
+      <div class="viral-likes">❤️ ${fmt(c.likes)}</div>
+    </div>
+  `).join('');
+  openSheet('sheetTopViral');
+}
+
+/* ══ PREMIUM ══ */
 function openBoost(){openSheet('sheetBoost');}
-function simulatePayment(){ U.isPremium=true;saveU();closeAllSheets();renderFeed();showToast('🎉 Bienvenue en Premium !'); }
+function simulatePayment(){
+  U.isPremium=true;saveU();closeAllSheets();renderFeed();showToast('🎉 Bienvenue en Premium ! Tout est débloqué 👑');
+}
 
-function renderPreviewCards(){ const container=document.getElementById('previewCards');if(!container)return; const visible=U.isPremium?C:C.filter(c=>c.cat!=='18+'); const sorted=[...visible].sort((a,b)=>(b.likes||0)-(a.likes||0)).slice(0,6); if(sorted.length===0){ container.innerHTML='<p class="preview-empty">Aucune confession.</p>'; return; } container.innerHTML=sorted.map(c=>`<div class="preview-card" onclick="goToFeed()"><div class="preview-badge">${catE(c.cat)}</div><div class="preview-text">${esc(c.text)}</div></div>`).join(''); }
-function refreshHomeStats(){ const el=document.getElementById('totalConfessions'); if(el)el.textContent=fmtNum(C.length+4200); }
-function updateStreak(){ const today=new Date().toDateString(); if(streak.lastDate!==today){ if(streak.lastDate===new Date(Date.now()-86400000).toDateString()) streak.count++; else streak.count=1; streak.lastDate=today; saveStreak(); } const el=document.getElementById('streakHome'), txt=document.getElementById('streakHomeText'); if(el&&txt&&(streak.scrolled>=3||streak.count>=2)){ txt.innerHTML=`Streak <strong>${streak.count} jour(s)</strong>`; el.classList.add('show'); } }
-function closeOnboarding(){ document.getElementById('onboarding-overlay').classList.remove('show'); save(K.ONBOARD,'done'); }
+/* ══ PREVIEW CARDS ══ */
+function renderPreviewCards(){
+  const container=document.getElementById('previewCards');if(!container)return;
+  // FIX: count only non-18+ (or all if premium) for visible stats
+  const visible=U.isPremium?C:C.filter(c=>c.cat!=='18+');
+  const sorted=[...visible].sort((a,b)=>b.likes-a.likes).slice(0,6);
+  if(sorted.length===0){
+    container.innerHTML='<div class="preview-empty">🤫 Aucune confession encore.<br>Sois le premier à briser le silence !<br><br><button class="btn-primary" style="max-width:220px;margin-top:12px;" onclick="openConfessSheet()">✍️ Confesser</button></div>';
+    return;
+  }
+  container.innerHTML=sorted.map(c=>`
+    <div class="preview-card" onclick="goToFeed()">
+      <div class="preview-badge">${catE(c.cat)} ${c.cat.toUpperCase()}</div>
+      <div class="preview-text">${esc(c.text)}</div>
+      <div class="preview-stats"><span>❤️ ${fmt(c.likes)}</span><span>💬 ${fmt(c.comments.length)}</span></div>
+    </div>
+  `).join('');
+}
+
+/* ══ STATS ══ */
+function refreshHomeStats(){
+  const visible=U.isPremium?C:C.filter(c=>c.cat!=='18+');
+  const el=document.getElementById('totalConfessions');
+  if(el)el.textContent=fmtNum(visible.length+4200);
+}
+
+/* ══ STREAK ══ */
+function updateStreak(){
+  const today=new Date().toDateString();
+  if(streak.lastDate!==today){
+    if(streak.lastDate===new Date(Date.now()-86400000).toDateString()) streak.count++;
+    else streak.count=1;
+    streak.lastDate=today;
+    saveStreak();
+  }
+  renderStreakHome();
+}
+function renderStreakHome(){
+  const el=document.getElementById('streakHome');
+  const txt=document.getElementById('streakHomeText');
+  if(!el||!txt)return;
+  if((streak.scrolled||0)>=3||(streak.count||0)>=2){
+    txt.innerHTML=`Tu as scrollé <strong>${streak.scrolled||0} confessions</strong> · Streak <strong>${streak.count||1} jour${(streak.count||1)>1?'s':''}</strong> 🏆`;
+    el.classList.add('show');
+  }
+}
+
+/* ══ ONBOARDING ══ */
+function closeOnboarding(){
+  document.getElementById('onboarding-overlay').classList.remove('show');
+  save(K.ONBOARD,'done');
+}
+
+/* ══ PWA ══ */
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();deferredPrompt=e;
+  if(!load(K.PWA,null)){
+    setTimeout(()=>document.getElementById('pwaBanner')?.classList.add('show'),3000);
+  }
+});
+document.getElementById('pwaInstallBtn')?.addEventListener('click',async()=>{
+  if(!deferredPrompt)return;
+  deferredPrompt.prompt();
+  const{outcome}=await deferredPrompt.userChoice;
+  if(outcome==='accepted')showToast('✅ SecretZone ajouté à ton écran d\'accueil !');
+  deferredPrompt=null;
+  dismissPWA();
+});
 function dismissPWA(){document.getElementById('pwaBanner')?.classList.remove('show');save(K.PWA,'dismissed');}
 
-function openSheet(id){ document.getElementById('sheetOverlay').classList.add('open'); document.getElementById(id).classList.add('open'); }
-function closeAllSheets(){ document.getElementById('sheetOverlay').classList.remove('open'); document.querySelectorAll('.bottom-sheet').forEach(s=>s.classList.remove('open')); }
+/* ══ SHEETS ══ */
+function openSheet(id){
+  document.getElementById('sheetOverlay').classList.add('open');
+  document.getElementById(id).classList.add('open');
+}
+function closeAllSheets(){
+  document.getElementById('sheetOverlay').classList.remove('open');
+  document.querySelectorAll('.bottom-sheet').forEach(s=>s.classList.remove('open'));
+}
 
+/* ══ UTILS ══ */
 function catE(cat){const m={amour:'❤️',trahison:'🔪',drole:'😂',dark:'🖤','18+':'🔞'};return m[cat]||'💬';}
 function esc(s){if(typeof s!=='string')return '';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function fmt(n){n=parseInt(n)||0;if(n>=1000000)return(n/1000000).toFixed(1)+'M';if(n>=1000)return(n/1000).toFixed(1)+'k';return String(n);}
+function fmt(n){n=parseInt(n)||0;if(n>=1000000)return(n/1000000).toFixed(1).replace('.0','')+'M';if(n>=1000)return(n/1000).toFixed(1).replace('.0','')+'k';return String(n);}
 function fmtNum(n){return n.toLocaleString('fr-FR');}
 function anonId(seed){return String((seed*9301+49297)%100003).padStart(4,'0').slice(0,4);}
-let _toast; function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg;t.classList.add('show'); clearTimeout(_toast);_toast=setTimeout(()=>t.classList.remove('show'),3500); }
+let _toast;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(_toast);_toast=setTimeout(()=>t.classList.remove('show'),3500);
+}
 
-/* ══════════════════════════════════════════
-   5. EXPOSITION DES FONCTIONS AU HTML (ESSENTIEL)
-   Comme on utilise 'type="module"', les fonctions ne sont plus 
-   globales par défaut. On les attache manuellement à 'window'.
-══════════════════════════════════════════ */
-Object.assign(window, {
-  closeOnboarding, openNotifications, openBoost, goToFeed, openConfessSheet, onHomeSearch,
-  goToFeedSearch, goToFeedFiltered, toggleSearch, closeSearch, onFeedSearch, setFilter,
-  setSort, shareNative, shareCardWA, shareCardCopy, closeShareCard, dismissPWA, setLang,
-  selectCat, submitConfession, postComment, copyScript, submitReport, simulatePayment,
-  toggleLike, vote, openComments, openScript, openTopViral, updateCharCount, closeAllSheets, 
-  goToHome, openReport, toggleReply, postReply
-});
+/* ══ PWA MANIFEST ══ */
+(function injectManifest(){
+  const m={name:'SecretZone',short_name:'SecretZone',description:'Confessions anonymes & virales',start_url:'/',display:'standalone',background_color:'#000000',theme_color:'#000000',icons:[{src:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23000"/><text y=".9em" font-size="90">🔒</text></svg>',sizes:'192x192',type:'image/svg+xml'},{src:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23000"/><text y=".9em" font-size="90">🔒</text></svg>',sizes:'512x512',type:'image/svg+xml'}]};
+  const blob=new Blob([JSON.stringify(m)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement('link');link.rel='manifest';link.href=url;
+  document.head.appendChild(link);
+})();
 
 /* ══ INIT ══ */
 document.addEventListener('DOMContentLoaded',()=>{
+  // Onboarding
   if(!load(K.ONBOARD,null)) document.getElementById('onboarding-overlay').classList.add('show');
-  
-  // Lancement de la connexion Firebase
-  loadConfessionsFromFirebase();
-  
+  // Stats
+  refreshHomeStats();
+  renderPreviewCards();
+  renderStreakHome();
   updateNotifBadge();
+  // Close share card on backdrop click
   document.getElementById('shareCardOverlay').addEventListener('click',function(e){if(e.target===this)closeShareCard();});
-  setInterval(()=>{ const el=document.getElementById('totalUsers');if(!el)return; const cur=parseInt(el.textContent.replace(/\D/g,''))||18502; el.textContent=fmtNum(Math.max(18000,cur+(Math.random()>.5?1:-1))); },5000);
+  // Pulse "en ligne" counter
+  setInterval(()=>{
+    const el=document.getElementById('totalUsers');if(!el)return;
+    const cur=parseInt(el.textContent.replace(/\D/g,''))||18502;
+    el.textContent=fmtNum(Math.max(18000,cur+(Math.random()>.5?1:-1)));
+  },5000);
 });
 </script>
 </body>
