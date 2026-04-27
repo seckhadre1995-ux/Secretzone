@@ -3,443 +3,1578 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>SecretZone — Confessions Anonymes</title>
-<meta name="description" content="Confesse-toi anonymement. Sans filtre. Communauté honnête.">
-<meta name="theme-color" content="#080808">
-
-<!-- Balises Open Graph pour WhatsApp -->
+<title>SecretZone — Confessions Anonymes & Virales</title>
+<meta name="description" content="Confesse-toi anonymement. Sans filtre. La communauté te juge honnêtement.">
+<meta name="theme-color" content="#000000">
 <meta property="og:title" content="SecretZone — Les secrets que personne n'ose dire">
 <meta property="og:description" content="Découvre les confessions les plus sombres et drôles. 100% anonyme.">
-<meta property="og:image" content="https://via.placeholder.com/1200x630/080808/6A00FF?text=SecretZone">
 <meta property="og:url" content="https://secretzone.app">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
+/* ================================================
+   VARIABLES & RESET
+   ================================================ */
 :root {
-  --bg: #080808; --bg2: #0f0f0f; --bg3: #161616;
-  --violet: #6A00FF; --violet2: #8B30FF;
-  --rose: #FF00AA; --rose2: #FF3DBF;
-  --cyan: #00F5FF; --white: #F0F0F0;
-  --muted: #555; --muted2: #333;
+  --bg: #000000;
+  --bg2: #0d0d0d;
+  --bg3: #161616;
+  --bg4: #1f1f1f;
+  --violet: #6A00FF;
+  --violet2: #8B30FF;
+  --rose: #FF00AA;
+  --rose2: #FF3DBF;
+  --cyan: #00F5FF;
+  --white: #FFFFFF;
+  --muted: #666666;
+  --muted2: #2a2a2a;
   --gold: #FFD700;
+  --green: #25D366;
   --font-display: 'Bebas Neue', sans-serif;
   --font-body: 'DM Sans', sans-serif;
   --font-mono: 'Space Mono', monospace;
+  --r-sm: 14px;
+  --r-md: 20px;
+  --r-lg: 28px;
+  --r-xl: 50px;
+  --shadow-violet: 0 8px 32px rgba(106,0,255,0.35);
+  --shadow-rose: 0 8px 32px rgba(255,0,170,0.35);
+  --transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--white); font-family: var(--font-body); overflow-x: hidden; min-height: 100vh; }
+html { scroll-behavior: smooth; font-size: 16px; }
 
-/* Bruit de fond global */
-body::before {
-  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ==============================================================
-   INTERFACE 1 : L'ACCUEIL (Présentation & Stats)
-   ============================================================== */
+/* Grain global */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ================================================
+   HOME VIEW
+   ================================================ */
 #home-view {
-  display: flex; flex-direction: column; min-height: 100vh; padding-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--bg);
   animation: fadeIn 0.5s ease;
 }
 
+/* HEADER */
 .header-home {
-  display: flex; align-items: center; justify-content: space-between; padding: 16px 24px;
-  background: rgba(8,8,8,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(106,0,255,0.2);
-  position: sticky; top: 0; z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
-.logo { font-family: var(--font-display); font-size: 2.2rem; letter-spacing: 2px; background: linear-gradient(90deg, var(--violet), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.logo span { color: var(--cyan); -webkit-text-fill-color: var(--cyan); }
-.btn-premium-home { background: transparent; border: 1px solid rgba(255,215,0,0.5); color: #FFD700; padding: 9px 16px; border-radius: 50px; font-weight: 600; font-size: 0.8rem; cursor: pointer; transition: all 0.3s; }
 
-.hero { text-align: center; padding: 60px 24px 40px; position: relative; }
-.hero::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 600px; height: 400px; background: radial-gradient(ellipse, rgba(106,0,255,0.25) 0%, transparent 70%); pointer-events: none; }
-.hero-eyebrow { font-family: var(--font-mono); font-size: 0.75rem; color: var(--rose); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 16px; }
-.hero h1 { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 6rem); line-height: 0.9; margin-bottom: 20px; }
-.hero h1 em { background: linear-gradient(90deg, var(--violet), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-style: normal; }
-.hero p { font-size: 1.1rem; color: rgba(240,240,240,0.6); max-width: 450px; margin: 0 auto 32px; line-height: 1.6; }
+.logo {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, var(--violet), var(--rose), var(--cyan));
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 4s linear infinite;
+}
 
-.hero-stats { display: flex; justify-content: center; gap: 32px; margin-bottom: 40px; }
-.stat { text-align: center; }
-.stat-number { font-family: var(--font-display); font-size: 2rem; background: linear-gradient(90deg, var(--violet), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.stat-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+.btn-premium-home {
+  background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,165,0,0.1));
+  border: 1px solid rgba(255,215,0,0.4);
+  color: var(--gold);
+  padding: 9px 16px;
+  border-radius: var(--r-xl);
+  font-weight: 700;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: var(--transition);
+  letter-spacing: 0.5px;
+}
+.btn-premium-home:hover { background: rgba(255,215,0,0.15); border-color: var(--gold); }
 
-/* Gros bouton pour entrer dans TikTok Mode */
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 60px 24px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(106,0,255,0.25) 0%, rgba(255,0,170,0.1) 40%, transparent 70%);
+  pointer-events: none;
+  animation: glowBreath 5s ease-in-out infinite;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--cyan);
+  background: rgba(0,245,255,0.08);
+  padding: 7px 18px;
+  border-radius: var(--r-xl);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  border: 1px solid rgba(0,245,255,0.2);
+}
+
+.live-dot {
+  width: 7px; height: 7px;
+  background: var(--cyan);
+  border-radius: 50%;
+  animation: livePulse 1.5s ease infinite;
+  box-shadow: 0 0 8px var(--cyan);
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 13vw, 6.5rem);
+  line-height: 0.88;
+  margin-bottom: 22px;
+  letter-spacing: 2px;
+}
+
+.hero h1 em {
+  background: linear-gradient(135deg, var(--rose), var(--violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: normal;
+  display: block;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.55);
+  max-width: 420px;
+  margin: 0 auto 36px;
+  line-height: 1.65;
+}
+
+/* STATS */
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 44px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 44px;
+}
+
+.stat {
+  text-align: center;
+  flex: 1;
+  padding: 18px 10px;
+  position: relative;
+}
+
+.stat:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 20%; bottom: 20%;
+  width: 1px;
+  background: rgba(255,255,255,0.08);
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--white);
+  display: block;
+  letter-spacing: 1px;
+}
+
+.stat-label {
+  font-size: 0.68rem;
+  color: var(--rose);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+/* CTA BUTTON */
 .btn-enter-tiktok {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  width: calc(100% - 48px); max-width: 400px; margin: 0 auto 40px;
-  background: linear-gradient(135deg, var(--violet), var(--rose));
-  color: white; padding: 20px; border-radius: 50px; border: none;
-  font-family: var(--font-body); font-size: 1.2rem; font-weight: 800; cursor: pointer;
-  box-shadow: 0 10px 30px rgba(255,0,170,0.4); animation: glowPulse 2.5s infinite; transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: calc(100% - 48px);
+  max-width: 420px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, var(--violet) 0%, var(--rose) 100%);
+  color: white;
+  padding: 20px 32px;
+  border-radius: var(--r-xl);
+  border: none;
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 rgba(255,0,170,0.4);
+  animation: ctaPulse 2.5s ease infinite;
+  transition: transform 0.15s, opacity 0.15s;
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
 }
-.btn-enter-tiktok:active { transform: scale(0.95); }
 
-.info-cards { max-width: 680px; margin: 0 auto; padding: 0 24px; display: grid; gap: 16px; }
-.info-card { background: var(--bg2); border: 1px solid var(--muted2); padding: 24px; border-radius: 20px; text-align: center; }
-.info-card h3 { color: var(--cyan); margin-bottom: 10px; font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 1px; }
-.info-card p { font-size: 0.9rem; color: rgba(240,240,240,0.7); line-height: 1.6; }
+.btn-enter-tiktok::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+}
 
-/* ==============================================================
-   INTERFACE 2 : LE FEED MODE TIKTOK
-   ============================================================== */
+.btn-enter-tiktok:active { transform: scale(0.96); opacity: 0.9; }
+
+/* TRENDING TAGS */
+.trending-section {
+  padding: 0 20px 10px;
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  padding: 0 4px;
+}
+
+.trending-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.trend-tag {
+  background: var(--bg2);
+  border: 1px solid var(--muted2);
+  padding: 9px 18px;
+  border-radius: var(--r-xl);
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.trend-tag:hover { border-color: var(--violet); color: var(--cyan); }
+
+/* HOW IT WORKS */
+.section-block {
+  padding: 50px 20px 0;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  margin-bottom: 28px;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.section-title span { color: var(--rose); }
+
+.how-it-works {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+.step-card {
+  background: var(--bg2);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 28px 22px;
+  border-radius: var(--r-lg);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--violet), var(--rose));
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.step-card:hover::before { opacity: 1; }
+.step-card:hover { border-color: rgba(106,0,255,0.2); }
+
+.step-num {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  color: rgba(255,255,255,0.04);
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.step-icon { font-size: 2.2rem; margin-bottom: 14px; display: block; }
+.step-card h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--white); font-weight: 700; }
+.step-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+/* PREVIEW CARDS */
+.preview-section {
+  padding: 50px 20px 0;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.preview-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.preview-scroll::-webkit-scrollbar { display: none; }
+
+.preview-card {
+  flex-shrink: 0;
+  width: 260px;
+  background: var(--bg2);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--r-lg);
+  padding: 22px 18px;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(106,0,255,0.08), rgba(255,0,170,0.08));
+  opacity: 0;
+  transition: var(--transition);
+  border-radius: inherit;
+}
+
+.preview-card:hover::after { opacity: 1; }
+.preview-card:hover { border-color: rgba(255,0,170,0.25); transform: translateY(-2px); }
+
+.preview-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.07);
+  padding: 4px 10px;
+  border-radius: var(--r-xl);
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 14px;
+}
+
+.preview-text {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.8);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.preview-stats {
+  display: flex;
+  gap: 14px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-family: var(--font-mono);
+}
+
+.preview-stat { display: flex; align-items: center; gap: 5px; }
+
+/* RULES */
+.rules-section {
+  padding: 50px 20px 0;
+  max-width: 680px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.rules-box {
+  background: rgba(255,0,170,0.04);
+  border: 1px solid rgba(255,0,170,0.15);
+  padding: 28px 24px;
+  border-radius: var(--r-lg);
+}
+
+.rules-box h3 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--rose);
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.rule-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.5;
+}
+
+.rule-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+
+/* FOOTER */
+.footer-home {
+  text-align: center;
+  padding: 50px 24px 60px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: 60px;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, var(--muted), rgba(255,255,255,0.5));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.82rem;
+  transition: var(--transition);
+}
+.footer-links a:hover { color: var(--violet); }
+
+.footer-text {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.2);
+  font-family: var(--font-mono);
+}
+
+
+/* ================================================
+   FEED VIEW
+   ================================================ */
 #feed-view {
-  display: none; height: 100vh; width: 100vw; background: #000; position: fixed; top: 0; left: 0; z-index: 500;
-  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: none;
+  height: 100dvh;
+  width: 100vw;
+  background: #000;
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 500;
+  animation: fadeIn 0.3s ease;
 }
 
 .feed-header {
-  position: absolute; top: 0; left: 0; right: 0; z-index: 510;
-  display: flex; align-items: center; justify-content: space-between; padding: 16px 20px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, transparent 100%);
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 510;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+  pointer-events: none;
 }
-.btn-back { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 50px; font-weight: bold; font-size: 0.85rem; cursor: pointer; backdrop-filter: blur(5px); }
-.btn-top-viral { background: rgba(255,0,170,0.15); border: 1px solid var(--rose); color: var(--rose); padding: 8px 16px; border-radius: 50px; font-weight: bold; font-size: 0.85rem; cursor: pointer; backdrop-filter: blur(5px); }
+.feed-header > * { pointer-events: auto; }
 
-/* CONTENEUR DU SCROLL INFINI */
+.feed-logo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, var(--violet), var(--rose));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.feed-controls { display: flex; gap: 10px; }
+
+.btn-feed {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: white;
+  padding: 8px 14px;
+  border-radius: var(--r-xl);
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: var(--transition);
+}
+.btn-feed:hover { background: rgba(255,255,255,0.14); }
+.btn-feed.viral { border-color: rgba(255,0,170,0.4); color: var(--rose2); }
+
+/* SNAP SCROLL */
 .snap-container {
-  height: 100vh; width: 100vw; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth;
+  height: 100dvh;
+  width: 100vw;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
   background: #000;
 }
 .snap-container::-webkit-scrollbar { display: none; }
 
-/* UNE CONFESSION = UN ECRAN */
+/* SLIDES */
 .slide {
-  height: 100vh; width: 100vw; scroll-snap-align: start; position: relative;
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 80px 70px 140px 20px; /* Espace pour header, sidebar et footer */
-  border-bottom: 1px solid #111;
+  height: 100dvh;
+  width: 100vw;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
 }
 
-/* Couleurs de fond selon la catégorie */
-.bg-amour { background: radial-gradient(circle at center, rgba(255,0,170,0.15) 0%, #000 70%); }
-.bg-trahison { background: radial-gradient(circle at center, rgba(255,165,0,0.15) 0%, #000 70%); }
-.bg-dark { background: radial-gradient(circle at center, rgba(106,0,255,0.15) 0%, #000 70%); }
-.bg-drole { background: radial-gradient(circle at center, rgba(0,245,255,0.15) 0%, #000 70%); }
-.bg-18 { background: radial-gradient(circle at center, rgba(255,0,0,0.2) 0%, #000 70%); }
+/* BG GRADIENTS — clairs pour que le texte soit lisible */
+.bg-amour { background: radial-gradient(circle at 30% 40%, rgba(255,0,170,0.35) 0%, rgba(106,0,255,0.2) 40%, #000 70%); }
+.bg-trahison { background: radial-gradient(circle at 70% 30%, rgba(255,100,0,0.35) 0%, rgba(180,0,0,0.15) 40%, #000 70%); }
+.bg-dark { background: radial-gradient(circle at 50% 60%, rgba(106,0,255,0.4) 0%, rgba(30,0,80,0.2) 40%, #000 70%); }
+.bg-drole { background: radial-gradient(circle at 50% 40%, rgba(0,245,255,0.3) 0%, rgba(0,100,150,0.15) 40%, #000 70%); }
+.bg-18 { background: radial-gradient(circle at 50% 50%, rgba(220,0,0,0.4) 0%, rgba(80,0,0,0.2) 40%, #000 70%); }
 
-.slide-badge { position: absolute; top: 70px; left: 20px; display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: bold; border: 1px solid rgba(255,255,255,0.2); z-index: 5; }
-.slide-badge.wolof { background: rgba(0,245,255,0.1); color: var(--cyan); border-color: var(--cyan); margin-left: 10px; }
-
-/* ASTUCE POUR LES HISTOIRES LONGUES : Zone défilante interne */
-.slide-text-container {
-  max-height: 100%; overflow-y: auto; scrollbar-width: none;
-  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+/* Background photo-like texture for depth */
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+  z-index: 0;
 }
-.slide-text-container::-webkit-scrollbar { display: none; }
-.slide-text { font-size: clamp(1.2rem, 5vw, 1.8rem); font-weight: 700; line-height: 1.5; text-shadow: 0 4px 15px rgba(0,0,0,0.9); margin-bottom: 15px; color: var(--white); }
-.slide-author { font-size: 0.85rem; color: var(--muted); font-family: var(--font-mono); margin-bottom: 20px; }
 
-/* FLOU POUR PREMIUM */
-.blurred-content { filter: blur(6px); user-select: none; pointer-events: none; }
-.locked-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 20; border-radius: 20px; margin: 80px 70px 140px 20px; }
-.locked-btn { background: var(--gold); border: none; padding: 12px 24px; border-radius: 50px; font-weight: bold; color: black; cursor: pointer; font-size: 1rem; box-shadow: 0 0 20px rgba(255,215,0,0.4); }
+/* Bottom gradient for legibility */
+.slide::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 75%;
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
 
-/* SIDEBAR TIKTOK (Boutons à droite) */
-.sidebar { position: absolute; right: 10px; bottom: 130px; display: flex; flex-direction: column; gap: 20px; align-items: center; z-index: 50; }
-.side-btn { display: flex; flex-direction: column; align-items: center; gap: 4px; background: transparent; border: none; color: white; cursor: pointer; }
-.side-icon { width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.2); }
-.side-btn:active .side-icon { transform: scale(0.9); }
-.side-btn.liked .side-icon { background: rgba(255,0,170,0.2); border-color: var(--rose); }
-.side-text { font-size: 0.75rem; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+/* Badge */
+.slide-badges {
+  position: absolute;
+  top: 80px;
+  left: 18px;
+  display: flex;
+  gap: 8px;
+  z-index: 5;
+  flex-wrap: wrap;
+}
 
-/* SYSTEME POLÉMIQUE (En bas du Slide) */
-.polemic-box { position: absolute; bottom: 20px; left: 20px; right: 80px; z-index: 50; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 16px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
-.polemic-q { font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; color: var(--gold); }
+.slide-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  padding: 5px 12px;
+  border-radius: var(--r-xl);
+  font-size: 0.72rem;
+  font-weight: 700;
+  border: 1px solid rgba(255,255,255,0.15);
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+}
+.slide-badge.wolof { color: var(--cyan); border-color: rgba(0,245,255,0.3); }
+
+/* Content zone */
+.slide-content {
+  position: relative;
+  z-index: 10;
+  padding: 0 80px 160px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  max-height: 60dvh;
+}
+
+.slide-text-scroll {
+  overflow-y: auto;
+  max-height: 100%;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
+  padding: 12px 0;
+}
+.slide-text-scroll::-webkit-scrollbar { display: none; }
+
+.slide-text {
+  font-size: clamp(1.15rem, 4.8vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.55;
+  color: var(--white);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+  margin-bottom: 12px;
+}
+
+.slide-author {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.45);
+  font-family: var(--font-mono);
+}
+
+/* BLUR PREMIUM */
+.blurred-content {
+  filter: blur(10px);
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.locked-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  gap: 16px;
+}
+
+.locked-btn {
+  background: linear-gradient(135deg, var(--gold), #FFA500);
+  border: none;
+  padding: 14px 28px;
+  border-radius: var(--r-xl);
+  font-weight: 800;
+  color: #000;
+  cursor: pointer;
+  font-size: 0.95rem;
+  box-shadow: 0 0 30px rgba(255,215,0,0.4);
+  transition: var(--transition);
+}
+.locked-btn:active { transform: scale(0.96); }
+
+/* SIDEBAR */
+.sidebar {
+  position: absolute;
+  right: 12px;
+  bottom: 165px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  z-index: 50;
+}
+
+.side-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.side-btn:active { transform: scale(0.88); }
+
+.side-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  transition: var(--transition);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.side-btn.liked .side-icon { background: rgba(255,0,170,0.25); border-color: var(--rose); }
+.side-text { font-size: 0.75rem; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,1); }
+
+/* POLEMIC BOX */
+.polemic-box {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  right: 76px;
+  z-index: 50;
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(16px);
+  padding: 14px 16px;
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+}
+
+.polemic-q {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--white);
+}
+
 .polemic-votes { display: flex; gap: 10px; }
-.vote-btn { flex: 1; padding: 10px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: white; font-weight: bold; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
-.vote-btn.yes { border-color: rgba(100,255,100,0.4); }
-.vote-btn.no { border-color: rgba(255,80,80,0.4); }
-.vote-btn.voted { background: rgba(255,255,255,0.2); opacity: 0.5; cursor: not-allowed; }
 
-/* BOUTON FLOTTANT CONFESSER (Mode TikTok) */
-.floating-confess { position: absolute; bottom: 30px; right: 20px; width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--violet), var(--rose)); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; border: none; box-shadow: 0 4px 15px rgba(255,0,170,0.5); cursor: pointer; z-index: 100; }
+.vote-btn {
+  flex: 1;
+  padding: 11px 8px;
+  border-radius: var(--r-md);
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  color: white;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.vote-btn.yes { border-color: rgba(80,220,80,0.3); }
+.vote-btn.no { border-color: rgba(255,80,80,0.3); }
+.vote-btn:hover:not(.voted) { background: rgba(255,255,255,0.1); }
+.vote-btn.voted { opacity: 0.45; cursor: default; pointer-events: none; }
+.vote-btn.voted-yes { background: rgba(80,220,80,0.15) !important; border-color: rgba(80,220,80,0.5) !important; opacity: 1; }
+.vote-btn.voted-no { background: rgba(255,80,80,0.15) !important; border-color: rgba(255,80,80,0.5) !important; opacity: 1; }
 
-/* ==============================================================
-   BOTTOM SHEETS (MODALS COMMUNS)
-   ============================================================== */
-.bottom-sheet { position: fixed; bottom: 0; left: 0; right: 0; background: #111; border-radius: 24px 24px 0 0; z-index: 1000; transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); max-height: 85vh; display: flex; flex-direction: column; border-top: 1px solid rgba(255,255,255,0.1); }
-.bottom-sheet.open { transform: translateY(0); }
-.sheet-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 999; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+/* PROGRESS BAR after vote */
+.vote-bar {
+  height: 3px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  margin-top: 10px;
+  overflow: hidden;
+  display: none;
+}
+.vote-bar.show { display: block; }
+.vote-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #50dc50, #ff5050);
+  border-radius: 10px;
+  transition: width 0.6s ease;
+}
+
+/* FLOATING CONFESS */
+.floating-confess {
+  position: fixed;
+  bottom: 28px;
+  right: 16px;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--violet), var(--rose));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 20px rgba(255,0,170,0.5);
+  cursor: pointer;
+  z-index: 520;
+  transition: transform 0.15s;
+}
+.floating-confess:active { transform: scale(0.9); }
+
+/* AD SLIDE */
+.ad-slide {
+  height: 100dvh;
+  width: 100vw;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(106,0,255,0.15), #000 70%);
+  text-align: center;
+  padding: 40px 30px;
+  gap: 20px;
+}
+
+/* ================================================
+   BOTTOM SHEETS
+   ================================================ */
+.sheet-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
 .sheet-overlay.open { opacity: 1; pointer-events: all; }
-.sheet-handle { width: 40px; height: 4px; background: var(--muted); border-radius: 2px; margin: 16px auto 10px; }
-.sheet-header { padding: 0 24px 16px; border-bottom: 1px solid #222; text-align: center; font-weight: bold; font-size: 1.1rem; color: white; }
-.sheet-content { padding: 24px; overflow-y: auto; flex: 1; }
 
-.btn-primary { width: 100%; background: linear-gradient(90deg, var(--violet), var(--rose)); border: none; color: white; padding: 16px; border-radius: 16px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+.bottom-sheet {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--bg2);
+  border-radius: 24px 24px 0 0;
+  z-index: 1000;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 88dvh;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-bottom: none;
+}
+.bottom-sheet.open { transform: translateY(0); }
 
-/* Sheet Confesser */
-textarea.confess-input { width: 100%; height: 160px; background: #1a1a1a; border: 1px solid #333; color: white; padding: 16px; border-radius: 16px; resize: none; outline: none; font-size: 1rem; font-family: var(--font-body); margin-bottom: 20px; }
-.cat-selector { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
-.cat-tag { padding: 8px 16px; border-radius: 50px; border: 1px solid #444; background: transparent; color: white; font-size: 0.85rem; cursor: pointer; }
-.cat-tag.active { border-color: var(--cyan); background: rgba(0,245,255,0.1); color: var(--cyan); }
+.sheet-handle {
+  width: 36px; height: 4px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 4px;
+  margin: 14px auto 10px;
+  flex-shrink: 0;
+}
 
-/* Sheet Commentaires */
-.comment-item { display: flex; gap: 12px; margin-bottom: 20px; }
-.c-avatar { width: 36px; height: 36px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink:0; }
-.c-body { background: #1a1a1a; padding: 12px 16px; border-radius: 0 16px 16px 16px; flex: 1; border: 1px solid #222;}
-.c-name { font-size: 0.75rem; color: var(--muted); margin-bottom: 4px; font-weight: bold; font-family: var(--font-mono);}
-.c-text { font-size: 0.9rem; line-height: 1.5; color: #ddd;}
-.c-input-area { padding: 16px 24px; border-top: 1px solid #222; display: flex; gap: 10px; background: #0a0a0a; }
-.c-input { flex: 1; background: #222; border: 1px solid #333; color: white; padding: 14px 16px; border-radius: 50px; outline: none; font-family: var(--font-body); font-size: 0.9rem;}
-.c-send { background: var(--violet); color: white; border: none; width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size:1.2rem;}
+.sheet-header {
+  padding: 4px 24px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: white;
+  text-align: center;
+  flex-shrink: 0;
+}
 
-/* Sheet Script TikTok */
-.script-box { background: rgba(106,0,255,0.08); border: 1px solid rgba(106,0,255,0.3); border-radius: 16px; padding: 20px; margin-bottom: 24px; }
-.script-part { margin-bottom: 16px; }
-.script-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--violet2); text-transform: uppercase; margin-bottom: 6px; }
-.script-text { font-size: 1rem; font-weight: 500; line-height:1.5; color: white;}
+.sheet-content {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
 
-/* Sheet Top Viral */
-.viral-item { display: flex; align-items: center; gap: 14px; background: #1a1a1a; border: 1px solid #333; padding: 16px; border-radius: 16px; margin-bottom: 12px; cursor: pointer;}
-.viral-rank { font-family: var(--font-display); font-size: 1.8rem; color: var(--rose); min-width: 30px; text-align:center;}
-.viral-text { font-size: 0.9rem; flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height:1.4;}
+.btn-primary {
+  width: 100%;
+  background: linear-gradient(90deg, var(--violet), var(--rose));
+  border: none;
+  color: white;
+  padding: 17px;
+  border-radius: var(--r-md);
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: var(--transition);
+}
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-primary:active { transform: scale(0.98); }
 
-/* Toast Message */
-.toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-20px); background: var(--white); color: #000; padding: 12px 24px; border-radius: 50px; font-weight: bold; font-size: 0.85rem; opacity: 0; pointer-events: none; transition: all 0.3s; z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+/* CONFESS SHEET */
+textarea.confess-input {
+  width: 100%;
+  height: 150px;
+  background: var(--bg3);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: white;
+  padding: 16px;
+  border-radius: var(--r-md);
+  resize: none;
+  outline: none;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  margin-bottom: 18px;
+  transition: border-color 0.2s;
+  line-height: 1.6;
+}
+textarea.confess-input:focus { border-color: rgba(106,0,255,0.5); }
+textarea.confess-input::placeholder { color: rgba(255,255,255,0.25); }
+
+.confess-char-count {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-align: right;
+  margin-top: -14px;
+  margin-bottom: 16px;
+}
+
+.cat-selector { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+.cat-tag {
+  padding: 9px 16px;
+  border-radius: var(--r-xl);
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-body);
+}
+.cat-tag:hover { border-color: rgba(255,255,255,0.2); color: white; }
+.cat-tag.active { border-color: var(--cyan); background: rgba(0,245,255,0.08); color: var(--cyan); font-weight: 700; }
+
+.confess-anon-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 18px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* COMMENTS */
+.comment-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+  animation: fadeIn 0.2s ease;
+}
+.c-avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.c-body {
+  background: var(--bg3);
+  padding: 12px 16px;
+  border-radius: 4px 16px 16px 16px;
+  flex: 1;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.c-name {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 5px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+.c-text { font-size: 0.92rem; line-height: 1.5; color: rgba(255,255,255,0.85); }
+
+.c-input-area {
+  padding: 14px 20px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  gap: 10px;
+  background: var(--bg);
+  flex-shrink: 0;
+}
+.c-input {
+  flex: 1;
+  background: var(--bg3);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: white;
+  padding: 13px 18px;
+  border-radius: var(--r-xl);
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  transition: border-color 0.2s;
+}
+.c-input:focus { border-color: rgba(106,0,255,0.4); }
+.c-input::placeholder { color: rgba(255,255,255,0.25); }
+.c-send {
+  background: var(--violet);
+  color: white;
+  border: none;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.c-send:hover { background: var(--violet2); }
+.c-send:active { transform: scale(0.92); }
+
+/* SCRIPT */
+.script-box {
+  background: rgba(106,0,255,0.06);
+  border: 1px solid rgba(106,0,255,0.2);
+  border-radius: var(--r-md);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.script-part { margin-bottom: 18px; }
+.script-part:last-child { margin-bottom: 0; }
+.script-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.script-text { font-size: 1rem; font-weight: 500; line-height: 1.55; color: white; }
+
+/* TOP VIRAL */
+.viral-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg3);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 14px;
+  border-radius: var(--r-md);
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.viral-item:hover { border-color: rgba(255,0,170,0.25); }
+.viral-rank {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--rose);
+  min-width: 34px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+.viral-text {
+  font-size: 0.88rem;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.8);
+}
+.viral-likes {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+
+/* PREMIUM SHEET */
+.premium-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.premium-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,215,0,0.04);
+  border: 1px solid rgba(255,215,0,0.1);
+  padding: 12px 16px;
+  border-radius: var(--r-md);
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.8);
+}
+.premium-feature-icon { font-size: 1.3rem; flex-shrink: 0; }
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(20,20,20,0.95);
+  color: white;
+  padding: 13px 24px;
+  border-radius: var(--r-xl);
+  font-weight: 700;
+  font-size: 0.88rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+  z-index: 9999;
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
+  max-width: 90vw;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* Animations */
+/* ================================================
+   ANIMATIONS
+   ================================================ */
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes glowPulse { 0%, 100% { box-shadow: 0 0 20px rgba(255,0,170,0.3); } 50% { box-shadow: 0 0 40px rgba(255,0,170,0.6), 0 0 60px rgba(106,0,255,0.4); } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes glowBreath { 0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); } 50% { opacity: 1; transform: translateX(-50%) scale(1.1); } }
+@keyframes ctaPulse { 0%, 100% { box-shadow: 0 0 20px rgba(255,0,170,0.3), 0 8px 32px rgba(106,0,255,0.25); } 50% { box-shadow: 0 0 50px rgba(255,0,170,0.6), 0 8px 50px rgba(106,0,255,0.45); } }
+@keyframes livePulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.75); } }
+@keyframes gradientShift { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+@keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.4); } 100% { transform: scale(1); } }
 </style>
 </head>
 <body>
 
-<!-- ==============================================================
-     ÉCRAN 1 : L'ACCUEIL (HOME VIEW)
-     ============================================================== -->
+<!-- ================================================
+     HOME VIEW
+     ================================================ -->
 <div id="home-view">
   <header class="header-home">
-    <div class="logo">Secret<span>Zone</span></div>
-    <button class="btn-premium-home" onclick="openBoost()">⚡ Boost / Premium</button>
+    <div class="logo">SecretZone</div>
+    <button class="btn-premium-home" onclick="openBoost()">👑 Premium</button>
   </header>
 
   <section class="hero">
-    <p class="hero-eyebrow">▲ Vrai • Anonyme • Sans Filtre</p>
-    <h1>Le lieu où<br>la vérité<br><em>éclate</em></h1>
-    <p>Lis, juge et partage les secrets les plus sombres, drôles et choquants de la communauté. Personne ne saura jamais qui tu es.</p>
-    
+    <div class="hero-glow"></div>
+    <span class="hero-eyebrow">
+      <span class="live-dot"></span>
+      Application N°1 des Confessions
+    </span>
+    <h1>
+      La vérité<br>
+      <em>sans filtre</em>
+    </h1>
+    <p>Lis, juge et partage les secrets les plus choquants, drôles et sombres. 100% anonyme — pour toujours.</p>
+
     <div class="hero-stats">
-      <div class="stat"><div class="stat-number" id="totalConfessions">4,208</div><div class="stat-label">Secrets</div></div>
-      <div class="stat"><div class="stat-number" id="totalUsers">18,502</div><div class="stat-label">Lecteurs</div></div>
-      <div class="stat"><div class="stat-number">∞</div><div class="stat-label">Anonymat</div></div>
+      <div class="stat">
+        <span class="stat-number" id="totalConfessions">4,208</span>
+        <span class="stat-label">Secrets</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number" id="totalUsers">18,502</span>
+        <span class="stat-label">En ligne</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">∞</span>
+        <span class="stat-label">Anonymat</span>
+      </div>
     </div>
 
-    <button class="btn-enter-tiktok" onclick="goToFeed()">👉 Ouvrir le Mode TikTok 🔥</button>
+    <button class="btn-enter-tiktok" onclick="goToFeed()">
+      🔥 Lancer le Feed TikTok
+    </button>
   </section>
 
-  <div class="info-cards">
-    <div class="info-card">
-      <h3>Pourquoi SecretZone ?</h3>
-      <p>Dans la vraie vie, on ne peut pas tout dire par peur des conséquences. Ici, tu as le pouvoir de lâcher ton fardeau en total anonymat. La communauté décidera si tu as raison ou tort.</p>
-    </div>
-    <div class="info-card">
-      <h3>📱 Mode Immersif</h3>
-      <p>Nous avons repensé l'expérience. Fais défiler les confessions de bas en haut comme sur TikTok. Commente, rends viral sur WhatsApp, ou copie les scripts pour tes propres vidéos !</p>
+  <!-- TRENDING -->
+  <div class="trending-section">
+    <div class="section-label">Tendances</div>
+    <div class="trending-tags">
+      <div class="trend-tag">#Trahison</div>
+      <div class="trend-tag">#AmourImpossible</div>
+      <div class="trend-tag">#Sénégal</div>
+      <div class="trend-tag">#Drôle</div>
+      <div class="trend-tag">#Confessions</div>
+      <div class="trend-tag">#Secret</div>
     </div>
   </div>
+
+  <!-- PREVIEW -->
+  <div class="preview-section">
+    <div class="section-label">Confessions populaires</div>
+    <div class="preview-scroll" id="previewCards"></div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section-block">
+    <h2 class="section-title">Comment ça <span>marche ?</span></h2>
+    <div class="how-it-works">
+      <div class="step-card">
+        <span class="step-num">01</span>
+        <span class="step-icon">✍️</span>
+        <h3>Lâche ton secret</h3>
+        <p>Écris ce que tu as sur le cœur. Ni email, ni numéro, ni compte — totalement anonyme.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-num">02</span>
+        <span class="step-icon">📱</span>
+        <h3>Scrolle à l'infini</h3>
+        <p>Découvre les histoires en plein écran immersif. Un swipe suffit. Tu ne pourras plus t'arrêter.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-num">03</span>
+        <span class="step-icon">⚖️</span>
+        <h3>La commu juge</h3>
+        <p>Vote, commente, partage. Dis-nous qui a raison ou tort. La vérité est collective.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RULES -->
+  <div class="rules-section">
+    <div class="rules-box">
+      <h3>🛡️ Règles de la Zone</h3>
+      <div class="rule-item"><span class="rule-icon">🎭</span>Reste anonyme. Ne révèle jamais ton vrai nom ni celui d'une autre personne.</div>
+      <div class="rule-item"><span class="rule-icon">🚫</span>Pas de haine, racisme ou harcèlement. On est là pour le drama, pas pour détruire des vies.</div>
+      <div class="rule-item"><span class="rule-icon">📤</span>Ce qui se passe dans la SecretZone, reste ici... sauf si tu partages sur WhatsApp 😉</div>
+    </div>
+  </div>
+
+  <footer class="footer-home">
+    <span class="footer-logo">SecretZone</span>
+    <div class="footer-links">
+      <a href="#">CGU</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-text">© 2026 SecretZone — Tous droits réservés.</div>
+  </footer>
 </div>
 
 
-<!-- ==============================================================
-     ÉCRAN 2 : LE FEED TIKTOK (FEED VIEW)
-     ============================================================== -->
+<!-- ================================================
+     FEED VIEW
+     ================================================ -->
 <div id="feed-view">
   <div class="feed-header">
-    <button class="btn-back" onclick="goToHome()">⬅ Accueil</button>
-    <button class="btn-top-viral" onclick="openTopViral()">🔥 Top Viral</button>
+    <div class="feed-logo">SZ</div>
+    <div class="feed-controls">
+      <button class="btn-feed viral" onclick="openTopViral()">🔥 Top Viral</button>
+      <button class="btn-feed" onclick="goToHome()">← Accueil</button>
+    </div>
   </div>
 
-  <div class="snap-container" id="feed-container">
-    <!-- Injecté par JavaScript -->
-  </div>
+  <div class="snap-container" id="feed-container"></div>
 
-  <button class="floating-confess" onclick="openConfess()">+</button>
+  <button class="floating-confess" onclick="openConfess()" title="Confesser">＋</button>
 </div>
 
 
-<!-- ==============================================================
-     BOTTOM SHEETS (MODALS SUPERPOSÉS)
-     ============================================================== -->
+<!-- ================================================
+     BOTTOM SHEETS
+     ================================================ -->
 <div class="sheet-overlay" id="sheetOverlay" onclick="closeAllSheets()"></div>
 
-<!-- 1. MODAL CONFESSER -->
+<!-- CONFESSER -->
 <div class="bottom-sheet" id="sheetConfess">
   <div class="sheet-handle"></div>
-  <div class="sheet-header">Lâche ton secret</div>
+  <div class="sheet-header">Lâche ton secret 🔒</div>
   <div class="sheet-content">
-    <textarea class="confess-input" id="confessText" placeholder="Aujourd'hui j'ai réalisé que..."></textarea>
+    <div class="confess-anon-note">🛡️ 100% anonyme — aucun compte, aucun email requis</div>
+    <textarea class="confess-input" id="confessText" maxlength="500" placeholder="Personne ne saura que c'est toi. Vas-y, lâche tout..." oninput="updateCharCount()"></textarea>
+    <div class="confess-char-count"><span id="charCount">0</span>/500</div>
     <div class="cat-selector">
-      <button class="cat-tag active" onclick="selectCat(this, 'amour')">❤️ Amour</button>
-      <button class="cat-tag" onclick="selectCat(this, 'trahison')">🔪 Trahison</button>
-      <button class="cat-tag" onclick="selectCat(this, 'drole')">😂 Drôle</button>
-      <button class="cat-tag" onclick="selectCat(this, 'dark')">🖤 Dark</button>
-      <button class="cat-tag" onclick="selectCat(this, '18+')">🔞 +18 ans</button>
+      <button class="cat-tag active" onclick="selectCat(this,'amour')">❤️ Amour</button>
+      <button class="cat-tag" onclick="selectCat(this,'trahison')">🔪 Trahison</button>
+      <button class="cat-tag" onclick="selectCat(this,'drole')">😂 Drôle</button>
+      <button class="cat-tag" onclick="selectCat(this,'dark')">🖤 Dark</button>
+      <button class="cat-tag" onclick="selectCat(this,'18+')">🔞 +18</button>
     </div>
-    <button class="btn-primary" onclick="submitConfession()">Publier Anonymement</button>
+    <button class="btn-primary" onclick="submitConfession()">🔒 Publier mon secret</button>
   </div>
 </div>
 
-<!-- 2. MODAL COMMENTAIRES -->
+<!-- COMMENTAIRES -->
 <div class="bottom-sheet" id="sheetComments">
   <div class="sheet-handle"></div>
   <div class="sheet-header" id="commentCountTitle">Commentaires</div>
   <div class="sheet-content" id="commentList"></div>
   <div class="c-input-area">
-    <input type="text" class="c-input" id="commentInput" placeholder="Ajoute un commentaire piquant...">
+    <input type="text" class="c-input" id="commentInput" placeholder="Ton avis honnête..." maxlength="200"
+      onkeydown="if(event.key==='Enter') postComment()">
     <button class="c-send" onclick="postComment()">↑</button>
   </div>
 </div>
 
-<!-- 3. MODAL SCRIPT TIKTOK -->
+<!-- SCRIPT TIKTOK -->
 <div class="bottom-sheet" id="sheetScript">
   <div class="sheet-handle"></div>
-  <div class="sheet-header">🎥 Ton Script Viral</div>
+  <div class="sheet-header">🎥 Script TikTok / Reels</div>
   <div class="sheet-content">
-    <p style="font-size:0.85rem; color:var(--muted); margin-bottom:20px; text-align:center;">Copie ce script, mets une musique triste, lis-le face caméra et fais des millions de vues.</p>
+    <p style="font-size:0.85rem; color:var(--muted); margin-bottom:20px; text-align:center; line-height:1.6;">Copie ce script, mets une musique triste, lis-le face caméra — tu vas faire des millions de vues.</p>
     <div class="script-box" id="scriptContent"></div>
-    <button class="btn-primary" onclick="copyScript()">📋 Copier le script</button>
+    <button class="btn-primary" onclick="copyScript()">📋 Copier le script complet</button>
   </div>
 </div>
 
-<!-- 4. MODAL TOP VIRAL -->
+<!-- TOP VIRAL -->
 <div class="bottom-sheet" id="sheetTopViral">
   <div class="sheet-handle"></div>
-  <div class="sheet-header">🔥 Le Temple de la Sauce</div>
+  <div class="sheet-header">🔥 Temple de la Sauce — Top 5</div>
   <div class="sheet-content" id="viralList"></div>
 </div>
 
-<!-- 5. MODAL BOOST / PREMIUM -->
+<!-- PREMIUM -->
 <div class="bottom-sheet" id="sheetBoost">
   <div class="sheet-handle"></div>
-  <div class="sheet-header">🚀 Monétisation & Premium</div>
+  <div class="sheet-header">👑 SecretZone Premium</div>
   <div class="sheet-content" style="text-align:center;">
-    <span style="font-size: 3.5rem; display:block; margin-bottom:15px;">💸</span>
-    <h3 style="margin-bottom: 10px; color:var(--gold); font-size:1.4rem;">Boost ta confession</h3>
-    <p style="font-size:0.95rem; color:var(--muted); margin-bottom: 24px; line-height:1.5;">Pour 2 500 FCFA, ta confession passe en priorité absolue, tu débloques le contenu 🔞 caché et on retire les pubs.</p>
-    <button class="btn-primary" style="background:var(--gold); color:black; box-shadow: 0 4px 15px rgba(255,215,0,0.3);" onclick="simulatePayment()">Payer 2 500 FCFA (Orange/Wave)</button>
+    <span style="font-size:3.5rem; display:block; margin-bottom:16px;">👑</span>
+    <h3 style="color:var(--gold); font-family:var(--font-display); font-size:2rem; letter-spacing:2px; margin-bottom:8px;">DEVENIR VIP</h3>
+    <p style="color:var(--muted); font-size:0.9rem; margin-bottom:24px; line-height:1.6;">Accède à tout sans restriction.</p>
+    <div class="premium-features">
+      <div class="premium-feature"><span class="premium-feature-icon">🔞</span> Accès au contenu +18 débloqué</div>
+      <div class="premium-feature"><span class="premium-feature-icon">🚀</span> Ta confession boostée en #1 du feed</div>
+      <div class="premium-feature"><span class="premium-feature-icon">🚫</span> Zéro publicité, zéro interruption</div>
+      <div class="premium-feature"><span class="premium-feature-icon">⭐</span> Badge VIP sur tes commentaires</div>
+    </div>
+    <button class="btn-primary" style="background:linear-gradient(135deg,var(--gold),#FFA500); color:#000; font-size:1.05rem;" onclick="simulatePayment()">
+      Payer 2 500 FCFA (Orange / Wave)
+    </button>
+    <p style="font-size:0.72rem; color:var(--muted); margin-top:14px;">Paiement sécurisé — Annulable à tout moment</p>
   </div>
 </div>
 
-<div class="toast" id="toast">Message</div>
+<div class="toast" id="toast"></div>
 
-<!-- ==============================================================
-     JAVASCRIPT LOGIC
-     ============================================================== -->
+<!-- ================================================
+     JAVASCRIPT
+     ================================================ -->
 <script>
-// --- 1. DONNÉES & LOCALSTORAGE ---
-let userData = JSON.parse(localStorage.getItem('sz_ultimate')) || { liked:[], voted: {}, lastPost: 0, isPremium: false };
-function saveUser() { localStorage.setItem('sz_ultimate', JSON.stringify(userData)); }
+'use strict';
 
-// Questions polémiques par catégorie
-const polemics = {
-  'amour':["Tu pardonnes ?", "Il/elle a abusé ?", "Gros Red flag ? 🚩"],
-  'trahison':["C'est impardonnable ?", "Vengeance immédiate ?", "Tu aurais fait pareil ?"],
-  'drole':["C'est honteux ? 😭", "On rigole ou c'est chaud ?"],
-  'dark':["On juge ou on soutient ?", "Ça fait peur ?", "Force à lui/elle ?"],
-  '18+':["C'est malsain ?", "Tu valides ?", "Choquant ?"]
-};
+// === DONNÉES ===
+const KEY_USER = 'sz_user_v4';
+const KEY_CONF = 'sz_conf_v4';
 
-// LES 9 HISTOIRES ORIGINALES INTÉGRALES
-const confessions =[
-  { id: 101, text: "Suis une fille de 25 ans et je sors avec un homme marié de 38 ans qui vit aux USA. On se parle par appels vocaux et vidéo, on passe de bons moments ensemble comme un couple normal. Mais parfois il me dit que si je viens à l'hôtel au Sénégal, il ne veut pas que je reste vierge… c'est quelque chose que je ne ferai jamais. À chaque fois qu'il dit ça je suis déçue, il s'excuse — et puis le sujet revient. Ce qui me fait le plus mal, c'est que depuis le début du Ramadan il ne m'a plus parlé. Je l'aime mais j'ai peur qu'un jour il tourne ma tête. Selon vous, est-ce qu'il m'aime vraiment ?", cat: 'amour', isWolof: true, likes: 5142, comments:[{a:'Anon_442', t:'Un homme qui t\'aime vraiment ne remet pas en cause tes valeurs.', emoji:'💜'},{a:'Anon_880', t:'Le silence pendant le Ramadan est un signal.', emoji:'🤍'}], vRight: 412, vWrong: 4102 },
-  { id: 102, text: "Je suis une fille de 26 ans, j'ai subi un mariage arrangé à 13 ans. Mon mari avait de l'argent mais il m'a donné une misère. Ma mère a accepté. J'ai quand même obtenu mon Bac+2 en me battant seule. Quand j'ai demandé le divorce, ma mère m'a dit que je n'avais nulle part où aller. Du coup ma maison c'est chez une amie. Je veux me reconstruire, je veux juste partir de là. J'ai mon Bac et ma Licence 2. Je pleure mais je ne veux pas abandonner.", cat: 'dark', isWolof: true, likes: 8903, comments:[{a:'Anon_771', t:'Ton courage est énorme. Bac+2 malgré tout ça.', emoji:'🔥'},{a:'Anon_993', t:'La société t\'a faillie mais toi tu ne t\'es jamais abandonnée.', emoji:'💪'}], vRight: 8201, vWrong: 143 },
-  { id: 103, text: "Salam, j'ai 22 ans et je suis marié. Hier nuit je me suis réveillé et j'ai vu que j'avais fait pipi dans le lit. Après ça j'ai réveillé ma femme et je lui ai dit que c'est elle qui a fait ça… elle a pleuré, elle a cru que c'était vrai. Moi je savais que c'était moi mais j'étais trop gêné pour l'admettre. Je l'ai laissée appeler sa mère pour lui dire qu'elle avait eu un accident. Je suis trop honteux. Vos conseils ?", cat: 'drole', isWolof: true, likes: 12480, comments:[{a:'Anon_440', t:'HAHAHAHA mon frère il faut avouer tout de suite 😭😭', emoji:'💀'},{a:'Anon_773', t:'Ta femme a appelé SA MÈRE 💀 avoue maintenant', emoji:'😭'}], vRight: 234, vWrong: 11890 },
-  { id: 104, text: "Je suis tombée amoureuse de mon beau-frère. Hier soir, quand ma soeur dormait profondément dans la chambre d'à côté, il m'a rejointe dans le salon et on a franchi la limite. Je sais que c'est mal mais je ne regrette rien.", cat: '18+', isWolof: false, likes: 9800, comments:[], vRight: 12, vWrong: 5000 },
-  { id: 105, text: "J'ai trompé mon copain… et aujourd'hui il m'a demandé de l'aider à choisir une bague pour ma propre demande en mariage. Je me dégoûte.", cat: 'trahison', isWolof: false, likes: 4217, comments:[{a:'Anon_330', t:'Mon Dieu... comment tu vis avec ça ?', emoji:'😮'}], vRight: 124, vWrong: 3891 },
-  { id: 106, text: "Mon meilleur ami sort avec mon ex… mais il ne sait pas que je l'aime encore secrètement.", cat: 'amour', isWolof: false, likes: 3104, comments:[{a:'Anon_004', t:'Parle lui. Vraiment.', emoji:'❤️'}], vRight: 589, vWrong: 1823 },
-  { id: 107, text: "J'ai menti à toute ma famille sur ma vie… en réalité je suis complètement perdu, je n'ai ni diplôme ni travail.", cat: 'dark', isWolof: false, likes: 5672, comments:[{a:'Anon_782', t:'T\'es pas seul dans ce cas.', emoji:'🤝'}], vRight: 4201, vWrong: 312 },
-  { id: 108, text: "Une fille m'aime sincèrement depuis 2 ans… mais je préfère courir derrière celle qui me détruit mentalement.", cat: 'amour', isWolof: false, likes: 6891, comments:[], vRight: 832, vWrong: 5241 },
-  { id: 109, text: "Je souris tous les jours… mais personne ne sait que je suis au bout du rouleau. J'ai tout pour être heureux mais je ne ressens plus rien.", cat: 'dark', isWolof: false, likes: 9412, comments:[{a:'Anon_900', t:'Je te vois. Tu comptes. Tiens bon 💜', emoji:'💜'}], vRight: 7890, vWrong: 234 }
+// Chargement sécurisé
+function safeLoad(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return fallback;
+    const parsed = JSON.parse(raw);
+    return parsed ?? fallback;
+  } catch (e) {
+    return fallback;
+  }
+}
+
+let userData = safeLoad(KEY_USER, { liked: [], voted: {}, lastPost: 0, isPremium: false });
+// Validation de la structure userData
+if (!Array.isArray(userData.liked)) userData.liked = [];
+if (typeof userData.voted !== 'object' || userData.voted === null) userData.voted = {};
+if (typeof userData.lastPost !== 'number') userData.lastPost = 0;
+if (typeof userData.isPremium !== 'boolean') userData.isPremium = false;
+
+function saveUser() {
+  try { localStorage.setItem(KEY_USER, JSON.stringify(userData)); } catch(e) {}
+}
+
+const DEFAULT_CONFESSIONS = [
+  { id: 101, text: "Suis une fille de 25 ans et je sors avec un homme marié de 38 ans qui vit aux USA. On se parle par appels vocaux et vidéo, on passe de bons moments ensemble. Mais parfois il me dit que si je viens à l'hôtel au Sénégal, il ne veut pas que je reste vierge… c'est quelque chose que je ne ferai jamais. À chaque fois qu'il dit ça je suis déçue, il s'excuse — puis le sujet revient. Ce qui me fait le plus mal : depuis le début du Ramadan il ne m'a plus parlé. Je l'aime mais j'ai peur qu'un jour il me tourne la tête. Selon vous, est-ce qu'il m'aime vraiment ?", cat: 'amour', isWolof: true, likes: 5142, comments: [{ a: 'Anon_442', t: "Un homme qui t'aime vraiment ne remet pas en cause tes valeurs.", emoji: '💜' }, { a: 'Anon_880', t: "Le silence pendant le Ramadan est un signal. Quelqu'un qui t'aime trouve toujours le temps.", emoji: '🤍' }, { a: 'Anon_330', t: "Fais attention à toi. Un homme marié qui presse = red flag majeur.", emoji: '⚠️' }], vRight: 412, vWrong: 4102 },
+  { id: 102, text: "Je suis une fille de 26 ans, j'ai subi un mariage arrangé à 13 ans. Mon mari avait de l'argent mais il m'a donné une misère. Ma mère a accepté. J'ai quand même obtenu mon Bac+2 en me battant seule. Quand j'ai demandé le divorce, ma mère m'a dit que je n'avais nulle part où aller. Ma maison c'est chez une amie maintenant. Je veux me reconstruire. J'ai mon Bac et ma Licence 2. Je pleure mais je ne veux pas abandonner.", cat: 'dark', isWolof: true, likes: 8903, comments: [{ a: 'Anon_771', t: "Ton courage est énorme. Bac+2 malgré tout ça.", emoji: '🔥' }, { a: 'Anon_993', t: "La société t'a faillie mais toi tu ne t'es jamais abandonnée.", emoji: '💪' }], vRight: 8201, vWrong: 143 },
+  { id: 103, text: "Salam, j'ai 22 ans et je suis marié. Hier nuit je me suis réveillé et j'ai vu que j'avais fait pipi dans le lit. J'ai réveillé ma femme et je lui ai dit que c'est elle qui avait fait ça… elle a pleuré, elle a cru que c'était vrai. Moi je savais que c'était moi mais j'étais trop gêné. Je l'ai laissée appeler sa mère pour lui dire qu'elle avait eu un accident. Je suis trop honteux. Vos conseils ?", cat: 'drole', isWolof: true, likes: 12480, comments: [{ a: 'Anon_440', t: "HAHAHAHA mon frère il faut avouer tout de suite 😭", emoji: '💀' }, { a: 'Anon_773', t: "Ta femme a appelé SA MÈRE 💀 avoue maintenant avant que ça empire.", emoji: '😭' }], vRight: 234, vWrong: 11890 },
+  { id: 104, text: "Je suis tombée amoureuse de mon beau-frère. Hier soir, quand ma sœur dormait dans la chambre d'à côté, il m'a rejointe dans le salon et on a franchi la limite. Je sais que c'est mal mais je ne regrette rien.", cat: '18+', isWolof: false, likes: 9800, comments: [], vRight: 12, vWrong: 5000 },
+  { id: 105, text: "J'ai trompé mon copain… et aujourd'hui il m'a demandé de l'aider à choisir une bague pour ma propre demande en mariage. Je me dégoûte.", cat: 'trahison', isWolof: false, likes: 4217, comments: [{ a: 'Anon_330', t: "Mon Dieu... comment tu vis avec ça ?", emoji: '😮' }], vRight: 124, vWrong: 3891 },
+  { id: 106, text: "Mon meilleur ami sort avec mon ex… mais il ne sait pas que je l'aime encore secrètement.", cat: 'amour', isWolof: false, likes: 3104, comments: [{ a: 'Anon_004', t: "Parle lui. Vraiment.", emoji: '❤️' }], vRight: 589, vWrong: 1823 },
+  { id: 107, text: "J'ai menti à toute ma famille sur ma vie… en réalité je suis complètement perdu, je n'ai ni diplôme ni travail stable.", cat: 'dark', isWolof: false, likes: 5672, comments: [{ a: 'Anon_782', t: "T'es pas seul dans ce cas. Force à toi.", emoji: '🤝' }], vRight: 4201, vWrong: 312 },
+  { id: 108, text: "Une fille m'aime sincèrement depuis 2 ans… mais je préfère courir derrière celle qui me détruit mentalement.", cat: 'amour', isWolof: false, likes: 6891, comments: [], vRight: 832, vWrong: 5241 },
+  { id: 109, text: "Je souris tous les jours… mais personne ne sait que je suis au bout du rouleau. J'ai tout pour être heureux mais je ne ressens plus rien.", cat: 'dark', isWolof: false, likes: 9412, comments: [{ a: 'Anon_900', t: "Je te vois. Tu comptes. Tiens bon 💜", emoji: '💜' }], vRight: 7890, vWrong: 234 }
 ];
 
-// --- 2. NAVIGATION INTERFACES ---
+let confessions = safeLoad(KEY_CONF, null);
+// Validation stricte du tableau
+if (!Array.isArray(confessions) || confessions.length === 0) {
+  confessions = DEFAULT_CONFESSIONS.map(c => ({ ...c }));
+  saveConfessions();
+}
+
+function saveConfessions() {
+  try { localStorage.setItem(KEY_CONF, JSON.stringify(confessions)); } catch(e) {}
+}
+
+// Trouver une confession par id, retourne null si non trouvé
+function findConf(id) {
+  return confessions.find(x => x.id === id) || null;
+}
+
+// === POLEMICS ===
+const POLEMICS = {
+  amour: ["Tu pardonnes ?", "Il/elle t'aime vraiment ?", "Tu ferais pareil pour cette personne ?"],
+  trahison: ["C'est impardonnable ?", "Vengeance ou pardon ?", "Tu aurais fait pareil ?"],
+  drole: ["C'est honteux ? 😭", "On rigole ou c'est chaud ?", "Tu aurais fait quoi à sa place ?"],
+  dark: ["On juge ou on soutient ?", "Ça t'inspire quoi ?", "Force à lui/elle ?"],
+  '18+': ["C'est malsain ?", "Tu valides ?", "Choquant ou pas ?"]
+};
+
+function getPolemic(cat) {
+  const list = POLEMICS[cat] || ["Qu'en penses-tu ?"];
+  return list[Math.floor(Math.random() * list.length)];
+}
+
+// === NAVIGATION ===
 function goToFeed() {
   document.getElementById('home-view').style.display = 'none';
-  document.getElementById('feed-view').style.display = 'block';
-  if(document.getElementById('feed-container').innerHTML.trim() === '') {
+  const fv = document.getElementById('feed-view');
+  fv.style.display = 'block';
+  if (document.getElementById('feed-container').innerHTML.trim() === '') {
     renderFeed();
   }
 }
+
 function goToHome() {
   document.getElementById('feed-view').style.display = 'none';
   document.getElementById('home-view').style.display = 'flex';
 }
 
-// --- 3. RENDU DU FEED TIKTOK ---
+// === PREVIEW CARDS (Home) ===
+function renderPreviewCards() {
+  const container = document.getElementById('previewCards');
+  if (!container) return;
+  const sorted = [...confessions].sort((a, b) => b.likes - a.likes).slice(0, 6);
+  container.innerHTML = sorted.map(c => `
+    <div class="preview-card" onclick="goToFeed()">
+      <div class="preview-badge">${catEmoji(c.cat)} ${c.cat.toUpperCase()}</div>
+      <div class="preview-text">${esc(c.text)}</div>
+      <div class="preview-stats">
+        <span class="preview-stat">❤️ ${fmt(c.likes)}</span>
+        <span class="preview-stat">💬 ${fmt(c.comments.length)}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function catEmoji(cat) {
+  const map = { amour: '❤️', trahison: '🔪', drole: '😂', dark: '🖤', '18+': '🔞' };
+  return map[cat] || '💬';
+}
+
+// === RENDER FEED ===
 function renderFeed() {
   const container = document.getElementById('feed-container');
+  if (!container) return;
   container.innerHTML = '';
-  
-  let slideCount = 0;
-  confessions.forEach((c) => {
+
+  confessions.forEach((c, i) => {
+    if (!c || typeof c !== 'object') return; // Guard: skip malformed data
     container.appendChild(createSlide(c));
-    slideCount++;
-    // Fausse pub tous les 4 posts
-    if(slideCount % 4 === 0 && slideCount < confessions.length) {
-      const ad = document.createElement('div');
-      ad.className = 'slide bg-dark';
-      ad.innerHTML = `<div class="slide-text-container" style="text-align:center; padding-top:50px;">
-        <h3 style="color:var(--cyan); margin-bottom:15px; font-family:var(--font-display); font-size:2rem;">ESPACE PUB</h3>
-        <p style="color:var(--muted); font-size:1.1rem;">Abonne-toi au Premium pour retirer la publicité.</p>
-        <button class="btn-primary" style="margin-top:20px; width:auto; padding:12px 30px;" onclick="openBoost()">Devenir Premium</button>
-      </div>`;
-      container.appendChild(ad);
+
+    // Pub tous les 4 slides, sauf premium
+    if (!userData.isPremium && (i + 1) % 4 === 0 && i < confessions.length - 1) {
+      container.appendChild(createAdSlide());
     }
   });
 }
 
 function createSlide(c) {
   const div = document.createElement('div');
-  div.className = `slide bg-${c.cat.replace('+','')}`;
-  div.dataset.id = c.id;
-  
-  const isLiked = userData.liked.includes(c.id);
-  const userVote = userData.voted[c.id];
-  const q = polemics[c.cat][Math.floor(Math.random() * polemics[c.cat].length)];
-  const badgeHtml = `<div class="slide-badge">📍 ${c.cat.toUpperCase()}</div>` + (c.isWolof ? `<div class="slide-badge wolof" style="left:110px;">🇸🇳 SÉNÉGAL</div>` : '');
-  const safeText = c.text.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  div.className = `slide bg-${(c.cat || 'dark').replace('+', '')}`;
+  div.dataset.id = String(c.id);
 
-  // Logique Premium (Flou)
-  let textHtml = `<div class="slide-text">${safeText}</div>`;
-  if(c.cat === '18+' && !userData.isPremium) {
-    textHtml = `
-      <div class="slide-text blurred-content">${safeText.substring(0, 60)}... [CONTENU VERROUILLÉ]</div>
-      <div class="locked-overlay">
-        <span>🔞</span>
-        <button class="locked-btn" onclick="openBoost()">Débloquer (Premium)</button>
-      </div>`;
-  }
+  const isLiked = userData.liked.includes(c.id);
+  const userVote = userData.voted[c.id] || null;
+  const polemic = getPolemic(c.cat);
+
+  const totalVotes = (c.vRight || 0) + (c.vWrong || 0);
+  const yesPercent = totalVotes > 0 ? Math.round(((c.vRight || 0) / totalVotes) * 100) : 50;
+
+  const isLocked = c.cat === '18+' && !userData.isPremium;
 
   div.innerHTML = `
-    ${badgeHtml}
-    <div class="slide-text-container">
-      ${textHtml}
-      <div class="slide-author">@Anonyme_${Math.floor(Math.random()*9000+1000)}</div>
+    <div class="slide-badges">
+      <div class="slide-badge">${catEmoji(c.cat)} ${(c.cat || '?').toUpperCase()}</div>
+      ${c.isWolof ? '<div class="slide-badge wolof">🇸🇳 SÉNÉGAL</div>' : ''}
+    </div>
+
+    <div class="slide-content">
+      ${isLocked
+        ? `<div style="position:relative;">
+             <div class="slide-text blurred-content">${esc(c.text.substring(0, 80))}...</div>
+             <div class="locked-overlay">
+               <span style="font-size:2.5rem;">🔞</span>
+               <p style="font-size:0.85rem; color:rgba(255,255,255,0.6); margin-bottom:12px;">Contenu réservé aux membres Premium</p>
+               <button class="locked-btn" onclick="openBoost()">Débloquer — 2 500 FCFA</button>
+             </div>
+           </div>`
+        : `<div class="slide-text-scroll">
+             <div class="slide-text">${esc(c.text)}</div>
+             <div class="slide-author">@Anonyme_${anonId(c.id)}</div>
+           </div>`
+      }
     </div>
 
     <div class="polemic-box">
-      <div class="polemic-q">🔥 ${q}</div>
+      <div class="polemic-q">🔥 ${esc(polemic)}</div>
       <div class="polemic-votes">
-        <button class="vote-btn yes ${userVote==='yes'?'voted':''}" onclick="vote(${c.id}, 'yes')">✅ C'est clair (${formatNum(c.vRight)})</button>
-        <button class="vote-btn no ${userVote==='no'?'voted':''}" onclick="vote(${c.id}, 'no')">❌ Abusé (${formatNum(c.vWrong)})</button>
+        <button class="vote-btn yes${userVote === 'yes' ? ' voted voted-yes' : ''}${userVote && userVote !== 'yes' ? ' voted' : ''}"
+          onclick="vote(${c.id}, 'yes', this)">
+          ✅ C'est clair (${fmt(c.vRight)})
+        </button>
+        <button class="vote-btn no${userVote === 'no' ? ' voted voted-no' : ''}${userVote && userVote !== 'no' ? ' voted' : ''}"
+          onclick="vote(${c.id}, 'no', this)">
+          ❌ Abusé (${fmt(c.vWrong)})
+        </button>
+      </div>
+      <div class="vote-bar${userVote ? ' show' : ''}" id="bar-${c.id}">
+        <div class="vote-bar-fill" style="width:${yesPercent}%"></div>
       </div>
     </div>
 
     <div class="sidebar">
-      <button class="side-btn ${isLiked?'liked':''}" onclick="toggleLike(${c.id}, this)">
+      <button class="side-btn${isLiked ? ' liked' : ''}" onclick="toggleLike(${c.id}, this)">
         <div class="side-icon">❤️</div>
-        <span class="side-text btn-count">${formatNum(c.likes)}</span>
+        <span class="side-text like-count-${c.id}">${fmt(c.likes)}</span>
       </button>
       <button class="side-btn" onclick="openComments(${c.id})">
         <div class="side-icon">💬</div>
-        <span class="side-text">${formatNum(c.comments.length)}</span>
+        <span class="side-text">${fmt(c.comments.length)}</span>
       </button>
       <button class="side-btn" onclick="shareWhatsApp(${c.id})">
         <div class="side-icon" style="background:rgba(37,211,102,0.2); border-color:#25D366;">📤</div>
@@ -451,110 +1586,318 @@ function createSlide(c) {
       </button>
     </div>
   `;
+
   return div;
 }
 
-// --- 4. INTERACTIONS ---
-function toggleLike(id, btn) {
-  const c = confessions.find(x => x.id === id);
-  const span = btn.querySelector('.btn-count');
-  if (userData.liked.includes(id)) {
-    userData.liked = userData.liked.filter(x => x !== id); c.likes--; btn.classList.remove('liked');
-  } else {
-    userData.liked.push(id); c.likes++; btn.classList.add('liked');
-  }
-  span.textContent = formatNum(c.likes); saveUser();
+function createAdSlide() {
+  const div = document.createElement('div');
+  div.className = 'ad-slide';
+  div.innerHTML = `
+    <span style="font-size:2.5rem;">💸</span>
+    <h3 style="font-family:var(--font-display); font-size:2.5rem; color:var(--cyan); letter-spacing:2px;">ESPACE PUB</h3>
+    <p style="color:var(--muted); font-size:1rem; max-width:280px; line-height:1.6; margin:0 auto;">
+      Passe en Premium pour retirer toutes les pubs et booster ta confession en #1.
+    </p>
+    <button class="btn-primary" style="max-width:280px;" onclick="openBoost()">👑 Devenir Premium</button>
+    <p style="font-size:0.7rem; color:rgba(255,255,255,0.2); font-family:var(--font-mono);">PUBLICITÉ</p>
+  `;
+  return div;
 }
 
-function vote(id, side) {
+// === INTERACTIONS ===
+
+// LIKE — mise à jour sans re-render complet du feed
+function toggleLike(id, btn) {
+  const c = findConf(id);
+  if (!c) return;
+
+  if (userData.liked.includes(id)) {
+    userData.liked = userData.liked.filter(x => x !== id);
+    c.likes = Math.max(0, (c.likes || 0) - 1);
+    btn.classList.remove('liked');
+  } else {
+    userData.liked.push(id);
+    c.likes = (c.likes || 0) + 1;
+    btn.classList.add('liked');
+    // Animation cœur
+    const icon = btn.querySelector('.side-icon');
+    if (icon) { icon.style.animation = 'heartPop 0.3s ease'; setTimeout(() => icon.style.animation = '', 300); }
+  }
+
+  // Met à jour SEULEMENT le compteur affiché — pas de re-render
+  document.querySelectorAll(`.like-count-${id}`).forEach(el => { el.textContent = fmt(c.likes); });
+  saveUser();
+  saveConfessions();
+}
+
+// VOTE — mise à jour locale sans re-render complet
+function vote(id, side, btn) {
   if (userData.voted[id]) { showToast('Tu as déjà jugé cette histoire !'); return; }
-  const c = confessions.find(x => x.id === id);
-  if(side === 'yes') c.vRight++; else c.vWrong++;
-  userData.voted[id] = side; saveUser(); renderFeed();
-  showToast('✅ Avis enregistré');
+  const c = findConf(id);
+  if (!c) return;
+
+  if (side === 'yes') c.vRight = (c.vRight || 0) + 1;
+  else c.vWrong = (c.vWrong || 0) + 1;
+
+  userData.voted[id] = side;
+  saveUser();
+  saveConfessions();
+
+  // Mise à jour visuelle locale (sans re-render)
+  const polemicBox = btn.closest('.polemic-box');
+  if (polemicBox) {
+    const yesBtn = polemicBox.querySelector('.vote-btn.yes');
+    const noBtn = polemicBox.querySelector('.vote-btn.no');
+    if (yesBtn) { yesBtn.textContent = `✅ C'est clair (${fmt(c.vRight)})`; yesBtn.classList.add('voted'); }
+    if (noBtn) { noBtn.textContent = `❌ Abusé (${fmt(c.vWrong)})`; noBtn.classList.add('voted'); }
+    if (side === 'yes' && yesBtn) yesBtn.classList.add('voted-yes');
+    if (side === 'no' && noBtn) noBtn.classList.add('voted-no');
+
+    const bar = polemicBox.querySelector('.vote-bar');
+    const fill = polemicBox.querySelector('.vote-bar-fill');
+    if (bar && fill) {
+      const total = (c.vRight || 0) + (c.vWrong || 0);
+      const pct = total > 0 ? Math.round((c.vRight / total) * 100) : 50;
+      bar.classList.add('show');
+      fill.style.width = pct + '%';
+    }
+  }
+
+  showToast(side === 'yes' ? '✅ Vote enregistré !' : '❌ Vote enregistré !');
 }
 
 function shareWhatsApp(id) {
-  const c = confessions.find(x => x.id === id);
-  let short = c.text.split('.')[0]; if(short.length > 70) short = short.substring(0, 70) + '...';
-  const punchline = `😭 "${short}" 💀`;
-  const msg = `💀 SecretZone\n\n${punchline}\n\n👉 Tu ferais quoi à sa place ? Donne ton avis ici :\n👉 https://secretzone.app`;
+  const c = findConf(id);
+  if (!c) return;
+  const short = c.text.length > 80 ? c.text.substring(0, 80) + '...' : c.text;
+  const msg = `😱 *SecretZone*\n\n"${short}"\n\n👉 Tu ferais quoi à sa place ?\nhttps://secretzone.app`;
   window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
 }
 
 function openScriptMode(id) {
-  const c = confessions.find(x => x.id === id);
+  const c = findConf(id);
+  if (!c) return;
   document.getElementById('scriptContent').innerHTML = `
-    <div class="script-part"><div class="script-label">Accroche (Hook)</div><div class="script-text">😳 "Vous n'allez jamais y croire..."</div></div>
-    <div class="script-part"><div class="script-label">L'Histoire</div><div class="script-text">"${c.text}"</div></div>
-    <div class="script-part"><div class="script-label">Appel à l'action</div><div class="script-text">👇 "Dites-moi en commentaire, vous auriez fait quoi à sa place ?"</div></div>
+    <div class="script-part">
+      <div class="script-label">🎣 Hook (0-3 sec)</div>
+      <div class="script-text">😳 "Vous n'allez JAMAIS y croire ce que quelqu'un m'a confessé..."</div>
+    </div>
+    <div class="script-part">
+      <div class="script-label">📖 L'Histoire</div>
+      <div class="script-text">"${esc(c.text)}"</div>
+    </div>
+    <div class="script-part">
+      <div class="script-label">🎯 Call to Action</div>
+      <div class="script-text">👇 "Dites-moi en commentaire — vous auriez fait quoi à sa place ? Je réponds à tout le monde !"</div>
+    </div>
   `;
   openSheet('sheetScript');
 }
+
 function copyScript() {
-  navigator.clipboard.writeText(document.getElementById('scriptContent').innerText).then(() => { closeAllSheets(); showToast('📋 Script copié !'); });
+  const text = document.getElementById('scriptContent').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    closeAllSheets();
+    showToast('📋 Script copié ! Go faire 1M de vues 🔥');
+  }).catch(() => showToast('Copie manuelle : sélectionne le texte et copie.'));
 }
 
-// --- 5. MODALS (BOTTOM SHEETS) ---
-function openSheet(id) { document.getElementById('sheetOverlay').classList.add('open'); document.getElementById(id).classList.add('open'); }
-function closeAllSheets() { document.getElementById('sheetOverlay').classList.remove('open'); document.querySelectorAll('.bottom-sheet').forEach(s => s.classList.remove('open')); }
+// === SHEETS ===
+function openSheet(id) {
+  document.getElementById('sheetOverlay').classList.add('open');
+  document.getElementById(id).classList.add('open');
+}
 
-// Commentaires
+function closeAllSheets() {
+  document.getElementById('sheetOverlay').classList.remove('open');
+  document.querySelectorAll('.bottom-sheet').forEach(s => s.classList.remove('open'));
+}
+
+// COMMENTAIRES
 let activePostId = null;
 function openComments(id) {
-  activePostId = id; const c = confessions.find(x => x.id === id);
-  document.getElementById('commentCountTitle').innerText = `${c.comments.length} Commentaires`;
+  const c = findConf(id);
+  if (!c) return;
+  activePostId = id;
+
+  document.getElementById('commentCountTitle').innerText = `${c.comments.length} Commentaire${c.comments.length !== 1 ? 's' : ''}`;
+
   const list = document.getElementById('commentList');
-  if(c.comments.length === 0) list.innerHTML = `<p style="color:#666; text-align:center; padding: 20px;">Sois le premier à juger 👀</p>`;
-  else list.innerHTML = c.comments.map(cm => `<div class="comment-item"><div class="c-avatar">${cm.emoji||'👤'}</div><div class="c-body"><div class="c-name">@${cm.a}</div><div class="c-text">${cm.t}</div></div></div>`).join('');
+  if (c.comments.length === 0) {
+    list.innerHTML = `<p style="color:var(--muted); text-align:center; padding:40px 20px;">Aucun commentaire encore — sois le premier à juger 👀</p>`;
+  } else {
+    list.innerHTML = c.comments.map(cm => `
+      <div class="comment-item">
+        <div class="c-avatar">${cm.emoji || '👤'}</div>
+        <div class="c-body">
+          <div class="c-name">@${esc(cm.a)}</div>
+          <div class="c-text">${esc(cm.t)}</div>
+        </div>
+      </div>
+    `).join('');
+    // Scroll au bas
+    list.scrollTop = list.scrollHeight;
+  }
   openSheet('sheetComments');
 }
+
 function postComment() {
-  const text = document.getElementById('commentInput').value.trim();
-  if(!text || !activePostId) return;
-  confessions.find(x => x.id === activePostId).comments.push({ a: 'Anon_' + Math.floor(Math.random()*999), t: text.replace(/</g,'&lt;'), emoji: '😈' });
-  document.getElementById('commentInput').value = ''; openComments(activePostId); renderFeed();
+  const input = document.getElementById('commentInput');
+  const text = input.value.trim();
+  if (!text || !activePostId) return;
+
+  const c = findConf(activePostId);
+  if (!c) return;
+
+  c.comments.push({ a: 'Anon_' + Math.floor(Math.random() * 9999), t: text, emoji: '😈' });
+  saveConfessions();
+  input.value = '';
+  openComments(activePostId); // Refresh commentaires
+
+  // Mise à jour du compteur dans le slide sans re-render
+  document.querySelectorAll(`[data-id="${activePostId}"] .side-text`).forEach((el, i) => {
+    if (i === 1) el.textContent = fmt(c.comments.length);
+  });
 }
 
-// Confesser
+// CONFESSER
 let selCat = 'amour';
-function selectCat(btn, cat) { document.querySelectorAll('.cat-tag').forEach(b => b.classList.remove('active')); btn.classList.add('active'); selCat = cat; }
-function openConfess() { openSheet('sheetConfess'); }
-function submitConfession() {
-  if (Date.now() - userData.lastPost < 60000) { showToast('⏳ Attends 1 min (anti-spam).'); return; }
-  const text = document.getElementById('confessText').value.trim();
-  if(!text) { showToast('⚠️ Écris un truc !'); return; }
-  confessions.unshift({ id: Date.now(), text: text.replace(/</g,'&lt;'), cat: selCat, isWolof: false, likes: 0, comments:[], vRight: 0, vWrong: 0 });
-  userData.lastPost = Date.now(); saveUser(); document.getElementById('confessText').value = '';
-  closeAllSheets(); renderFeed(); showToast('🔥 Confession publiée !');
-  if(document.getElementById('feed-view').style.display === 'block') document.getElementById('feed-container').scrollTo(0,0);
+function selectCat(btn, cat) {
+  document.querySelectorAll('.cat-tag').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  selCat = cat;
 }
 
-// Top Viral
+function updateCharCount() {
+  const len = document.getElementById('confessText').value.length;
+  document.getElementById('charCount').textContent = len;
+}
+
+function openConfess() { openSheet('sheetConfess'); }
+
+function submitConfession() {
+  const now = Date.now();
+  const cooldown = 60000;
+  if (now - (userData.lastPost || 0) < cooldown) {
+    const wait = Math.ceil((cooldown - (now - userData.lastPost)) / 1000);
+    showToast(`⏳ Attends encore ${wait}s (anti-spam).`);
+    return;
+  }
+
+  const textEl = document.getElementById('confessText');
+  const text = textEl.value.trim();
+  if (!text) { showToast('⚠️ Écris quelque chose d\'abord !'); return; }
+  if (text.length < 10) { showToast('⚠️ Trop court — donne plus de détails.'); return; }
+
+  const newConf = {
+    id: now,
+    text: text,
+    cat: selCat,
+    isWolof: false,
+    likes: 0,
+    comments: [],
+    vRight: 0,
+    vWrong: 0
+  };
+
+  confessions.unshift(newConf);
+  saveConfessions();
+
+  userData.lastPost = now;
+  saveUser();
+
+  textEl.value = '';
+  updateCharCount();
+  closeAllSheets();
+  renderFeed();
+  showToast('🔥 Confession publiée ! Prépare-toi à être jugé.');
+
+  // Scroll to top du feed
+  const container = document.getElementById('feed-container');
+  if (container) container.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Met à jour le compteur sur la home
+  const countEl = document.getElementById('totalConfessions');
+  if (countEl) countEl.textContent = fmtNum(confessions.length + 4200);
+
+  // Met à jour les preview cards
+  renderPreviewCards();
+}
+
+// TOP VIRAL
 function openTopViral() {
-  const sorted = [...confessions].sort((a,b) => b.likes - a.likes).slice(0, 5);
+  const sorted = [...confessions].sort((a, b) => (b.likes || 0) - (a.likes || 0)).slice(0, 5);
   document.getElementById('viralList').innerHTML = sorted.map((c, i) => `
-    <div class="viral-item" onclick="closeAllSheets(); showToast('Fais défiler pour la trouver !')">
-      <div class="viral-rank">#${i+1}</div>
-      <div class="viral-text">${c.text}</div>
-      <div style="font-size:0.75rem; color:var(--muted); text-align:right;">❤️ ${formatNum(c.likes)}</div>
+    <div class="viral-item" onclick="closeAllSheets(); showToast('Fais défiler le feed pour la trouver !')">
+      <div class="viral-rank">#${i + 1}</div>
+      <div class="viral-text">${esc(c.text)}</div>
+      <div class="viral-likes">❤️ ${fmt(c.likes)}</div>
     </div>
   `).join('');
   openSheet('sheetTopViral');
 }
 
-// Premium Boost
+// PREMIUM
 function openBoost() { openSheet('sheetBoost'); }
 function simulatePayment() {
-  userData.isPremium = true; saveUser(); closeAllSheets(); renderFeed();
-  showToast('🎉 Paiement validé. Mode Premium activé !');
+  userData.isPremium = true;
+  saveUser();
+  closeAllSheets();
+  renderFeed();
+  showToast('🎉 Bienvenue en Premium ! Tout est débloqué 👑');
 }
 
-// --- 6. UTILS ---
-function formatNum(n) { return n >= 1000 ? (n/1000).toFixed(1).replace('.0','') + 'k' : n; }
-let tTo; function showToast(msg) { const t = document.getElementById('toast'); t.innerText = msg; t.classList.add('show'); clearTimeout(tTo); tTo = setTimeout(() => t.classList.remove('show'), 3000); }
+// === UTILS ===
+function esc(str) {
+  if (typeof str !== 'string') return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
 
-setInterval(() => { const el = document.getElementById('totalUsers'); el.textContent = (parseInt(el.textContent.replace(/[^0-9]/g,'')) + Math.floor(Math.random()*3)).toLocaleString('fr-FR'); }, 4000);
+function fmt(n) {
+  n = parseInt(n) || 0;
+  if (n >= 1000000) return (n / 1000000).toFixed(1).replace('.0', '') + 'M';
+  if (n >= 1000) return (n / 1000).toFixed(1).replace('.0', '') + 'k';
+  return String(n);
+}
+
+function fmtNum(n) {
+  return n.toLocaleString('fr-FR');
+}
+
+function anonId(seed) {
+  // Génère un ID stable basé sur le seed (pas aléatoire à chaque render)
+  return String((seed * 9301 + 49297) % 100003).padStart(4, '0').slice(0, 4);
+}
+
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// === INIT ===
+document.addEventListener('DOMContentLoaded', () => {
+  // Compteurs home
+  const confEl = document.getElementById('totalConfessions');
+  if (confEl) confEl.textContent = fmtNum(confessions.length + 4200);
+
+  // Preview cards
+  renderPreviewCards();
+
+  // Compteur "en ligne" qui monte doucement
+  setInterval(() => {
+    const el = document.getElementById('totalUsers');
+    if (!el) return;
+    const cur = parseInt(el.textContent.replace(/[^\d]/g, '')) || 18502;
+    const delta = Math.random() > 0.5 ? 1 : -1;
+    const next = Math.max(18000, cur + delta);
+    el.textContent = fmtNum(next);
+  }, 5000);
+});
 </script>
 </body>
 </html>
