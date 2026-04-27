@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SecretZone — Tes confessions, ton monde</title>
-<meta name="description" content="Confesse-toi anonymement. Analyse IA réelle. Communauté honnête.">
+<meta name="description" content="Confesse-toi anonymement. Sans filtre. Communauté honnête.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -98,18 +98,6 @@ header {
 
 .confession-text { font-size: 0.95rem; line-height: 1.8; color: rgba(240,240,240,0.85); font-weight: 300; margin-bottom: 20px; }
 
-/* AI BOX */
-.ai-analysis { background: rgba(106,0,255,0.08); border: 1px solid rgba(106,0,255,0.25); border-radius: 14px; padding: 16px; margin-bottom: 18px; display: none; }
-.ai-analysis.visible { display: block; animation: fadeIn 0.4s ease; }
-.ai-header { display: flex; align-items: center; gap: 6px; font-size: 0.7rem; color: var(--violet2); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
-.ai-badge { display: inline-flex; align-items: center; gap: 4px; background: rgba(106,0,255,0.2); border: 1px solid rgba(106,0,255,0.4); border-radius: 20px; padding: 2px 8px; font-size: 0.6rem; color: var(--violet2); font-family: var(--font-mono); margin-left: auto; }
-.ai-emotions { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
-.ai-emotion-tag { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 4px 10px; font-size: 0.72rem; color: rgba(240,240,240,0.7); }
-.ai-advice { font-size: 0.85rem; color: rgba(240,240,240,0.7); line-height: 1.7; font-style: italic; border-left: 2px solid var(--violet); padding-left: 12px; }
-.ai-loading { display: flex; align-items: center; gap: 10px; font-size: 0.78rem; color: var(--violet2); font-family: var(--font-mono); }
-.ai-spinner { width: 16px; height: 16px; border: 2px solid rgba(106,0,255,0.3); border-top-color: var(--violet); border-radius: 50%; animation: spin 0.8s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-
 /* VOTE */
 .vote-section { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; padding: 12px; background: rgba(255,255,255,0.03); border-radius: 12px; }
 .vote-question { font-size: 0.75rem; color: rgba(240,240,240,0.5); flex: 1; font-style: italic; }
@@ -126,8 +114,6 @@ header {
 .action-btn.liked { border-color: var(--rose); color: var(--rose); background: rgba(255,0,170,0.08); }
 .action-btn.whatsapp { border-color: rgba(37,211,102,0.4); color: #25D366; }
 .action-btn.whatsapp:hover { background: rgba(37,211,102,0.1); }
-.action-btn.ai-btn { border-color: rgba(106,0,255,0.4); color: var(--violet2); background: rgba(106,0,255,0.08); }
-.action-btn.ai-btn:hover { background: rgba(106,0,255,0.2); }
 .btn-count { font-family: var(--font-mono); font-size: 0.7rem; }
 
 /* COMMENTS */
@@ -201,22 +187,6 @@ header {
 .ad-banner { margin: 0 16px 24px; background: var(--bg2); border: 1px dashed var(--muted2); border-radius: 14px; padding: 16px; text-align: center; color: var(--muted); font-size: 0.75rem; font-family: var(--font-mono); }
 .ad-banner span { display: block; font-size: 1rem; color: rgba(240,240,240,0.3); margin-bottom: 4px; }
 
-/* BACKEND INFO BOX */
-.backend-info {
-  max-width: 680px; margin: 0 auto 24px; padding: 0 16px;
-}
-.backend-box {
-  background: rgba(0,245,255,0.05); border: 1px solid rgba(0,245,255,0.2);
-  border-radius: 14px; padding: 16px 20px;
-  display: flex; align-items: center; gap: 14px;
-}
-.backend-dot {
-  width: 10px; height: 10px; border-radius: 50%; background: var(--cyan);
-  box-shadow: 0 0 8px var(--cyan); animation: dotPulse 1.5s ease-in-out infinite; flex-shrink: 0;
-}
-.backend-text { font-size: 0.75rem; color: rgba(240,240,240,0.6); font-family: var(--font-mono); line-height: 1.5; }
-.backend-text strong { color: var(--cyan); }
-
 /* FOOTER */
 footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--muted2); color: var(--muted); font-size: 0.75rem; font-family: var(--font-mono); line-height: 1.8; }
 .footer-logo { font-family: var(--font-display); font-size: 2rem; background: linear-gradient(90deg, var(--violet), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 2px; display: block; margin-bottom: 12px; }
@@ -257,7 +227,7 @@ footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--mut
 <section class="hero">
   <p class="hero-eyebrow">▲ Confessions Anonymes — Vrai • Sans filtre • Sans jugement</p>
   <h1>Les secrets que<br>personne <em>n'ose</em><br>dire…</h1>
-  <p>Ici, tu peux tout dire. Analyse psychologique par IA réelle. Sans nom, sans peur.</p>
+  <p>Ici, tu peux tout dire. Sans nom, sans peur.</p>
   <div class="hero-stats">
     <div class="stat"><div class="stat-number" id="totalConfessions">2,850</div><div class="stat-label">Confessions</div></div>
     <div class="stat"><div class="stat-number" id="totalUsers">14,293</div><div class="stat-label">Lecteurs</div></div>
@@ -286,17 +256,6 @@ footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--mut
   <button class="cat-btn" onclick="filterCat(this,'dark')">🖤 Dark</button>
 </div>
 
-<!-- INFO BACKEND -->
-<div class="backend-info">
-  <div class="backend-box">
-    <div class="backend-dot"></div>
-    <div class="backend-text">
-      <strong>Version Production Ready</strong> — L'analyse IA passe par un backend sécurisé.<br>
-      Ta clé API Anthropic n'est jamais exposée au navigateur.
-    </div>
-  </div>
-</div>
-
 <div class="ad-banner" style="max-width: 680px; margin: 0 auto 16px;">
   <span>📢</span>Espace publicitaire — Votre annonce ici
 </div>
@@ -314,7 +273,7 @@ footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--mut
   <div class="premium-title">⚡ SECRETZONE PREMIUM</div>
   <div class="premium-sub">Débloque l'expérience complète</div>
   <div class="premium-features">
-    <div class="pf-item">Analyse psychologique IA approfondie illimitée</div>
+    <div class="pf-item">Mise en avant prioritaire de tes confessions</div>
     <div class="pf-item">Audio narratif — écoute chaque confession</div>
     <div class="pf-item">Génération vidéo TikTok automatique</div>
     <div class="pf-item">Pas de publicité</div>
@@ -372,10 +331,9 @@ footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--mut
 
 <script>
 // =====================================================
-// DONNÉES — confessions avec les 3 nouvelles histoires
+// DONNÉES
 // =====================================================
 const confessions = [
-  // ——— NOUVELLES HISTOIRES ———
   {
     id: 101,
     text: "Suis une fille de 25 ans et je sors avec un homme marié de 38 ans qui vit aux USA. On se parle par appels vocaux et vidéo, on passe de bons moments ensemble comme un couple normal. Mais parfois il me dit que si je viens à l'hôtel au Sénégal, il ne veut pas que je reste vierge… c'est quelque chose que je ne ferai jamais. À chaque fois qu'il dit ça je suis déçue, il s'excuse — et puis le sujet revient. Ce qui me fait le plus mal, c'est que depuis le début du Ramadan il ne m'a plus parlé. Je l'aime mais j'ai peur qu'un jour il tourne ma tête. Selon vous, est-ce qu'il m'aime vraiment ?",
@@ -392,8 +350,7 @@ const confessions = [
       { author: 'Anonyme_3309', text: "Fais attention à toi. Un homme marié qui presse = red flag majeur.", emoji: '⚠️' }
     ],
     votes: { right: 412, wrong: 4102 },
-    currentVote: null,
-    aiCache: null
+    currentVote: null
   },
   {
     id: 102,
@@ -411,8 +368,7 @@ const confessions = [
       { author: 'Anonyme_9934', text: "La société t'a faillie mais toi tu ne t'es jamais abandonnée. C'est ça qui compte.", emoji: '💜' }
     ],
     votes: { right: 8201, wrong: 143 },
-    currentVote: null,
-    aiCache: null
+    currentVote: null
   },
   {
     id: 103,
@@ -430,73 +386,19 @@ const confessions = [
       { author: 'Anonyme_1122', text: "Fais-lui un cadeau et avoue. Elle va rigoler aussi un jour… peut-être.", emoji: '🎁' }
     ],
     votes: { right: 234, wrong: 11890 },
-    currentVote: null,
-    aiCache: null
+    currentVote: null
   },
-  // ——— HISTOIRES ORIGINALES ———
-  { id: 1, text: "J'ai trompé mon copain… et il m'a demandé de l'aider à choisir une bague pour moi.", category: 'amour', avatar: '👤', avatarBg: 'linear-gradient(135deg, #FF6464, #FF00AA)', name: 'Anonyme_7742', time: 'il y a 2h', isWolof: false, likes: 4217, comments: [{ author: 'Anonyme_3301', text: 'Mon Dieu... comment tu vis avec ça ?', emoji: '😮' }, { author: 'Anonyme_9988', text: 'Il mérite mieux que ça.', emoji: '💀' }], votes: { right: 124, wrong: 3891 }, currentVote: null, aiCache: null },
-  { id: 2, text: "Mon meilleur ami sort avec mon ex… mais il ne sait pas que je l'aime encore.", category: 'amour', avatar: '👥', avatarBg: 'linear-gradient(135deg, #6A00FF, #00F5FF)', name: 'Anonyme_1156', time: 'il y a 5h', isWolof: false, likes: 3104, comments: [{ author: 'Anonyme_0042', text: 'Parle lui. Vraiment.', emoji: '❤️' }], votes: { right: 589, wrong: 1823 }, currentVote: null, aiCache: null },
-  { id: 3, text: "J'ai menti à toute ma famille sur ma vie… en réalité je suis complètement perdu.", category: 'dark', avatar: '🎭', avatarBg: 'linear-gradient(135deg, #2d0066, #6A00FF)', name: 'Anonyme_5599', time: 'il y a 8h', isWolof: false, likes: 5672, comments: [{ author: 'Anonyme_7821', text: "T'es pas seul dans ce cas.", emoji: '🤝' }], votes: { right: 4201, wrong: 312 }, currentVote: null, aiCache: null },
-  { id: 4, text: "Une fille m'aime sincèrement… mais je préfère courir derrière celle qui me détruit.", category: 'amour', avatar: '🏃', avatarBg: 'linear-gradient(135deg, #FF6464, #6A00FF)', name: 'Anonyme_2278', time: 'il y a 12h', isWolof: false, likes: 6891, comments: [], votes: { right: 832, wrong: 5241 }, currentVote: null, aiCache: null },
-  { id: 5, text: "Je souris tous les jours… mais personne ne sait que je suis au bout.", category: 'dark', avatar: '😊', avatarBg: 'linear-gradient(135deg, #1a1a2e, #6A00FF)', name: 'Anonyme_0019', time: 'il y a 1j', isWolof: false, likes: 8903, comments: [{ author: 'Anonyme_9001', text: "Je te vois. Tu comptes. Tiens bon 💜", emoji: '💜' }], votes: { right: 7821, wrong: 245 }, currentVote: null, aiCache: null },
-  { id: 6, text: "J'ai tout pour être heureux… mais je ne ressens rien.", category: 'dark', avatar: '⬜', avatarBg: 'linear-gradient(135deg, #1a1a1a, #333)', name: 'Anonyme_9900', time: 'il y a 3j', isWolof: false, likes: 9412, comments: [], votes: { right: 7890, wrong: 234 }, currentVote: null, aiCache: null }
+  { id: 1, text: "J'ai trompé mon copain… et il m'a demandé de l'aider à choisir une bague pour moi.", category: 'amour', avatar: '👤', avatarBg: 'linear-gradient(135deg, #FF6464, #FF00AA)', name: 'Anonyme_7742', time: 'il y a 2h', isWolof: false, likes: 4217, comments: [{ author: 'Anonyme_3301', text: 'Mon Dieu... comment tu vis avec ça ?', emoji: '😮' }, { author: 'Anonyme_9988', text: 'Il mérite mieux que ça.', emoji: '💀' }], votes: { right: 124, wrong: 3891 }, currentVote: null },
+  { id: 2, text: "Mon meilleur ami sort avec mon ex… mais il ne sait pas que je l'aime encore.", category: 'amour', avatar: '👥', avatarBg: 'linear-gradient(135deg, #6A00FF, #00F5FF)', name: 'Anonyme_1156', time: 'il y a 5h', isWolof: false, likes: 3104, comments: [{ author: 'Anonyme_0042', text: 'Parle lui. Vraiment.', emoji: '❤️' }], votes: { right: 589, wrong: 1823 }, currentVote: null },
+  { id: 3, text: "J'ai menti à toute ma famille sur ma vie… en réalité je suis complètement perdu.", category: 'dark', avatar: '🎭', avatarBg: 'linear-gradient(135deg, #2d0066, #6A00FF)', name: 'Anonyme_5599', time: 'il y a 8h', isWolof: false, likes: 5672, comments: [{ author: 'Anonyme_7821', text: "T'es pas seul dans ce cas.", emoji: '🤝' }], votes: { right: 4201, wrong: 312 }, currentVote: null },
+  { id: 4, text: "Une fille m'aime sincèrement… mais je préfère courir derrière celle qui me détruit.", category: 'amour', avatar: '🏃', avatarBg: 'linear-gradient(135deg, #FF6464, #6A00FF)', name: 'Anonyme_2278', time: 'il y a 12h', isWolof: false, likes: 6891, comments: [], votes: { right: 832, wrong: 5241 }, currentVote: null },
+  { id: 5, text: "Je souris tous les jours… mais personne ne sait que je suis au bout.", category: 'dark', avatar: '😊', avatarBg: 'linear-gradient(135deg, #1a1a2e, #6A00FF)', name: 'Anonyme_0019', time: 'il y a 1j', isWolof: false, likes: 8903, comments: [{ author: 'Anonyme_9001', text: "Je te vois. Tu comptes. Tiens bon 💜", emoji: '💜' }], votes: { right: 7821, wrong: 245 }, currentVote: null },
+  { id: 6, text: "J'ai tout pour être heureux… mais je ne ressens rien.", category: 'dark', avatar: '⬜', avatarBg: 'linear-gradient(135deg, #1a1a1a, #333)', name: 'Anonyme_9900', time: 'il y a 3j', isWolof: false, likes: 9412, comments: [], votes: { right: 7890, wrong: 234 }, currentVote: null }
 ];
 
 let currentFilter = 'tous';
 let selectedCategory = '';
 let currentStoryText = '';
-
-// =====================================================
-// IA — Appel vers le backend proxy (sécurisé)
-// =====================================================
-async function fetchAIAnalysis(confessionText, confessionId) {
-  const box = document.getElementById('ai-' + confessionId);
-  if (!box) return;
-
-  box.innerHTML = `
-    <div class="ai-header">🤖 Analyse IA <span class="ai-badge">⚡ CLAUDE</span></div>
-    <div class="ai-loading"><div class="ai-spinner"></div>Analyse psychologique en cours...</div>
-  `;
-
-  const c = confessions.find(x => x.id === confessionId);
-  if (c?.aiCache) { renderAIResult(box, c.aiCache); return; }
-
-  try {
-    // ✅ Appel sécurisé vers le backend proxy Vercel — clé API cachée côté serveur
-    const response = await fetch("/api/analyze", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: confessionText })
-    });
-
-    if (!response.ok) throw new Error('Erreur API ' + response.status);
-
-    const parsed = await response.json();
-    if (c) c.aiCache = parsed;
-    renderAIResult(box, parsed);
-
-  } catch (err) {
-    box.innerHTML = `
-      <div class="ai-header">🤖 Analyse IA <span class="ai-badge">⚡ CLAUDE</span></div>
-      <div style="font-size:0.8rem; color: var(--muted); font-style: italic;">
-        Service temporairement indisponible. Réessaie dans quelques secondes.
-      </div>
-    `;
-  }
-}
-
-function renderAIResult(box, parsed) {
-  const colors = { faible: '#64FF64', modérée: '#FFA500', forte: '#FF6464', critique: '#FF0000' };
-  const color = colors[parsed.intensite] || '#B264FF';
-  box.innerHTML = `
-    <div class="ai-header">🤖 Analyse IA <span class="ai-badge">⚡ CLAUDE</span></div>
-    <div class="ai-emotions">
-      ${(parsed.emotions || []).map(e => `<span class="ai-emotion-tag">${e}</span>`).join('')}
-      <span class="ai-emotion-tag" style="color:${color};border-color:${color}40;">● Intensité ${parsed.intensite}</span>
-    </div>
-    <div class="ai-advice">${parsed.conseil || ''}</div>
-  `;
-}
 
 // =====================================================
 // RENDU
@@ -535,10 +437,6 @@ function createCard(c, i) {
       <div class="card-category ${getCatClass(c.category)}">${getCatLabel(c.category)}</div>
     </div>
     <div class="confession-text">${safeText}</div>
-    <div class="ai-analysis" id="ai-${c.id}">
-      <div class="ai-header">🤖 Analyse IA <span class="ai-badge">⚡ CLAUDE</span></div>
-      <div style="font-size:0.75rem;color:var(--muted);font-style:italic;">Clique sur "Analyse IA" pour analyser cette confession.</div>
-    </div>
     <div class="vote-section">
       <span class="vote-question">Il/elle a raison ou tort ?</span>
       <button class="vote-btn vote-right" onclick="vote(${c.id}, 'right', this)">✅ Raison (${c.votes.right})</button>
@@ -547,7 +445,6 @@ function createCard(c, i) {
     <div class="card-actions">
       <button class="action-btn" id="like-${c.id}" onclick="toggleLike(${c.id}, this)">❤️ <span class="btn-count">${formatNum(c.likes)}</span></button>
       <button class="action-btn" onclick="toggleComments(${c.id})">💬 <span class="btn-count">${c.comments.length}</span></button>
-      <button class="action-btn ai-btn" onclick="toggleAI(${c.id})">🧠 Analyse IA</button>
       <button class="action-btn" onclick="openStory('${encodeURIComponent(c.text.substring(0,120))}')">✨ Story</button>
       <button class="action-btn whatsapp" onclick="shareWA('${encodeURIComponent(c.text.substring(0,200))}')">📤 WA</button>
     </div>
@@ -589,17 +486,6 @@ function renderRanking() {
 // =====================================================
 // ACTIONS
 // =====================================================
-function toggleAI(id) {
-  const box = document.getElementById('ai-' + id);
-  const visible = box.classList.contains('visible');
-  box.classList.toggle('visible');
-  if (!visible) {
-    const c = confessions.find(x => x.id === id);
-    fetchAIAnalysis(c.text, id);
-    showToast('🤖 Analyse IA par Claude en cours...');
-  }
-}
-
 function toggleLike(id, btn) {
   const c = confessions.find(c => c.id === id);
   if (!c) return;
@@ -660,7 +546,7 @@ function submitConfession() {
   if (!text) { showToast('⚠️ Écris ta confession d\'abord !'); return; }
   if (!selectedCategory) { showToast('⚠️ Choisis une catégorie !'); return; }
   const safeText = text.replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  const newC = { id: Date.now(), text: safeText, category: selectedCategory, avatar: '🔒', avatarBg: 'linear-gradient(135deg, var(--violet), var(--rose))', name: 'Anonyme_' + Math.floor(Math.random()*9000+1000), time: "à l'instant", isWolof: false, likes: 0, comments: [], votes: { right: 0, wrong: 0 }, currentVote: null, aiCache: null };
+  const newC = { id: Date.now(), text: safeText, category: selectedCategory, avatar: '🔒', avatarBg: 'linear-gradient(135deg, var(--violet), var(--rose))', name: 'Anonyme_' + Math.floor(Math.random()*9000+1000), time: "à l'instant", isWolof: false, likes: 0, comments: [], votes: { right: 0, wrong: 0 }, currentVote: null };
   confessions.unshift(newC);
   closeModal();
   document.getElementById('confessionText').value = '';
@@ -695,4 +581,4 @@ renderFeed();
 renderRanking();
 </script>
 </body>
-</html>
+  </html>
