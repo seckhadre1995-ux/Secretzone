@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -6,7 +6,7 @@
 <title>SecretZone — Tes confessions, ton monde</title>
 <meta name="description" content="Confesse-toi anonymement. Sans filtre. Communauté honnête.">
 
-<!-- 6. PARTAGE ET SEO : Balises Open Graph pour les réseaux sociaux -->
+<!-- SEO & Partage WhatsApp (Open Graph) -->
 <meta property="og:title" content="SecretZone — Les secrets que personne n'ose dire">
 <meta property="og:description" content="Découvre les confessions les plus sombres et drôles. 100% anonyme.">
 <meta property="og:image" content="https://via.placeholder.com/1200x630/080808/6A00FF?text=SecretZone">
@@ -34,22 +34,49 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
   pointer-events: none; z-index: 9999; opacity: 0.4;
 }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--violet); border-radius: 2px; }
 
-/* HEADER & HERO */
-header { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; background: rgba(8,8,8,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(106,0,255,0.2); }
-.logo { font-family: var(--font-display); font-size: 2rem; letter-spacing: 2px; background: linear-gradient(90deg, var(--violet), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; }
+/* HEADER */
+header {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px; background: rgba(8,8,8,0.88);
+  backdrop-filter: blur(20px); border-bottom: 1px solid rgba(106,0,255,0.2);
+}
+.logo { font-family: var(--font-display); font-size: 2rem; letter-spacing: 2px; background: linear-gradient(90deg, var(--violet), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; cursor: pointer; }
 .logo span { color: var(--cyan); -webkit-text-fill-color: var(--cyan); }
-.header-actions { display: flex; gap: 10px; }
-.btn-confess { background: linear-gradient(135deg, var(--violet), var(--rose)); border: none; color: white; padding: 10px 20px; border-radius: 50px; font-weight: 700; font-size: 0.85rem; cursor: pointer; box-shadow: 0 0 20px rgba(106,0,255,0.4); }
-.btn-premium { background: transparent; border: 1px solid rgba(255,215,0,0.5); color: #FFD700; padding: 9px 16px; border-radius: 50px; font-weight: 600; font-size: 0.8rem; cursor: pointer; }
+.header-actions { display: flex; gap: 10px; align-items: center; }
+.btn-confess { background: linear-gradient(135deg, var(--violet), var(--rose)); border: none; color: white; padding: 10px 20px; border-radius: 50px; font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; cursor: pointer; box-shadow: 0 0 20px rgba(106,0,255,0.4); transition: all 0.3s; }
+.btn-confess:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 0 30px rgba(106,0,255,0.7); }
+.btn-premium { background: transparent; border: 1px solid rgba(255,215,0,0.5); color: #FFD700; padding: 9px 16px; border-radius: 50px; font-family: var(--font-body); font-weight: 600; font-size: 0.8rem; cursor: pointer; transition: all 0.3s; }
+.btn-premium:hover { background: rgba(255,215,0,0.1); border-color: #FFD700; }
 
+/* HERO */
 .hero { text-align: center; padding: 60px 24px 40px; position: relative; overflow: hidden; }
-.hero-eyebrow { font-family: var(--font-mono); font-size: 0.7rem; color: var(--rose); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 16px; }
-.hero h1 { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 6rem); line-height: 0.9; margin-bottom: 20px; }
-.hero h1 em { background: linear-gradient(90deg, var(--violet), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-style: normal; }
-.hero p { color: rgba(240,240,240,0.6); max-width: 400px; margin: 0 auto 32px; line-height: 1.6; }
+.hero::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 600px; height: 400px; background: radial-gradient(ellipse, rgba(106,0,255,0.25) 0%, transparent 70%); pointer-events: none; }
+.hero-eyebrow { font-family: var(--font-mono); font-size: 0.7rem; color: var(--rose); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 16px; animation: fadeInDown 0.6s ease both; }
+.hero h1 { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 6rem); line-height: 0.9; letter-spacing: 2px; background: linear-gradient(180deg, #fff 30%, rgba(255,255,255,0.4)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: fadeInDown 0.7s 0.1s ease both; margin-bottom: 20px; }
+.hero h1 em { background: linear-gradient(90deg, var(--violet), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-style: normal; }
+.hero p { font-size: 1rem; color: rgba(240,240,240,0.6); max-width: 400px; margin: 0 auto 32px; line-height: 1.6; animation: fadeInDown 0.7s 0.2s ease both; }
+.hero-stats { display: flex; justify-content: center; gap: 32px; animation: fadeInDown 0.7s 0.3s ease both; }
+.stat { text-align: center; }
+.stat-number { font-family: var(--font-display); font-size: 1.8rem; background: linear-gradient(90deg, var(--violet), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.stat-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
 
-/* RECHERCHE ET TRI (Nouveauté UX) */
+/* FEATURED */
+.featured-section { padding: 0 16px 28px; max-width: 680px; margin: 0 auto; }
+.section-label { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.65rem; color: var(--rose); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+.section-label::before { content: ''; width: 20px; height: 1px; background: var(--rose); }
+.confession-featured { background: linear-gradient(135deg, rgba(106,0,255,0.15), rgba(255,0,170,0.1)); border: 1px solid rgba(106,0,255,0.4); border-radius: 20px; padding: 24px; position: relative; overflow: hidden; animation: glowPulse 3s ease-in-out infinite; }
+.confession-featured::before { content: ''; position: absolute; top: -50%; right: -20%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,0,170,0.15) 0%, transparent 70%); pointer-events: none; }
+.featured-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,0,170,0.15); border: 1px solid rgba(255,0,170,0.3); border-radius: 50px; padding: 4px 12px; font-size: 0.7rem; color: var(--rose); font-weight: 600; margin-bottom: 16px; }
+.featured-text { font-size: 1.15rem; line-height: 1.7; color: var(--white); font-weight: 300; margin-bottom: 20px; font-style: italic; }
+.featured-text::before { content: '"'; color: var(--rose); font-size: 2rem; line-height: 0; vertical-align: -0.3em; margin-right: 4px; }
+.featured-text::after { content: '"'; color: var(--rose); font-size: 2rem; line-height: 0; vertical-align: -0.3em; margin-left: 4px; }
+
+/* RECHERCHE ET TRI */
 .toolbar { padding: 0 16px 20px; max-width: 680px; margin: 0 auto; display: flex; gap: 10px; flex-wrap: wrap; }
 .search-bar { flex: 1; min-width: 200px; background: var(--bg2); border: 1px solid var(--muted2); padding: 10px 16px; border-radius: 50px; color: var(--white); font-family: var(--font-body); outline: none; }
 .search-bar:focus { border-color: var(--violet); }
@@ -57,24 +84,31 @@ header { position: sticky; top: 0; z-index: 100; display: flex; align-items: cen
 
 /* CATEGORIES */
 .categories { padding: 0 16px 20px; max-width: 680px; margin: 0 auto; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
-.cat-btn { flex-shrink: 0; background: var(--bg3); border: 1px solid var(--muted2); color: rgba(240,240,240,0.6); padding: 8px 18px; border-radius: 50px; font-size: 0.8rem; cursor: pointer; }
-.cat-btn.active { background: linear-gradient(135deg, rgba(106,0,255,0.3), rgba(255,0,170,0.2)); border-color: var(--violet); color: var(--white); }
+.categories::-webkit-scrollbar { display: none; }
+.cat-btn { flex-shrink: 0; background: var(--bg3); border: 1px solid var(--muted2); color: rgba(240,240,240,0.6); padding: 8px 18px; border-radius: 50px; font-size: 0.8rem; font-family: var(--font-body); font-weight: 500; cursor: pointer; transition: all 0.25s; }
+.cat-btn:hover, .cat-btn.active { background: linear-gradient(135deg, rgba(106,0,255,0.3), rgba(255,0,170,0.2)); border-color: var(--violet); color: var(--white); box-shadow: 0 0 12px rgba(106,0,255,0.3); }
 
 /* CARDS */
 .confessions-feed { padding: 0 16px; display: flex; flex-direction: column; gap: 16px; max-width: 680px; margin: 0 auto; }
-.confession-card { background: var(--bg2); border: 1px solid var(--muted2); border-radius: 20px; padding: 24px; position: relative; overflow: hidden; animation: fadeIn 0.5s ease both; }
+.confession-card { background: var(--bg2); border: 1px solid var(--muted2); border-radius: 20px; padding: 24px; position: relative; overflow: hidden; transition: all 0.3s; animation: cardSlideIn 0.5s ease both; }
+.confession-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--violet), transparent); opacity: 0; transition: opacity 0.3s; }
+.confession-card:hover { border-color: rgba(106,0,255,0.4); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(106,0,255,0.1); }
+.confession-card:hover::before { opacity: 1; }
 .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .card-meta { display: flex; align-items: center; gap: 10px; }
 .anon-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
 .anon-info { display: flex; flex-direction: column; }
 .anon-name { font-size: 0.8rem; font-weight: 600; color: rgba(240,240,240,0.8); }
 .anon-time { font-size: 0.65rem; color: var(--muted); font-family: var(--font-mono); }
-.card-category { font-size: 0.65rem; padding: 3px 10px; border-radius: 50px; font-weight: 600; text-transform: uppercase; }
+.card-category { font-size: 0.65rem; padding: 3px 10px; border-radius: 50px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
 
 .cat-amour { background: rgba(255,100,100,0.15); color: #FF6464; border: 1px solid rgba(255,100,100,0.3); }
-.cat-dark { background: rgba(150,50,255,0.15); color: #B264FF; border: 1px solid rgba(150,50,255,0.3); }
+.cat-trahison { background: rgba(255,165,0,0.15); color: #FFA500; border: 1px solid rgba(255,165,0,0.3); }
 .cat-drole { background: rgba(100,255,100,0.1); color: #64FF64; border: 1px solid rgba(100,255,100,0.3); }
+.cat-dark { background: rgba(150,50,255,0.15); color: #B264FF; border: 1px solid rgba(150,50,255,0.3); }
 .cat-18 { background: rgba(255,0,0,0.15); color: #FF3333; border: 1px solid rgba(255,0,0,0.4); }
+
+.badge-wolof { display: inline-flex; align-items: center; gap: 4px; background: rgba(0,245,255,0.08); border: 1px solid rgba(0,245,255,0.25); border-radius: 50px; padding: 3px 10px; font-size: 0.6rem; color: var(--cyan); font-family: var(--font-mono); margin-left: 6px; }
 
 .confession-text { font-size: 0.95rem; line-height: 1.8; color: rgba(240,240,240,0.85); font-weight: 300; margin-bottom: 20px; }
 
@@ -82,52 +116,125 @@ header { position: sticky; top: 0; z-index: 100; display: flex; align-items: cen
 .blurred-content { filter: blur(6px); user-select: none; pointer-events: none; }
 .locked-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(15,15,15,0.7); backdrop-filter: blur(2px); border-radius: 20px; z-index: 10; }
 .locked-overlay span { font-size: 2rem; margin-bottom: 10px; }
-.locked-overlay button { background: var(--gold); border: none; padding: 8px 16px; border-radius: 50px; font-weight: bold; cursor: pointer; }
+.locked-overlay button { background: var(--gold); border: none; padding: 8px 16px; border-radius: 50px; font-weight: bold; cursor: pointer; color: black; }
 
-/* ACTIONS & VOTES */
+/* VOTE */
 .vote-section { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; padding: 12px; background: rgba(255,255,255,0.03); border-radius: 12px; }
 .vote-question { font-size: 0.75rem; color: rgba(240,240,240,0.5); flex: 1; font-style: italic; }
-.vote-btn { padding: 7px 14px; border-radius: 50px; border: 1px solid; font-size: 0.75rem; font-weight: 700; cursor: pointer; background: transparent; }
-.vote-right { border-color: rgba(100,255,100,0.3); color: #64FF64; }
-.vote-wrong { border-color: rgba(255,80,80,0.3); color: #FF6464; }
-.vote-btn.voted { background: rgba(255,255,255,0.1); opacity: 0.5; cursor: not-allowed; }
+.vote-btn { padding: 7px 14px; border-radius: 50px; border: 1px solid; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.25s; font-family: var(--font-body); }
+.vote-right { background: rgba(100,255,100,0.08); border-color: rgba(100,255,100,0.3); color: #64FF64; }
+.vote-right:hover:not(.voted) { background: rgba(100,255,100,0.2); box-shadow: 0 0 15px rgba(100,255,100,0.3); transform: scale(1.05); }
+.vote-wrong { background: rgba(255,80,80,0.08); border-color: rgba(255,80,80,0.3); color: #FF6464; }
+.vote-wrong:hover:not(.voted) { background: rgba(255,80,80,0.2); box-shadow: 0 0 15px rgba(255,80,80,0.3); transform: scale(1.05); }
+.vote-btn.voted { background: rgba(255,255,255,0.1); border-color: var(--muted); color: var(--white); opacity: 0.6; cursor: not-allowed; }
 
+/* ACTIONS */
 .card-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-.action-btn { display: flex; align-items: center; gap: 5px; background: var(--bg3); border: 1px solid var(--muted2); color: rgba(240,240,240,0.6); padding: 8px 12px; border-radius: 50px; font-size: 0.72rem; cursor: pointer; }
+.action-btn { display: flex; align-items: center; gap: 5px; background: var(--bg3); border: 1px solid var(--muted2); color: rgba(240,240,240,0.6); padding: 8px 12px; border-radius: 50px; font-size: 0.72rem; font-family: var(--font-body); font-weight: 500; cursor: pointer; transition: all 0.25s; white-space: nowrap; }
+.action-btn:hover { background: rgba(255,255,255,0.08); color: var(--white); border-color: rgba(255,255,255,0.2); }
 .action-btn.liked { border-color: var(--rose); color: var(--rose); background: rgba(255,0,170,0.08); }
-.btn-report { margin-left: auto; color: var(--muted); background: transparent; border: none; font-size: 0.7rem; cursor: pointer; text-decoration: underline; }
+.action-btn.whatsapp { border-color: rgba(37,211,102,0.4); color: #25D366; }
+.action-btn.whatsapp:hover { background: rgba(37,211,102,0.1); }
+.btn-count { font-family: var(--font-mono); font-size: 0.7rem; }
+.btn-report { margin-left: auto; color: var(--muted); background: transparent; border: none; font-size: 0.7rem; cursor: pointer; text-decoration: underline; font-family: var(--font-body); }
 
 /* COMMENTS */
 .comments-section { display: none; margin-top: 16px; border-top: 1px solid var(--muted2); padding-top: 16px; }
-.comments-section.visible { display: block; }
+.comments-section.visible { display: block; animation: fadeIn 0.3s ease; }
 .comment-input-row { display: flex; gap: 8px; margin-bottom: 12px; }
-.comment-input { flex: 1; background: var(--bg3); border: 1px solid var(--muted2); border-radius: 20px; padding: 10px 16px; color: var(--white); outline: none; }
-.comment-submit { background: var(--violet); border: none; color: white; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; }
+.comment-input { flex: 1; background: var(--bg3); border: 1px solid var(--muted2); border-radius: 20px; padding: 10px 16px; color: var(--white); font-family: var(--font-body); font-size: 0.82rem; outline: none; transition: border-color 0.25s; }
+.comment-input:focus { border-color: var(--violet); }
+.comment-input::placeholder { color: var(--muted); }
+.comment-submit { background: var(--violet); border: none; color: white; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 0.9rem; transition: all 0.25s; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.comment-submit:hover { background: var(--violet2); transform: scale(1.1); }
+.comment-item { display: flex; gap: 10px; margin-bottom: 10px; animation: fadeIn 0.3s ease; }
+.comment-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--muted2), var(--muted)); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; }
+.comment-bubble { background: var(--bg3); border-radius: 12px; padding: 8px 12px; flex: 1; }
+.comment-author { font-size: 0.65rem; color: var(--muted); font-weight: 600; margin-bottom: 2px; font-family: var(--font-mono); }
+.comment-text { font-size: 0.82rem; color: rgba(240,240,240,0.75); }
 
-/* MODALS & COOKIES */
+/* MODALS */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); z-index: 200; display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.35s; }
 .modal-overlay.open { opacity: 1; pointer-events: all; }
-.modal { width: 100%; max-width: 680px; background: var(--bg2); border: 1px solid rgba(106,0,255,0.4); border-radius: 28px 28px 0 0; padding: 32px 24px 40px; transform: translateY(100%); transition: transform 0.4s; }
+.modal { width: 100%; max-width: 680px; background: var(--bg2); border: 1px solid rgba(106,0,255,0.4); border-radius: 28px 28px 0 0; padding: 32px 24px 40px; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); max-height: 90vh; overflow-y: auto; }
 .modal-overlay.open .modal { transform: translateY(0); }
 .modal-handle { width: 40px; height: 4px; background: var(--muted2); border-radius: 2px; margin: 0 auto 24px; }
+.modal-title { font-family: var(--font-display); font-size: 2rem; letter-spacing: 1px; background: linear-gradient(90deg, var(--white), rgba(255,255,255,0.5)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
+.modal-subtitle { font-size: 0.85rem; color: var(--muted); margin-bottom: 24px; }
 .form-group { margin-bottom: 20px; }
-.form-textarea { width: 100%; background: var(--bg3); border: 1px solid var(--muted2); border-radius: 16px; padding: 16px; color: var(--white); font-family: var(--font-body); resize: none; outline: none; min-height: 130px; }
+.form-label { font-size: 0.75rem; font-weight: 600; color: rgba(240,240,240,0.6); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block; }
+.form-textarea { width: 100%; background: var(--bg3); border: 1px solid var(--muted2); border-radius: 16px; padding: 16px; color: var(--white); font-family: var(--font-body); font-size: 0.95rem; line-height: 1.6; resize: none; outline: none; min-height: 130px; transition: border-color 0.25s; }
+.form-textarea:focus { border-color: var(--violet); box-shadow: 0 0 20px rgba(106,0,255,0.15); }
+.form-textarea::placeholder { color: var(--muted); }
 .cat-select { display: flex; gap: 8px; flex-wrap: wrap; }
-.cat-option { padding: 8px 16px; border-radius: 50px; border: 1px solid var(--muted2); background: var(--bg3); color: rgba(240,240,240,0.5); font-size: 0.8rem; cursor: pointer; }
+.cat-option { padding: 8px 16px; border-radius: 50px; border: 1px solid var(--muted2); background: var(--bg3); color: rgba(240,240,240,0.5); font-size: 0.8rem; cursor: pointer; transition: all 0.25s; font-family: var(--font-body); }
 .cat-option.selected { border-color: var(--violet); color: var(--white); background: rgba(106,0,255,0.2); }
-.btn-submit { width: 100%; background: linear-gradient(135deg, var(--violet), var(--rose)); border: none; color: white; padding: 16px; border-radius: 16px; font-weight: 700; cursor: pointer; }
+.btn-submit { width: 100%; background: linear-gradient(135deg, var(--violet), var(--rose)); border: none; color: white; padding: 16px; border-radius: 16px; font-family: var(--font-body); font-weight: 700; font-size: 1rem; cursor: pointer; box-shadow: 0 0 30px rgba(106,0,255,0.4); transition: all 0.3s; }
+.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 4px 40px rgba(106,0,255,0.6); }
 
-.cookie-banner { position: fixed; bottom: -100px; left: 0; right: 0; background: var(--bg2); border-top: 1px solid var(--violet); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; z-index: 900; transition: bottom 0.5s; font-size: 0.8rem; }
+/* STORY */
+.story-modal { position: fixed; inset: 0; background: #000; z-index: 300; display: none; align-items: center; justify-content: center; flex-direction: column; }
+.story-modal.open { display: flex; }
+.story-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #0D0D0D, #1a0030, #0D0D0D); }
+.story-content { position: relative; z-index: 1; text-align: center; padding: 40px 32px; max-width: 380px; }
+.story-logo { font-family: var(--font-display); font-size: 1.5rem; background: linear-gradient(90deg, var(--violet), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 32px; letter-spacing: 2px; }
+.story-quote { font-size: 1.2rem; line-height: 1.6; color: white; font-weight: 300; font-style: italic; margin-bottom: 32px; }
+.story-cta { font-size: 0.75rem; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase; font-family: var(--font-mono); }
+.story-actions { position: relative; z-index: 1; display: flex; gap: 12px; padding: 24px; width: 100%; max-width: 380px; justify-content: center; }
+.story-share-btn { flex: 1; padding: 12px; border-radius: 14px; border: none; font-family: var(--font-body); font-weight: 700; font-size: 0.82rem; cursor: pointer; }
+.story-close { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 1; }
+
+/* PREMIUM */
+.premium-section { margin: 32px 16px; background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(255,165,0,0.05)); border: 1px solid rgba(255,215,0,0.25); border-radius: 20px; padding: 28px 24px; text-align: center; position: relative; overflow: hidden; }
+.premium-section::before { content: '⚡'; position: absolute; font-size: 8rem; opacity: 0.04; right: -20px; top: -20px; }
+.premium-title { font-family: var(--font-display); font-size: 1.8rem; color: #FFD700; letter-spacing: 1px; margin-bottom: 8px; }
+.premium-sub { font-size: 0.85rem; color: rgba(255,215,0,0.6); margin-bottom: 20px; }
+.premium-features { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; text-align: left; }
+.pf-item { font-size: 0.85rem; color: rgba(240,240,240,0.75); display: flex; align-items: center; gap: 8px; }
+.pf-item::before { content: '✦'; color: #FFD700; font-size: 0.6rem; }
+.btn-gold { background: linear-gradient(135deg, #FFD700, #FF8C00); border: none; color: #000; padding: 14px 32px; border-radius: 50px; font-family: var(--font-body); font-weight: 800; font-size: 0.9rem; cursor: pointer; box-shadow: 0 0 30px rgba(255,215,0,0.3); transition: all 0.3s; }
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 4px 40px rgba(255,215,0,0.5); }
+
+/* RANKING */
+.ranking-section { padding: 0 16px 32px; max-width: 680px; margin: 0 auto; }
+.ranking-title { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 1px; background: linear-gradient(90deg, var(--white), rgba(255,255,255,0.5)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 16px; }
+.rank-item { display: flex; align-items: center; gap: 14px; padding: 14px; border-radius: 14px; background: var(--bg2); border: 1px solid var(--muted2); margin-bottom: 10px; transition: all 0.25s; cursor: pointer; }
+.rank-item:hover { border-color: rgba(106,0,255,0.3); }
+.rank-number { font-family: var(--font-display); font-size: 1.5rem; min-width: 32px; }
+.rank-1 { color: #FFD700; } .rank-2 { color: #C0C0C0; } .rank-3 { color: #CD7F32; } .rank-other { color: var(--muted); }
+.rank-text { flex: 1; font-size: 0.85rem; color: rgba(240,240,240,0.75); line-height: 1.4; }
+.rank-likes { font-family: var(--font-mono); font-size: 0.7rem; color: var(--rose); }
+
+/* AD */
+.ad-banner { margin: 0 16px 24px; background: var(--bg2); border: 1px dashed var(--muted2); border-radius: 14px; padding: 16px; text-align: center; color: var(--muted); font-size: 0.75rem; font-family: var(--font-mono); }
+.ad-banner span { display: block; font-size: 1rem; color: rgba(240,240,240,0.3); margin-bottom: 4px; }
+
+/* BANNIERE COOKIE */
+.cookie-banner { position: fixed; bottom: -100px; left: 0; right: 0; background: var(--bg2); border-top: 1px solid var(--violet); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; z-index: 900; transition: bottom 0.5s; font-size: 0.8rem; flex-wrap: wrap; gap: 10px; }
 .cookie-banner.show { bottom: 0; }
-.cookie-btn { background: var(--white); color: var(--bg); border: none; padding: 8px 16px; border-radius: 50px; font-weight: bold; cursor: pointer; }
+.cookie-btn { background: var(--white); color: var(--bg); border: none; padding: 8px 16px; border-radius: 50px; font-weight: bold; cursor: pointer; font-family: var(--font-body); }
 
-.toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--bg3); border: 1px solid rgba(106,0,255,0.4); border-radius: 50px; padding: 12px 24px; font-size: 0.82rem; color: var(--white); z-index: 1000; transition: transform 0.4s; }
+/* FOOTER */
+footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--muted2); color: var(--muted); font-size: 0.75rem; font-family: var(--font-mono); line-height: 1.8; margin-bottom: 50px;}
+.footer-logo { font-family: var(--font-display); font-size: 2rem; background: linear-gradient(90deg, var(--violet), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 2px; display: block; margin-bottom: 12px; }
+
+/* TOAST */
+.toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--bg3); border: 1px solid rgba(106,0,255,0.4); border-radius: 50px; padding: 12px 24px; font-size: 0.82rem; color: var(--white); z-index: 1000; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); white-space: nowrap; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
 .toast.show { transform: translateX(-50%) translateY(0); }
 
 /* LOADING INFINITE SCROLL */
 .infinite-loader { display: none; text-align: center; padding: 20px; color: var(--muted); font-family: var(--font-mono); font-size: 0.8rem; }
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+/* ANIMATIONS */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes cardSlideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes glowPulse { 0%, 100% { box-shadow: 0 0 20px rgba(106,0,255,0.3); } 50% { box-shadow: 0 0 40px rgba(106,0,255,0.6), 0 0 60px rgba(255,0,170,0.2); } }
+
+@media (max-width: 400px) {
+  .card-actions { gap: 6px; }
+  .action-btn { padding: 7px 10px; font-size: 0.68rem; }
+}
 </style>
 </head>
 <body>
@@ -135,19 +242,25 @@ header { position: sticky; top: 0; z-index: 100; display: flex; align-items: cen
 <header>
   <div class="logo">Secret<span>Zone</span></div>
   <div class="header-actions">
-    <button class="btn-premium" onclick="triggerPremium()">⚡ Premium</button>
-    <button class="btn-confess" onclick="openModal('confessModal')">+ Confesser</button>
+    <button class="btn-premium" onclick="showPremium()" id="btnHeaderPremium">⚡ Premium</button>
+    <button class="btn-confess" onclick="openModal()">+ Confesser</button>
   </div>
 </header>
 
 <section class="hero">
-  <p class="hero-eyebrow">▲ 100% Anonyme • Sans filtre</p>
+  <p class="hero-eyebrow">▲ Confessions Anonymes — Vrai • Sans filtre • Sans jugement</p>
   <h1>Les secrets que<br>personne <em>n'ose</em><br>dire…</h1>
+  <p>Ici, tu peux tout dire. Sans nom, sans peur.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-number" id="totalConfessions">2,850</div><div class="stat-label">Confessions</div></div>
+    <div class="stat"><div class="stat-number" id="totalUsers">14,293</div><div class="stat-label">Lecteurs</div></div>
+    <div class="stat"><div class="stat-number">∞</div><div class="stat-label">Anonymat</div></div>
+  </div>
 </section>
 
 <!-- RECHERCHE ET TRI -->
 <div class="toolbar">
-  <input type="text" class="search-bar" id="searchInput" placeholder="Rechercher un mot (ex: mariage, amour)..." onkeyup="applyFilters()">
+  <input type="text" class="search-bar" id="searchInput" placeholder="Rechercher un mot (ex: mariage, ex, argent)..." onkeyup="applyFilters()">
   <select class="sort-select" id="sortSelect" onchange="applyFilters()">
     <option value="recent">⏱️ Plus récents</option>
     <option value="popular">🔥 Plus populaires</option>
@@ -157,31 +270,81 @@ header { position: sticky; top: 0; z-index: 100; display: flex; align-items: cen
 <div class="categories" id="categories">
   <button class="cat-btn active" onclick="filterCat(this,'tous')">🌐 Tous</button>
   <button class="cat-btn" onclick="filterCat(this,'amour')">❤️ Amour</button>
-  <button class="cat-btn" onclick="filterCat(this,'dark')">🖤 Dark</button>
+  <button class="cat-btn" onclick="filterCat(this,'trahison')">🔪 Trahison</button>
   <button class="cat-btn" onclick="filterCat(this,'drole')">😂 Drôle</button>
+  <button class="cat-btn" onclick="filterCat(this,'dark')">🖤 Dark</button>
   <button class="cat-btn" onclick="filterCat(this,'18+')">🔞 Caché (Premium)</button>
+</div>
+
+<div class="ad-banner" style="max-width: 680px; margin: 0 auto 16px;">
+  <span>📢</span>Espace publicitaire — Votre annonce ici
 </div>
 
 <div class="confessions-feed" id="feed"></div>
 <div class="infinite-loader" id="infiniteLoader">Chargement des confessions...</div>
 
-<!-- MODAL CONFESSION -->
-<div class="modal-overlay" id="confessModal" onclick="closeModalIfBg(event)">
-  <div class="modal">
+<div class="ranking-section">
+  <div class="section-label" style="margin-top: 40px;">🏆 Top Confessions</div>
+  <div class="ranking-title">Les Plus Virales</div>
+  <div id="rankingList"></div>
+</div>
+
+<div class="premium-section" id="premiumSection">
+  <div class="premium-title">⚡ SECRETZONE PREMIUM</div>
+  <div class="premium-sub">Débloque l'expérience complète</div>
+  <div class="premium-features">
+    <div class="pf-item">Mise en avant prioritaire de tes confessions</div>
+    <div class="pf-item">Audio narratif — écoute chaque confession</div>
+    <div class="pf-item">Génération vidéo TikTok automatique</div>
+    <div class="pf-item">Pas de publicité</div>
+    <div class="pf-item">Badge Premium exclusif</div>
+    <div class="pf-item">Accès aux confessions cachées 🔞</div>
+  </div>
+  <button class="btn-gold" onclick="triggerPremium()">Devenir Premium — 2 500 FCFA/mois</button>
+</div>
+
+<footer>
+  <span class="footer-logo">SecretZone</span>
+  Tes confessions restent 100% anonymes. Pour toujours.<br>
+  © 2025 SecretZone · <a href="#" style="color: var(--violet);">Confidentialité</a> · <a href="#" style="color: var(--violet);">Contact</a>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalIfBg(event)">
+  <div class="modal" id="modal">
     <div class="modal-handle"></div>
-    <h2 style="margin-bottom:10px;">Ta Confession</h2>
+    <div class="modal-title">Ta Confession</div>
+    <div class="modal-subtitle">100% anonyme. Jamais tracé. Jamais jugé.</div>
     <div class="form-group">
+      <label class="form-label">Ce que tu veux dire...</label>
       <textarea class="form-textarea" id="confessionText" placeholder="Aujourd'hui j'ai réalisé que..." maxlength="500"></textarea>
+      <div style="text-align: right; font-size: 0.65rem; color: var(--muted); margin-top: 4px; font-family: var(--font-mono);" id="charCount">0 / 500</div>
     </div>
     <div class="form-group">
+      <label class="form-label">Catégorie</label>
       <div class="cat-select" id="catSelect">
         <button class="cat-option" onclick="selectCat(this,'amour')">❤️ Amour</button>
-        <button class="cat-option" onclick="selectCat(this,'dark')">🖤 Dark</button>
+        <button class="cat-option" onclick="selectCat(this,'trahison')">🔪 Trahison</button>
         <button class="cat-option" onclick="selectCat(this,'drole')">😂 Drôle</button>
+        <button class="cat-option" onclick="selectCat(this,'dark')">🖤 Dark</button>
         <button class="cat-option" onclick="selectCat(this,'18+')">🔞 +18 ans</button>
       </div>
     </div>
     <button class="btn-submit" onclick="submitConfession()">🔒 Confesser Anonymement</button>
+  </div>
+</div>
+
+<div class="story-modal" id="storyModal">
+  <div class="story-bg"></div>
+  <button class="story-close" onclick="closeStory()">✕</button>
+  <div class="story-content">
+    <div class="story-logo">SECRET ZONE</div>
+    <div class="story-quote" id="storyText"></div>
+    <div class="story-cta">secretzone.app</div>
+  </div>
+  <div class="story-actions">
+    <button class="story-share-btn" style="background: linear-gradient(135deg, #25D366, #128C7E); color: white;" onclick="shareWhatsApp()">📤 WhatsApp</button>
+    <button class="story-share-btn" style="background: linear-gradient(135deg, var(--violet), var(--rose)); color: white;" onclick="copyStory()">📋 Copier</button>
   </div>
 </div>
 
@@ -195,10 +358,10 @@ header { position: sticky; top: 0; z-index: 100; display: flex; align-items: cen
 
 <script>
 // =====================================================
-// 2. GESTION DES UTILISATEURS (LocalStorage / Anonymat)
+// GESTION UTILISATEUR & LOCALSTORAGE
 // =====================================================
 let userData = JSON.parse(localStorage.getItem('sz_user')) || {
-  liked: [], voted: {}, reported: [], isPremium: false, lastPostTime: 0, cookiesAccepted: false
+  liked: [], voted: {}, reported:[], isPremium: false, lastPostTime: 0, cookiesAccepted: false
 };
 function saveUser() { localStorage.setItem('sz_user', JSON.stringify(userData)); }
 
@@ -210,24 +373,7 @@ function acceptCookies() {
   document.getElementById('cookieBanner').classList.remove('show');
 }
 
-// =====================================================
-// BASE DE DONNÉES (Simulée avec des Vrais Timestamps)
-// =====================================================
-const now = Date.now();
-const confessionsData = [
-  { id: 101, text: "Je sors avec un homme marié qui vit aux USA. Depuis le Ramadan il ne me parle plus...", category: 'amour', avatar: '🌹', name: 'Anonyme_DK', timestamp: now - 3600000, likes: 5142, comments: [], votes: { right: 412, wrong: 4102 } },
-  { id: 102, text: "J'ai mon Bac+2 mais je vis chez une amie car ma mère a refusé que je divorce de mon mariage arrangé...", category: 'dark', avatar: '📚', name: 'Anonyme_SN', timestamp: now - 7200000, likes: 8903, comments: [], votes: { right: 8201, wrong: 143 } },
-  { id: 103, text: "J'ai fait pipi au lit et j'ai accusé ma femme. Elle a pleuré et a appelé sa mère. J'ai trop honte.", category: 'drole', avatar: '😳', name: 'Anonyme_221', timestamp: now - 1800000, likes: 12480, comments: [], votes: { right: 234, wrong: 11890 } },
-  { id: 104, text: "J'ai menti sur mon CV pour avoir ce job de Directeur. Ça fait 2 ans, personne ne sait que je n'ai pas le bac.", category: 'dark', avatar: '💼', name: 'Anonyme_Boss', timestamp: now - 86400000, likes: 320, comments: [], votes: { right: 120, wrong: 400 } },
-  // Contenu Premium (18+)
-  { id: 105, text: "Je suis tombée amoureuse de mon beau-frère. Hier soir, quand ma soeur dormait, on a franchi la limite...", category: '18+', avatar: '🔥', name: 'Anonyme_XX', timestamp: now - 900000, likes: 9800, comments: [], votes: { right: 12, wrong: 5000 } }
-];
-
-let currentFilter = 'tous';
-let displayedCount = 0;
-const chunk = 3; // Défilement infini : charge 3 par 3
-
-// 5. UX : TEMPS DYNAMIQUE
+// Temps dynamique
 function timeAgo(ts) {
   const diff = Math.floor((Date.now() - ts) / 1000);
   if (diff < 60) return "à l'instant";
@@ -237,16 +383,103 @@ function timeAgo(ts) {
 }
 
 // =====================================================
-// RENDU ET FILTRES (Recherche & Tri)
+// DONNÉES (Les Histoires + timestamps simulés)
 // =====================================================
+const now = Date.now();
+const confessions =[
+  {
+    id: 101,
+    text: "Suis une fille de 25 ans et je sors avec un homme marié de 38 ans qui vit aux USA. On se parle par appels vocaux et vidéo, on passe de bons moments ensemble comme un couple normal. Mais parfois il me dit que si je viens à l'hôtel au Sénégal, il ne veut pas que je reste vierge… c'est quelque chose que je ne ferai jamais. À chaque fois qu'il dit ça je suis déçue, il s'excuse — et puis le sujet revient. Ce qui me fait le plus mal, c'est que depuis le début du Ramadan il ne m'a plus parlé. Je l'aime mais j'ai peur qu'un jour il tourne ma tête. Selon vous, est-ce qu'il m'aime vraiment ?",
+    category: 'amour',
+    avatar: '🌹',
+    avatarBg: 'linear-gradient(135deg, #FF6464, #FF00AA)',
+    name: 'Anonyme_Dakar_F',
+    timestamp: now - 10800000, // 3h
+    isWolof: true,
+    likes: 5142,
+    comments:[
+      { author: 'Anonyme_4421', text: "Un homme qui t'aime vraiment ne remet pas en cause tes valeurs. Jamais. Tu mérites mieux.", emoji: '💜' },
+      { author: 'Anonyme_8801', text: "Le silence pendant le Ramadan est un signal. Quelqu'un qui t'aime trouve toujours le temps.", emoji: '🤍' },
+      { author: 'Anonyme_3309', text: "Fais attention à toi. Un homme marié qui presse = red flag majeur.", emoji: '⚠️' }
+    ],
+    votes: { right: 412, wrong: 4102 }
+  },
+  {
+    id: 102,
+    text: "Je suis une fille de 26 ans, j'ai subi un mariage arrangé à 13 ans. Mon mari avait de l'argent mais il m'a donné une misère. Ma mère a accepté. J'ai quand même obtenu mon Bac+2 en me battant seule. Quand j'ai demandé le divorce, ma mère m'a dit que je n'avais nulle part où aller. Du coup ma maison c'est chez une amie. Je veux me reconstruire, je veux juste partir de là. J'ai mon Bac et ma Licence 2. Je pleure mais je ne veux pas abandonner.",
+    category: 'dark',
+    avatar: '📚',
+    avatarBg: 'linear-gradient(135deg, #2d0066, #6A00FF)',
+    name: 'Anonyme_Sénégal_F',
+    timestamp: now - 21600000, // 6h
+    isWolof: true,
+    likes: 8903,
+    comments:[
+      { author: 'Anonyme_7712', text: "Ton courage est énorme. Bac+2 malgré tout ça — tu es plus forte que tu ne le penses.", emoji: '🔥' },
+      { author: 'Anonyme_0055', text: "Tu as les diplômes, tu as la volonté. Le reste vient. Tiens bon.", emoji: '💪' },
+      { author: 'Anonyme_9934', text: "La société t'a faillie mais toi tu ne t'es jamais abandonnée. C'est ça qui compte.", emoji: '💜' }
+    ],
+    votes: { right: 8201, wrong: 143 }
+  },
+  {
+    id: 103,
+    text: "Salam, j'ai 22 ans et je suis marié. Hier nuit je me suis réveillé et j'ai vu que j'avais fait pipi dans le lit. Après ça j'ai réveillé ma femme et je lui ai dit que c'est elle qui a fait ça… elle a pleuré, elle a cru que c'était vrai. Moi je savais que c'était moi mais j'étais trop gêné pour l'admettre. Je l'ai laissée appeler sa mère pour lui dire qu'elle avait eu un accident. Je suis trop honteux. Vos conseils ?",
+    category: 'drole',
+    avatar: '😳',
+    avatarBg: 'linear-gradient(135deg, #FF6400, #FF00AA)',
+    name: 'Anonyme_221_M',
+    timestamp: now - 3600000, // 1h
+    isWolof: true,
+    likes: 12480,
+    comments:[
+      { author: 'Anonyme_4400', text: "HAHAHAHA mon frère il faut avouer tout de suite 😭😭", emoji: '💀' },
+      { author: 'Anonyme_7733', text: "Ta femme a appelé SA MÈRE pour dire qu'elle a fait pipi 💀 avoue maintenant avant que ça empire", emoji: '😭' },
+      { author: 'Anonyme_1122', text: "Fais-lui un cadeau et avoue. Elle va rigoler aussi un jour… peut-être.", emoji: '🎁' }
+    ],
+    votes: { right: 234, wrong: 11890 }
+  },
+  // Contenu Premium
+  {
+    id: 999,
+    text: "Je suis tombée amoureuse de mon beau-frère. Hier soir, quand ma soeur dormait profondément dans la chambre d'à côté, il m'a rejointe dans le salon et on a franchi la limite. Je sais que c'est mal mais je ne regrette rien.",
+    category: '18+',
+    avatar: '🔥',
+    avatarBg: 'linear-gradient(135deg, #FF0000, #990000)',
+    name: 'Anonyme_XX',
+    timestamp: now - 5000000,
+    isWolof: false,
+    likes: 9800,
+    comments:[],
+    votes: { right: 12, wrong: 5000 }
+  },
+  { id: 1, text: "J'ai trompé mon copain… et il m'a demandé de l'aider à choisir une bague pour moi.", category: 'amour', avatar: '👤', avatarBg: 'linear-gradient(135deg, #FF6464, #FF00AA)', name: 'Anonyme_7742', timestamp: now - 7200000, isWolof: false, likes: 4217, comments:[{ author: 'Anonyme_3301', text: 'Mon Dieu... comment tu vis avec ça ?', emoji: '😮' }, { author: 'Anonyme_9988', text: 'Il mérite mieux que ça.', emoji: '💀' }], votes: { right: 124, wrong: 3891 } },
+  { id: 2, text: "Mon meilleur ami sort avec mon ex… mais il ne sait pas que je l'aime encore.", category: 'amour', avatar: '👥', avatarBg: 'linear-gradient(135deg, #6A00FF, #00F5FF)', name: 'Anonyme_1156', timestamp: now - 18000000, isWolof: false, likes: 3104, comments:[{ author: 'Anonyme_0042', text: 'Parle lui. Vraiment.', emoji: '❤️' }], votes: { right: 589, wrong: 1823 } },
+  { id: 3, text: "J'ai menti à toute ma famille sur ma vie… en réalité je suis complètement perdu.", category: 'dark', avatar: '🎭', avatarBg: 'linear-gradient(135deg, #2d0066, #6A00FF)', name: 'Anonyme_5599', timestamp: now - 28800000, isWolof: false, likes: 5672, comments:[{ author: 'Anonyme_7821', text: "T'es pas seul dans ce cas.", emoji: '🤝' }], votes: { right: 4201, wrong: 312 } },
+  { id: 4, text: "Une fille m'aime sincèrement… mais je préfère courir derrière celle qui me détruit.", category: 'amour', avatar: '🏃', avatarBg: 'linear-gradient(135deg, #FF6464, #6A00FF)', name: 'Anonyme_2278', timestamp: now - 43200000, isWolof: false, likes: 6891, comments:[], votes: { right: 832, wrong: 5241 } },
+  { id: 5, text: "Je souris tous les jours… mais personne ne sait que je suis au bout.", category: 'dark', avatar: '😊', avatarBg: 'linear-gradient(135deg, #1a1a2e, #6A00FF)', name: 'Anonyme_0019', timestamp: now - 86400000, isWolof: false, likes: 8903, comments:[{ author: 'Anonyme_9001', text: "Je te vois. Tu comptes. Tiens bon 💜", emoji: '💜' }], votes: { right: 7821, wrong: 245 } },
+  { id: 6, text: "J'ai tout pour être heureux… mais je ne ressens rien.", category: 'dark', avatar: '⬜', avatarBg: 'linear-gradient(135deg, #1a1a1a, #333)', name: 'Anonyme_9900', timestamp: now - 259200000, isWolof: false, likes: 9412, comments:[], votes: { right: 7890, wrong: 234 } }
+];
+
+let currentFilter = 'tous';
+let selectedCategory = '';
+let currentStoryText = '';
+let displayedCount = 0;
+const chunkSize = 4; // Nombre de posts chargés par défilement
+
+// =====================================================
+// RENDU & FILTRES
+// =====================================================
+function getCatClass(cat) { return 'cat-' + cat.replace('+',''); }
+function getCatLabel(cat) { return { amour: '❤️ Amour', trahison: '🔪 Trahison', drole: '😂 Drôle', dark: '🖤 Dark', '18+': '🔞 +18 ans' }[cat] || cat; }
+
 function applyFilters(resetLimit = true) {
   if(resetLimit) displayedCount = 0;
   
   const search = document.getElementById('searchInput').value.toLowerCase();
   const sort = document.getElementById('sortSelect').value;
   
-  let filtered = confessionsData.filter(c => {
-    if(userData.reported.includes(c.id)) return false; // Cache les signalés
+  let filtered = confessions.filter(c => {
+    if(userData.reported.includes(c.id)) return false; // Cacher signalés
     const matchCat = currentFilter === 'tous' || c.category === currentFilter;
     const matchSearch = c.text.toLowerCase().includes(search);
     return matchCat && matchSearch;
@@ -257,28 +490,29 @@ function applyFilters(resetLimit = true) {
 
   if(resetLimit) document.getElementById('feed').innerHTML = '';
   
-  const toDisplay = filtered.slice(displayedCount, displayedCount + chunk);
-  toDisplay.forEach(c => document.getElementById('feed').appendChild(createCard(c)));
+  const toDisplay = filtered.slice(displayedCount, displayedCount + chunkSize);
+  toDisplay.forEach((c, i) => document.getElementById('feed').appendChild(createCard(c, i)));
   
-  displayedCount += chunk;
+  displayedCount += chunkSize;
   document.getElementById('infiniteLoader').style.display = displayedCount < filtered.length ? 'block' : 'none';
 }
 
-function createCard(c) {
+function createCard(c, i) {
   const div = document.createElement('div');
   div.className = 'confession-card';
   div.dataset.id = c.id;
-  
+  div.style.animationDelay = (i * 0.05) + 's';
+
   const isLiked = userData.liked.includes(c.id);
   const userVote = userData.voted[c.id];
   const safeText = c.text.replace(/</g,'&lt;').replace(/>/g,'&gt;');
   
-  // 4. PREMIUM : Logique de floutage
+  // PREMIUM FLOUTAGE LOGIC
   let contentHTML = `<div class="confession-text">${safeText}</div>`;
   if (c.category === '18+' && !userData.isPremium) {
     contentHTML = `
-      <div style="position:relative;">
-        <div class="confession-text blurred-content">${safeText.substring(0, 50)}... [CONTENU CACHÉ]</div>
+      <div style="position:relative; margin-bottom: 20px;">
+        <div class="confession-text blurred-content" style="margin-bottom:0;">${safeText.substring(0, 50)}... [CONTENU CACHÉ]</div>
         <div class="locked-overlay">
           <span>🔞</span>
           <button onclick="triggerPremium()">Débloquer (Premium)</button>
@@ -289,33 +523,65 @@ function createCard(c) {
   div.innerHTML = `
     <div class="card-header">
       <div class="card-meta">
-        <div class="anon-avatar" style="background:var(--muted2)">${c.avatar}</div>
+        <div class="anon-avatar" style="background: ${c.avatarBg}">${c.avatar}</div>
         <div class="anon-info">
-          <span class="anon-name">${c.name}</span>
+          <span class="anon-name">${c.name}${c.isWolof ? ' <span class="badge-wolof">🇸🇳 Sénégal</span>' : ''}</span>
           <span class="anon-time">${timeAgo(c.timestamp)}</span>
         </div>
       </div>
-      <div class="card-category cat-${c.category.replace('+','')}">${c.category}</div>
+      <div class="card-category ${getCatClass(c.category)}">${getCatLabel(c.category)}</div>
     </div>
     
     ${contentHTML}
 
     <div class="vote-section">
-      <span class="vote-question">Raison ou tort ?</span>
-      <button class="vote-btn vote-right ${userVote==='right'?'voted':''}" onclick="vote(${c.id}, 'right')">✅ (${c.votes.right})</button>
-      <button class="vote-btn vote-wrong ${userVote==='wrong'?'voted':''}" onclick="vote(${c.id}, 'wrong')">❌ (${c.votes.wrong})</button>
+      <span class="vote-question">Il/elle a raison ou tort ?</span>
+      <button class="vote-btn vote-right ${userVote==='right'?'voted':''}" onclick="vote(${c.id}, 'right')">✅ Raison (${c.votes.right})</button>
+      <button class="vote-btn vote-wrong ${userVote==='wrong'?'voted':''}" onclick="vote(${c.id}, 'wrong')">❌ Tort (${c.votes.wrong})</button>
     </div>
-
     <div class="card-actions">
-      <button class="action-btn ${isLiked?'liked':''}" onclick="toggleLike(${c.id}, this)">❤️ <span class="btn-count">${c.likes}</span></button>
-      <button class="action-btn" onclick="shareWA('${encodeURIComponent(c.text.substring(0,100))}')">📤 Partager</button>
+      <button class="action-btn ${isLiked?'liked':''}" onclick="toggleLike(${c.id}, this)">❤️ <span class="btn-count">${formatNum(c.likes)}</span></button>
+      <button class="action-btn" onclick="toggleComments(${c.id})">💬 <span class="btn-count">${c.comments.length}</span></button>
+      <button class="action-btn" onclick="openStory('${encodeURIComponent(c.text.substring(0,120))}')">✨ Story</button>
+      <button class="action-btn whatsapp" onclick="shareWA('${encodeURIComponent(c.text.substring(0,200))}')">📤 WA</button>
       <button class="btn-report" onclick="reportPost(${c.id})">⚠️ Signaler</button>
+    </div>
+    <div class="comments-section" id="comments-${c.id}">
+      <div class="comment-input-row">
+        <input class="comment-input" id="cinput-${c.id}" placeholder="Réagis anonymement..." maxlength="200">
+        <button class="comment-submit" onclick="addComment(${c.id})">↑</button>
+      </div>
+      <div id="comments-list-${c.id}">
+        ${c.comments.map(cm => `
+          <div class="comment-item">
+            <div class="comment-avatar">${cm.emoji}</div>
+            <div class="comment-bubble">
+              <div class="comment-author">${cm.author}</div>
+              <div class="comment-text">${cm.text}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
     </div>
   `;
   return div;
 }
 
-// 5. DÉFILEMENT INFINI (Infinite Scroll)
+function renderRanking() {
+  const list = document.getElementById('rankingList');
+  const sorted = [...confessions].sort((a, b) => b.likes - a.likes).slice(0, 5);
+  list.innerHTML = sorted.map((c, i) => {
+    const numClass = i < 3 ? `rank-${i+1}` : 'rank-other';
+    const numLabel = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `#${i+1}`;
+    return `<div class="rank-item" onclick="openStory('${encodeURIComponent(c.text.substring(0,120))}')">
+      <div class="rank-number ${numClass}">${numLabel}</div>
+      <div class="rank-text">${c.text.substring(0,70)}${c.text.length>70?'…':''}</div>
+      <div class="rank-likes">❤️ ${formatNum(c.likes)}</div>
+    </div>`;
+  }).join('');
+}
+
+// 5. DEFILEMENT INFINI
 window.addEventListener('scroll', () => {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
     if(document.getElementById('infiniteLoader').style.display === 'block') {
@@ -325,104 +591,134 @@ window.addEventListener('scroll', () => {
 });
 
 // =====================================================
-// ACTIONS : LIKES, VOTES & MODÉRATION
+// ACTIONS LIKES / VOTES / COMMENTAIRES
 // =====================================================
 function toggleLike(id, btn) {
-  const c = confessionsData.find(x => x.id === id);
+  const c = confessions.find(c => c.id === id);
   if (!c) return;
   const count = btn.querySelector('.btn-count');
   
   if (userData.liked.includes(id)) {
     userData.liked = userData.liked.filter(x => x !== id);
-    c.likes--; btn.classList.remove('liked');
+    c.likes--; btn.classList.remove('liked'); showToast('Like retiré');
   } else {
     userData.liked.push(id);
-    c.likes++; btn.classList.add('liked');
+    c.likes++; btn.classList.add('liked'); showToast('❤️ Confession likée !');
   }
-  count.textContent = c.likes;
+  count.textContent = formatNum(c.likes);
   saveUser();
 }
 
 function vote(id, side) {
   if (userData.voted[id]) { showToast('Tu as déjà voté !'); return; }
-  
-  const c = confessionsData.find(x => x.id === id);
+  const c = confessions.find(c => c.id === id);
   c.votes[side]++;
   userData.voted[id] = side;
   saveUser();
-  applyFilters(true); // Re-rend pour mettre à jour les boutons
-  showToast(side === 'right' ? '✅ Vote enregistré' : '❌ Vote enregistré');
+  applyFilters(true); // Re-affiche pour griser les boutons
+  showToast(side === 'right' ? '✅ Vote : Raison !' : '❌ Vote : Tort !');
 }
 
-// 2. SÉCURITÉ : SIGNALEMENT
 function reportPost(id) {
   if(confirm("Signaler ce contenu pour propos inappropriés ou dangereux ?")) {
-    userData.reported.push(id);
-    saveUser();
-    applyFilters(true); // Fait disparaître le post de l'écran
+    userData.reported.push(id); saveUser(); applyFilters(true);
     showToast('⚠️ Contenu signalé et masqué. Merci.');
   }
 }
 
-// 2. SÉCURITÉ : ANTI-SPAM CONFESSION
-let selectedCategory = '';
-function selectCat(btn, cat) { 
-  document.querySelectorAll('.cat-option').forEach(b => b.classList.remove('selected')); 
-  btn.classList.add('selected'); selectedCategory = cat; 
+function toggleComments(id) {
+  const section = document.getElementById('comments-' + id);
+  section.classList.toggle('visible');
+  if (section.classList.contains('visible')) setTimeout(() => section.querySelector('input').focus(), 100);
 }
+
+function addComment(id) {
+  const input = document.getElementById('cinput-' + id);
+  const text = input.value.trim();
+  if (!text) return;
+  const safeText = text.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const c = confessions.find(c => c.id === id);
+  const newComment = { author: 'Anonyme_' + Math.floor(Math.random()*9000+1000), text: safeText, emoji:['💬','😮','💜','🤝','❤️','🙏'][Math.floor(Math.random()*6)] };
+  c.comments.push(newComment);
+  
+  const list = document.getElementById('comments-list-' + id);
+  const div = document.createElement('div');
+  div.className = 'comment-item';
+  div.innerHTML = `<div class="comment-avatar">${newComment.emoji}</div><div class="comment-bubble"><div class="comment-author">${newComment.author}</div><div class="comment-text">${newComment.text}</div></div>`;
+  list.appendChild(div);
+  input.value = '';
+  
+  const card = document.querySelector('[data-id="' + id + '"]');
+  card.querySelectorAll('.action-btn')[1].querySelector('.btn-count').textContent = c.comments.length;
+  showToast('💬 Commentaire posté !');
+}
+
+// =====================================================
+// MODAL & ANTI-SPAM
+// =====================================================
+function openModal() { document.getElementById('modalOverlay').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+function closeModalIfBg(e) { if (e.target === document.getElementById('modalOverlay')) closeModal(); }
+function selectCat(btn, cat) { document.querySelectorAll('.cat-option').forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); selectedCategory = cat; }
+document.getElementById('confessionText').addEventListener('input', function() { document.getElementById('charCount').textContent = this.value.length + ' / 500'; });
 
 function submitConfession() {
-  // Rate Limiting : 1 minute
-  if (Date.now() - userData.lastPostTime < 60000) {
-    showToast('⏳ Attends 1 minute avant de publier à nouveau (Anti-spam).');
-    return;
-  }
-
+  if (Date.now() - userData.lastPostTime < 60000) { showToast('⏳ Attends 1 minute entre chaque publication.'); return; }
+  
   const text = document.getElementById('confessionText').value.trim();
-  if (!text || !selectedCategory) { showToast('⚠️ Remplis tout !'); return; }
+  if (!text) { showToast('⚠️ Écris ta confession d\'abord !'); return; }
+  if (!selectedCategory) { showToast('⚠️ Choisis une catégorie !'); return; }
   
-  confessionsData.unshift({
-    id: Date.now(), text: text, category: selectedCategory, avatar: '👤', name: 'Anonyme', timestamp: Date.now(), likes: 0, comments: [], votes: { right:0, wrong:0 }
-  });
-
-  userData.lastPostTime = Date.now();
-  saveUser();
+  const safeText = text.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const newC = { id: Date.now(), text: safeText, category: selectedCategory, avatar: '🔒', avatarBg: 'linear-gradient(135deg, var(--violet), var(--rose))', name: 'Anonyme_' + Math.floor(Math.random()*9000+1000), timestamp: Date.now(), isWolof: false, likes: 0, comments:[], votes: { right: 0, wrong: 0 } };
   
-  document.getElementById('confessionText').value = '';
-  document.getElementById('confessModal').classList.remove('open');
+  confessions.unshift(newC);
+  userData.lastPostTime = Date.now(); saveUser();
+  
+  closeModal();
+  document.getElementById('confessionText').value = ''; document.getElementById('charCount').textContent = '0 / 500'; selectedCategory = '';
+  document.querySelectorAll('.cat-option').forEach(b => b.classList.remove('selected'));
   applyFilters(true);
-  showToast('🔒 Confession en ligne !');
+  showToast('🔒 Confession publiée anonymement !');
 }
 
 // =====================================================
-// 4. PREMIUM ET MONÉTISATION
+// STORY, PREMIUM ET UTILS
 // =====================================================
-function triggerPremium() {
-  if(userData.isPremium) {
-    showToast('Tu es déjà membre Premium ⚡'); return;
-  }
-  // Simulation de la passerelle de paiement (PayDunya, Stripe, etc.)
-  if(confirm("Simulation Paiement : Veux-tu payer 2500 FCFA pour débloquer le contenu 🔞 et enlever les pubs ?")) {
-    userData.isPremium = true;
-    saveUser();
-    applyFilters(true); // Re-rend l'écran (défloute les posts 18+)
-    document.querySelector('.btn-premium').textContent = '⚡ Premium Actif';
-    showToast('🎉 Bienvenue dans le club Premium !');
-  }
-}
+function openStory(enc) { currentStoryText = decodeURIComponent(enc); document.getElementById('storyText').textContent = '"' + currentStoryText + '"'; document.getElementById('storyModal').classList.add('open'); }
+function closeStory() { document.getElementById('storyModal').classList.remove('open'); }
+function shareWA(enc) { const msg = `💀 SecretZone:\n\n"${decodeURIComponent(enc)}"\n\n👉 secretzone.app`; window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank'); }
+function shareWhatsApp() { shareWA(encodeURIComponent(currentStoryText)); }
+function copyStory() { navigator.clipboard.writeText(`💀 SecretZone:\n\n"${currentStoryText}"\n\n👉 secretzone.app`).then(() => showToast('📋 Copié !')); }
 
-// UTILS
-function filterCat(btn, cat) { document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); currentFilter = cat; applyFilters(); }
-function openModal(id) { document.getElementById(id).classList.add('open'); }
-function closeModalIfBg(e) { if (e.target.classList.contains('modal-overlay')) e.target.classList.remove('open'); }
-function shareWA(enc) { window.open('https://wa.me/?text=' + enc + '%0A%0A👉%20Lu%20sur%20secretzone.app', '_blank'); }
+function filterCat(btn, cat) { document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); currentFilter = cat; applyFilters(true); }
+function formatNum(n) { if (n >= 1000) return (n/1000).toFixed(1).replace('.0','') + 'k'; return n; }
 
 let toastTimeout;
 function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimeout); toastTimeout = setTimeout(() => t.classList.remove('show'), 2800); }
 
+function showPremium() { 
+  const el = document.getElementById('premiumSection'); el.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
+  el.style.border = '1px solid rgba(255,215,0,0.6)'; setTimeout(() => { el.style.border = '1px solid rgba(255,215,0,0.25)'; }, 2000); 
+}
+
+function triggerPremium() {
+  if(userData.isPremium) { showToast('Tu es déjà membre Premium ⚡'); return; }
+  if(confirm("Simulation Paiement : Veux-tu payer 2500 FCFA pour débloquer le contenu 🔞 et enlever les pubs ?")) {
+    userData.isPremium = true; saveUser();
+    document.getElementById('btnHeaderPremium').textContent = '⚡ Premium Actif';
+    applyFilters(true);
+    showToast('🎉 Bienvenue dans le club Premium !');
+  }
+}
+
+// LIVE COUNTER
+setInterval(() => { const el = document.getElementById('totalUsers'); el.textContent = (parseInt(el.textContent.replace(/[^0-9]/g,'')) + Math.floor(Math.random()*3)).toLocaleString('fr-FR'); }, 4000);
+
 // INIT
-if(userData.isPremium) document.querySelector('.btn-premium').textContent = '⚡ Premium Actif';
-applyFilters();
+if(userData.isPremium) document.getElementById('btnHeaderPremium').textContent = '⚡ Premium Actif';
+applyFilters(true);
+renderRanking();
 </script>
 </body>
 </html>
