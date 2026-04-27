@@ -9,7 +9,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="SecretZone">
-<!-- PWA Manifest inline via JS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -310,7 +309,6 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
 </head>
 <body>
 
-<!-- ONBOARDING -->
 <div id="onboarding-overlay">
   <div class="onboard-card">
     <div class="onboard-title">SECRETZONE</div>
@@ -325,7 +323,6 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   </div>
 </div>
 
-<!-- HOME -->
 <div id="home-view">
   <header class="header-home">
     <div class="logo">SecretZone</div>
@@ -346,7 +343,6 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
       <div class="stat"><span class="stat-number">∞</span><span class="stat-label">Anonymat</span></div>
     </div>
 
-    <!-- STREAK HOME -->
     <div class="streak-home" id="streakHome">
       <span style="font-size:1.4rem;">🔥</span>
       <div class="streak-home-text" id="streakHomeText"></div>
@@ -356,7 +352,6 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
     <button class="btn-ghost" onclick="openConfessSheet()">✍️ Lâcher mon secret maintenant</button>
   </section>
 
-  <!-- SEARCH HOME -->
   <div class="home-search-wrap">
     <div class="home-search-inner">
       <span class="home-search-icon">🔍</span>
@@ -407,7 +402,6 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   </footer>
 </div>
 
-<!-- FEED -->
 <div id="feed-view">
   <div class="feed-header">
     <div class="feed-logo">SZ</div>
@@ -419,7 +413,6 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
     </div>
   </div>
 
-  <!-- FILTER -->
   <div class="filter-bar" id="filterBar">
     <button class="filter-chip active" data-cat="all" onclick="setFilter('all',this)">✨ Tout</button>
     <button class="filter-chip" data-cat="amour" onclick="setFilter('amour',this)">❤️ Amour</button>
@@ -430,14 +423,12 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
     <button class="filter-chip" data-cat="wolof" onclick="setFilter('wolof',this)">🇸🇳 Sénégal</button>
   </div>
 
-  <!-- SORT -->
   <div class="sort-bar">
     <button class="sort-chip active" data-sort="hot" onclick="setSort('hot',this)">🔥 Tendances</button>
     <button class="sort-chip" data-sort="new" onclick="setSort('new',this)">🆕 Récent</button>
     <button class="sort-chip" data-sort="top" onclick="setSort('top',this)">👑 Top likes</button>
   </div>
 
-  <!-- SEARCH -->
   <div class="search-bar-wrap" id="searchBarWrap">
     <div class="search-bar-inner">
       <input type="text" class="search-input" id="feedSearchInput" placeholder="Rechercher dans les confessions..." oninput="onFeedSearch(this.value)">
@@ -449,7 +440,6 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   <button class="floating-confess" onclick="openConfessSheet()">＋</button>
 </div>
 
-<!-- SHARE CARD -->
 <div id="shareCardOverlay">
   <div class="share-card" id="shareCardEl">
     <div class="share-card-header">
@@ -470,7 +460,6 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   <button class="sc-close" onclick="closeShareCard()">✕ Fermer</button>
 </div>
 
-<!-- PWA BANNER -->
 <div class="pwa-banner" id="pwaBanner">
   <span style="font-size:1.6rem;">📲</span>
   <div class="pwa-banner-text"><strong>Installer SecretZone</strong><br>Accès rapide depuis ton écran d'accueil.</div>
@@ -478,10 +467,8 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   <button class="pwa-dismiss" onclick="dismissPWA()">✕</button>
 </div>
 
-<!-- SHEETS -->
 <div class="sheet-overlay" id="sheetOverlay" onclick="closeAllSheets()"></div>
 
-<!-- CONFESSER -->
 <div class="bottom-sheet" id="sheetConfess">
   <div class="sheet-handle"></div>
   <div class="sheet-header">Lâche ton secret 🔒</div>
@@ -504,7 +491,6 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   </div>
 </div>
 
-<!-- COMMENTAIRES -->
 <div class="bottom-sheet" id="sheetComments">
   <div class="sheet-handle"></div>
   <div class="sheet-header" id="commentCountTitle">Commentaires</div>
@@ -515,7 +501,6 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   </div>
 </div>
 
-<!-- SCRIPT -->
 <div class="bottom-sheet" id="sheetScript">
   <div class="sheet-handle"></div>
   <div class="sheet-header">🎥 Script TikTok / Reels</div>
@@ -526,14 +511,12 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   </div>
 </div>
 
-<!-- TOP VIRAL -->
 <div class="bottom-sheet" id="sheetTopViral">
   <div class="sheet-handle"></div>
   <div class="sheet-header">🔥 Top 5 Viral</div>
   <div class="sheet-content" id="viralList"></div>
 </div>
 
-<!-- SIGNALEMENT -->
 <div class="bottom-sheet" id="sheetReport">
   <div class="sheet-handle"></div>
   <div class="sheet-header">🚩 Signaler</div>
@@ -550,14 +533,12 @@ textarea.confess-input::placeholder{color:rgba(255,255,255,.25);}
   </div>
 </div>
 
-<!-- NOTIFICATIONS -->
 <div class="bottom-sheet" id="sheetNotif">
   <div class="sheet-handle"></div>
   <div class="sheet-header">🔔 Notifications</div>
   <div class="sheet-content" id="notifList"></div>
 </div>
 
-<!-- PREMIUM -->
 <div class="bottom-sheet" id="sheetBoost">
   <div class="sheet-handle"></div>
   <div class="sheet-header">👑 SecretZone Premium</div>
@@ -895,7 +876,8 @@ Object.assign(window, {
   goToFeedSearch, goToFeedFiltered, toggleSearch, closeSearch, onFeedSearch, setFilter,
   setSort, shareNative, shareCardWA, shareCardCopy, closeShareCard, dismissPWA, setLang,
   selectCat, submitConfession, postComment, copyScript, submitReport, simulatePayment,
-  toggleLike, vote, openComments, openScript, openTopViral, updateCharCount, closeAllSheets, goToHome
+  toggleLike, vote, openComments, openScript, openTopViral, updateCharCount, closeAllSheets, 
+  goToHome, openShareCard, openReport // Ajoutés pour assurer le fonctionnement total
 });
 
 /* ══ INIT ══ */
@@ -910,3 +892,5 @@ document.addEventListener('DOMContentLoaded',()=>{
   setInterval(()=>{ const el=document.getElementById('totalUsers');if(!el)return; const cur=parseInt(el.textContent.replace(/\D/g,''))||18502; el.textContent=fmtNum(Math.max(18000,cur+(Math.random()>.5?1:-1))); },5000);
 });
 </script>
+</body>
+</html>
