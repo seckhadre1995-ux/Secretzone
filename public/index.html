@@ -11,56 +11,87 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #000000;
+  --bg: #000000; --bg-card: #111111;
   --violet: #6A00FF; --rose: #FF00AA; --cyan: #00F5FF;
   --white: #FFFFFF; --muted: #888888;
   --gold: #FFD700;
   --font-display: 'Bebas Neue', sans-serif;
   --font-body: 'DM Sans', sans-serif;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
-html, body { height: 100%; width: 100%; background: var(--bg); color: var(--white); font-family: var(--font-body); overflow: hidden; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body { background: var(--bg); color: var(--white); font-family: var(--font-body); overflow-x: hidden; }
 
 /* OVERLAYS & NOISE */
 body::before {
-  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.05;
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
-/* HEADER FIXE */
-header {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 20px; background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+/* =========================================
+   INTERFACE 1 : ACCUEIL (INFORMATIONS)
+   ========================================= */
+#home-view {
+  min-height: 100vh; display: flex; flex-direction: column; padding-bottom: 50px;
+  animation: fadeIn 0.4s ease;
 }
-.logo { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 2px; background: linear-gradient(90deg, var(--violet), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.header-right { display: flex; gap: 12px; }
-.btn-top { font-family: var(--font-body); font-weight: 700; font-size: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 12px; border-radius: 50px; backdrop-filter: blur(10px); cursor: pointer; }
-.btn-top.viral { border-color: var(--rose); color: var(--rose); background: rgba(255,0,170,0.1); }
+.home-header {
+  display: flex; align-items: center; justify-content: space-between; padding: 20px;
+}
+.logo { font-family: var(--font-display); font-size: 2rem; letter-spacing: 2px; background: linear-gradient(90deg, var(--violet), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.logo span { color: var(--cyan); -webkit-text-fill-color: var(--cyan); }
 
-/* TIKTOK SCROLL CONTAINER */
-.snap-container {
-  height: 100vh; width: 100vw; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth;
+.hero { text-align: center; padding: 60px 20px 40px; }
+.hero h1 { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 5rem); line-height: 0.9; margin-bottom: 15px; }
+.hero h1 em { background: linear-gradient(90deg, var(--violet), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-style: normal; }
+.hero p { color: var(--muted); max-width: 400px; margin: 0 auto 30px; line-height: 1.6; }
+
+.stats-container { display: flex; justify-content: center; gap: 30px; margin-bottom: 40px; }
+.stat-box { text-align: center; }
+.stat-num { font-family: var(--font-display); font-size: 2rem; color: var(--white); }
+.stat-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-family: 'Space Mono', monospace; }
+
+/* CTA PRINCIPAL : ENTRER DANS LE FEED */
+.btn-enter-feed {
+  display: block; width: calc(100% - 40px); max-width: 350px; margin: 0 auto 40px;
+  background: linear-gradient(135deg, var(--violet), var(--rose));
+  color: white; padding: 18px; border-radius: 50px; border: none;
+  font-size: 1.1rem; font-weight: bold; cursor: pointer;
+  box-shadow: 0 10px 30px rgba(255,0,170,0.3); animation: pulse 2s infinite;
 }
+
+.home-info-box {
+  background: var(--bg-card); border: 1px solid #222; border-radius: 20px; padding: 24px; margin: 0 20px; max-width: 600px; margin-left: auto; margin-right: auto; text-align: center;
+}
+.home-info-box h3 { color: var(--cyan); margin-bottom: 10px; font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 1px; }
+.home-info-box p { font-size: 0.9rem; color: #aaa; line-height: 1.5; margin-bottom: 20px; }
+.btn-outline { background: transparent; border: 1px solid #444; color: white; padding: 10px 20px; border-radius: 50px; font-weight: bold; cursor: pointer; }
+
+/* =========================================
+   INTERFACE 2 : FEED TIKTOK (SCROLLER)
+   ========================================= */
+#feed-view {
+  display: none; height: 100vh; width: 100vw; overflow: hidden; position: relative; background: black;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.feed-header {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; padding: 16px 20px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+}
+.btn-back { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 50px; font-weight: bold; font-size: 0.8rem; cursor: pointer; backdrop-filter: blur(5px); }
+.btn-top-confess { background: linear-gradient(90deg, var(--violet), var(--rose)); color: white; border: none; padding: 8px 16px; border-radius: 50px; font-weight: bold; font-size: 0.8rem; cursor: pointer; }
+
+.snap-container { height: 100vh; width: 100vw; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
 .snap-container::-webkit-scrollbar { display: none; }
 
-/* SLIDE (1 CONFESSION = 1 ECRAN) */
-.slide {
-  height: 100vh; width: 100vw; scroll-snap-align: start; position: relative;
-  display: flex; flex-direction: column; justify-content: center; padding: 20px 80px 120px 20px;
-  background-size: cover; background-position: center; border-bottom: 1px solid #111;
-}
-
-/* DEGRADES DYNAMIQUES */
+.slide { height: 100vh; width: 100vw; scroll-snap-align: start; position: relative; display: flex; flex-direction: column; justify-content: center; padding: 20px 80px 120px 20px; background-size: cover; background-position: center; border-bottom: 1px solid #111; user-select: none; }
 .bg-amour { background: radial-gradient(circle at center, rgba(255,0,170,0.15) 0%, var(--bg) 70%); }
 .bg-trahison { background: radial-gradient(circle at center, rgba(255,165,0,0.15) 0%, var(--bg) 70%); }
 .bg-dark { background: radial-gradient(circle at center, rgba(106,0,255,0.15) 0%, var(--bg) 70%); }
 .bg-drole { background: radial-gradient(circle at center, rgba(0,245,255,0.15) 0%, var(--bg) 70%); }
 
-/* CONTENU CONFESSION */
 .slide-badge { position: absolute; top: 80px; left: 20px; display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: bold; border: 1px solid rgba(255,255,255,0.2); }
 .slide-badge.wolof { background: rgba(0,245,255,0.1); color: var(--cyan); border-color: var(--cyan); margin-left: 10px;}
-
 .slide-text { font-size: clamp(1.4rem, 6vw, 2rem); font-weight: 700; line-height: 1.4; text-shadow: 0 4px 20px rgba(0,0,0,0.8); margin-bottom: 20px; }
 .slide-author { font-size: 0.85rem; color: var(--muted); font-family: 'Space Mono', monospace; }
 
@@ -72,10 +103,7 @@ header {
 .side-btn.liked .side-icon { background: rgba(255,0,170,0.2); border-color: var(--rose); }
 .side-text { font-size: 0.75rem; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
 
-.icon-wa { background: rgba(37,211,102,0.2); border-color: #25D366; }
-.icon-boost { background: rgba(255,215,0,0.2); border-color: #FFD700; }
-
-/* SYSTEME POLEMIQUE (BOTTOM) */
+/* SYSTEME POLEMIQUE */
 .polemic-box { position: absolute; bottom: 30px; left: 20px; right: 80px; z-index: 10; }
 .polemic-q { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; color: var(--gold); text-shadow: 0 2px 5px #000; }
 .polemic-votes { display: flex; gap: 10px; }
@@ -84,72 +112,119 @@ header {
 .vote-btn.no { border-color: rgba(255,80,80,0.5); }
 .vote-btn.voted { background: rgba(255,255,255,0.2); opacity: 0.5; }
 
-/* AD SLIDE */
-.ad-slide { background: linear-gradient(135deg, #111, #222); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-.ad-label { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
-.ad-title { font-size: 2rem; font-family: var(--font-display); color: var(--cyan); margin-bottom: 10px; }
-.ad-btn { background: var(--cyan); color: black; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; margin-top: 20px; }
-
-/* BOTTOM SHEETS (MODALS) */
+/* =========================================
+   MODALS COMMUNS (BOTTOM SHEETS)
+   ========================================= */
 .bottom-sheet { position: fixed; bottom: 0; left: 0; right: 0; background: #111; border-radius: 20px 20px 0 0; z-index: 200; transform: translateY(100%); transition: transform 0.3s ease-out; max-height: 85vh; display: flex; flex-direction: column; border-top: 1px solid rgba(255,255,255,0.1); }
 .bottom-sheet.open { transform: translateY(0); }
-.sheet-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 199; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.sheet-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 199; opacity: 0; pointer-events: none; transition: opacity 0.3s; backdrop-filter: blur(3px); }
 .sheet-overlay.open { opacity: 1; pointer-events: all; }
 .sheet-handle { width: 40px; height: 4px; background: var(--muted); border-radius: 2px; margin: 12px auto; }
 .sheet-header { padding: 0 20px 16px; border-bottom: 1px solid #222; text-align: center; font-weight: bold; font-size: 1.1rem; }
 .sheet-content { padding: 20px; overflow-y: auto; flex: 1; }
 
-/* COMMENTAIRES UI */
-.comment-item { display: flex; gap: 12px; margin-bottom: 16px; }
-.c-avatar { width: 36px; height: 36px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
-.c-body { background: #1a1a1a; padding: 10px 14px; border-radius: 0 16px 16px 16px; flex: 1; }
-.c-name { font-size: 0.75rem; color: var(--muted); margin-bottom: 4px; font-weight: bold; }
-.c-text { font-size: 0.9rem; line-height: 1.4; }
-.c-input-area { padding: 12px 20px; border-top: 1px solid #222; display: flex; gap: 10px; background: #0a0a0a; }
-.c-input { flex: 1; background: #222; border: none; color: white; padding: 12px 16px; border-radius: 50px; outline: none; font-family: var(--font-body); }
-.c-send { background: var(--rose); color: white; border: none; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-
-/* SCRIPT & BOOST UI */
-.script-box { background: rgba(106,0,255,0.1); border: 1px solid var(--violet); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
-.script-part { margin-bottom: 12px; }
-.script-label { font-family: 'Space Mono'; font-size: 0.7rem; color: var(--violet); text-transform: uppercase; margin-bottom: 4px; }
-.script-text { font-size: 1rem; font-weight: 500; }
 .btn-primary { width: 100%; background: linear-gradient(90deg, var(--violet), var(--rose)); border: none; color: white; padding: 14px; border-radius: 12px; font-size: 1rem; font-weight: bold; cursor: pointer; }
 
-/* CONFESS MODAL */
+/* MODAL CONFESSER */
 textarea.confess-input { width: 100%; height: 150px; background: #111; border: 1px solid #333; color: white; padding: 16px; border-radius: 12px; resize: none; outline: none; font-size: 1.1rem; font-family: var(--font-body); margin-bottom: 20px; }
 .cat-selector { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
 .cat-tag { padding: 8px 16px; border-radius: 50px; border: 1px solid #444; background: transparent; color: white; font-size: 0.85rem; cursor: pointer; }
 .cat-tag.active { border-color: var(--cyan); background: rgba(0,245,255,0.1); color: var(--cyan); }
 
-/* TOP VIRAL UI */
-.viral-item { display: flex; align-items: center; gap: 14px; background: #111; border: 1px solid #333; padding: 12px; border-radius: 12px; margin-bottom: 10px; cursor: pointer;}
-.viral-rank { font-family: var(--font-display); font-size: 1.5rem; color: var(--rose); min-width: 25px; }
-.viral-text { font-size: 0.85rem; flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+/* SCRIPT & COMMENTAIRES (Raccourcis pour l'exemple) */
+.script-box { background: rgba(106,0,255,0.1); border: 1px solid var(--violet); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+.script-part { margin-bottom: 12px; }
+.script-label { font-family: 'Space Mono'; font-size: 0.7rem; color: var(--violet); text-transform: uppercase; margin-bottom: 4px; }
+.comment-item { display: flex; gap: 12px; margin-bottom: 16px; }
+.c-avatar { width: 36px; height: 36px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+.c-body { background: #1a1a1a; padding: 10px 14px; border-radius: 0 16px 16px 16px; flex: 1; }
+.c-name { font-size: 0.75rem; color: var(--muted); margin-bottom: 4px; font-weight: bold; }
+.c-input-area { padding: 12px 20px; border-top: 1px solid #222; display: flex; gap: 10px; background: #0a0a0a; }
+.c-input { flex: 1; background: #222; border: none; color: white; padding: 12px 16px; border-radius: 50px; outline: none; font-family: var(--font-body); }
+.c-send { background: var(--rose); color: white; border: none; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
 
-/* TOAST */
-.toast { position: fixed; top: 80px; left: 50%; transform: translateX(-50%) translateY(-20px); background: white; color: black; padding: 12px 24px; border-radius: 50px; font-weight: bold; font-size: 0.85rem; opacity: 0; pointer-events: none; transition: all 0.3s; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+/* TOAST ET ANIMATIONS */
+.toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-20px); background: white; color: black; padding: 12px 24px; border-radius: 50px; font-weight: bold; font-size: 0.85rem; opacity: 0; pointer-events: none; transition: all 0.3s; z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,0,170,0.4); } 70% { box-shadow: 0 0 0 20px rgba(255,0,170,0); } 100% { box-shadow: 0 0 0 0 rgba(255,0,170,0); } }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">Secret<span>Zone</span></div>
-  <div class="header-right">
-    <button class="btn-top viral" onclick="openTopViral()">🔥 Top Viral</button>
-    <button class="btn-top" onclick="openConfess()">+ Confesser</button>
+<!-- =========================================
+     INTERFACE 1 : L'ACCUEIL (INFORMATIONS)
+     ========================================= -->
+<div id="home-view">
+  <div class="home-header">
+    <div class="logo">Secret<span>Zone</span></div>
+    <button class="btn-outline" style="border-color:var(--gold); color:var(--gold);" onclick="showToast('Bientôt Premium !')">⚡ Premium</button>
   </div>
-</header>
 
-<div class="snap-container" id="feed">
-  <!-- Les slides seront injectés ici -->
+  <section class="hero">
+    <h1>Le lieu où<br>la vérité<br><em>éclate</em></h1>
+    <p>100% Anonyme. Aucun compte requis. Lis, juge et partage les secrets les plus sombres et drôles du web.</p>
+    
+    <div class="stats-container">
+      <div class="stat-box"><div class="stat-num" id="totalConfessions">4,208</div><div class="stat-label">Secrets</div></div>
+      <div class="stat-box"><div class="stat-num" id="totalUsers">18,502</div><div class="stat-label">Lecteurs</div></div>
+      <div class="stat-box"><div class="stat-num">∞</div><div class="stat-label">Anonymat</div></div>
+    </div>
+  </section>
+
+  <!-- BOUTON PRINCIPAL : CHANGE D'INTERFACE -->
+  <button class="btn-enter-feed" onclick="goToFeed()">👉 Lancer le Mode TikTok 🔥</button>
+
+  <div class="home-info-box">
+    <h3>Pourquoi SecretZone ?</h3>
+    <p>Dans la vraie vie, on ne peut pas tout dire. Peur d'être jugé, peur des conséquences. Ici, tu as le pouvoir de lâcher ton fardeau, et la communauté décidera si tu as raison ou tort.</p>
+    <button class="btn-outline" onclick="openConfess()">+ Ajouter une confession</button>
+  </div>
+  
+  <p style="text-align:center; color:var(--muted); font-size:0.7rem; margin-top:40px;">© 2026 SecretZone · Cookies · Confidentialité</p>
 </div>
 
-<!-- BOTTOM SHEETS (MODALS) -->
+
+<!-- =========================================
+     INTERFACE 2 : LE FEED TIKTOK
+     ========================================= -->
+<div id="feed-view">
+  <div class="feed-header">
+    <!-- BOUTON RETOUR A L'ACCUEIL -->
+    <button class="btn-back" onclick="goToHome()">⬅ Accueil</button>
+    <div class="logo" style="font-size:1.4rem;">Secret<span>Zone</span></div>
+    <button class="btn-top-confess" onclick="openConfess()">+ Confesser</button>
+  </div>
+
+  <div class="snap-container" id="feed-container">
+    <!-- Les confessions seront injectées ici par Javascript -->
+  </div>
+</div>
+
+
+<!-- =========================================
+     MODALS COMMUNS (Accessibles partout)
+     ========================================= -->
 <div class="sheet-overlay" id="sheetOverlay" onclick="closeAllSheets()"></div>
 
-<!-- 1. MODAL COMMENTAIRES -->
+<!-- MODAL CONFESSER -->
+<div class="bottom-sheet" id="sheetConfess">
+  <div class="sheet-handle"></div>
+  <div class="sheet-header">Lâche ton secret</div>
+  <div class="sheet-content">
+    <textarea class="confess-input" id="confessText" placeholder="Personne ne saura que c'est toi..."></textarea>
+    <div class="cat-selector">
+      <button class="cat-tag active" onclick="selectCat(this, 'amour')">❤️ Amour</button>
+      <button class="cat-tag" onclick="selectCat(this, 'trahison')">🔪 Trahison</button>
+      <button class="cat-tag" onclick="selectCat(this, 'drole')">😂 Drôle</button>
+      <button class="cat-tag" onclick="selectCat(this, 'dark')">🖤 Dark</button>
+    </div>
+    <button class="btn-primary" onclick="submitConfession()">Publier Anonymement</button>
+  </div>
+</div>
+
+<!-- MODAL COMMENTAIRES -->
 <div class="bottom-sheet" id="sheetComments">
   <div class="sheet-handle"></div>
   <div class="sheet-header" id="commentCountTitle">Commentaires</div>
@@ -160,65 +235,46 @@ textarea.confess-input { width: 100%; height: 150px; background: #111; border: 1
   </div>
 </div>
 
-<!-- 2. MODAL SCRIPT TIKTOK -->
+<!-- MODAL SCRIPT -->
 <div class="bottom-sheet" id="sheetScript">
   <div class="sheet-handle"></div>
-  <div class="sheet-header">🎥 Ton Script TikTok Automatique</div>
+  <div class="sheet-header">🎥 Ton Script Viral</div>
   <div class="sheet-content">
-    <p style="font-size:0.8rem; color:var(--muted); margin-bottom:20px; text-align:center;">Lis ça face caméra, ajoute une musique triste, et fais des vues.</p>
+    <p style="font-size:0.8rem; color:var(--muted); margin-bottom:20px; text-align:center;">Copie ce script pour tes vidéos TikTok/Reels.</p>
     <div class="script-box" id="scriptContent"></div>
     <button class="btn-primary" onclick="copyScript()">📋 Copier le script</button>
   </div>
 </div>
 
-<!-- 3. MODAL CONFESSER -->
-<div class="bottom-sheet" id="sheetConfess">
-  <div class="sheet-handle"></div>
-  <div class="sheet-header">Lâche ton secret</div>
-  <div class="sheet-content">
-    <textarea class="confess-input" id="confessText" placeholder="Aujourd'hui j'ai réalisé que..."></textarea>
-    <div class="cat-selector" id="catSelector">
-      <button class="cat-tag active" onclick="selectCat(this, 'amour')">❤️ Amour</button>
-      <button class="cat-tag" onclick="selectCat(this, 'trahison')">🔪 Trahison</button>
-      <button class="cat-tag" onclick="selectCat(this, 'drole')">😂 Drôle</button>
-      <button class="cat-tag" onclick="selectCat(this, 'dark')">🖤 Dark</button>
-    </div>
-    <button class="btn-primary" onclick="submitConfession()">Publier Anonymement</button>
-  </div>
-</div>
-
-<!-- 4. MODAL BOOST (MONETISATION) -->
-<div class="bottom-sheet" id="sheetBoost">
-  <div class="sheet-handle"></div>
-  <div class="sheet-header">🚀 Rendre Viral</div>
-  <div class="sheet-content" style="text-align:center;">
-    <span style="font-size: 4rem; display:block; margin-bottom:10px;">💸</span>
-    <h3 style="margin-bottom: 10px; color:var(--gold);">Boost ta confession</h3>
-    <p style="font-size:0.9rem; color:var(--muted); margin-bottom: 24px;">Pour 500 FCFA, ta confession sera vue par 10 000 personnes aujourd'hui et passera en Top Feed.</p>
-    <button class="btn-primary" style="background:var(--gold); color:black;" onclick="simulatePayment()">Payer 500 FCFA (Orange Money / Wave)</button>
-  </div>
-</div>
-
-<!-- 5. MODAL TOP VIRAL -->
-<div class="bottom-sheet" id="sheetTopViral">
-  <div class="sheet-handle"></div>
-  <div class="sheet-header">🔥 Le Temple de la Sauce</div>
-  <div class="sheet-content" id="viralList"></div>
-</div>
-
 <div class="toast" id="toast">Message</div>
 
+<!-- =========================================
+     JAVASCRIPT LOGIC
+     ========================================= -->
 <script>
-// ==========================================
-// 1. DATA & LOCALSTORAGE
-// ==========================================
-let userData = JSON.parse(localStorage.getItem('sz_tiktok')) || { liked:[], voted: {}, lastPost: 0 };
-function saveUser() { localStorage.setItem('sz_tiktok', JSON.stringify(userData)); }
+// NAVIGATION ENTRE LES 2 INTERFACES
+function goToFeed() {
+  document.getElementById('home-view').style.display = 'none';
+  document.getElementById('feed-view').style.display = 'block';
+  // Assurer que le feed est bien chargé si ce n'est pas fait
+  if(document.getElementById('feed-container').innerHTML.trim() === '') {
+    renderFeed();
+  }
+}
+
+function goToHome() {
+  document.getElementById('feed-view').style.display = 'none';
+  document.getElementById('home-view').style.display = 'flex';
+}
+
+// DONNÉES & UTILISATEUR
+let userData = JSON.parse(localStorage.getItem('sz_user2')) || { liked:[], voted: {}, lastPost: 0 };
+function saveUser() { localStorage.setItem('sz_user2', JSON.stringify(userData)); }
 
 const polemics = {
   'amour':["Tu pardonnes ?", "Il/elle a abusé ?", "Red flag ? 🚩"],
   'trahison':["C'est impardonnable ?", "Vengeance ?", "Tu aurais fait pareil ?"],
-  'drole': ["C'est honteux ? 😭", "On rigole ou c'est chaud ?"],
+  'drole':["C'est honteux ? 😭", "On rigole ou c'est chaud ?"],
   'dark':["On juge ou on soutient ?", "Ça fait peur ?", "Force à lui/elle ?"]
 };
 
@@ -226,35 +282,22 @@ const confessions =[
   { id: 101, text: "Je sors avec un homme marié de 38 ans aux USA... il me demande de coucher avec lui à l'hôtel, j'ai refusé. Depuis le Ramadan il m'ignore. Je l'aime, il m'aime vraiment ?", cat: 'amour', isWolof: true, likes: 15420, comments:[{a:'Anon_88', t:'Ma soeur fuis. Il voulait juste ça.'}], vRight: 200, vWrong: 9000 },
   { id: 102, text: "Mariage arrangé à 13 ans. J'ai eu mon Bac+2 seule. J'ai demandé le divorce, ma mère m'a dit de dégager. Je dors chez une amie, je pleure mais je n'abandonne pas.", cat: 'dark', isWolof: true, likes: 24300, comments:[{a:'Anon_22', t:'Force à toi reine 👑'}], vRight: 15000, vWrong: 12 },
   { id: 103, text: "J'ai fait pipi au lit cette nuit. J'ai réveillé ma femme et je lui ai dit que c'était elle... Elle a pleuré et a appelé sa mère pour lui dire. J'ai trop honte.", cat: 'drole', isWolof: true, likes: 45000, comments:[{a:'Anon_01', t:'HAHAHA avoue tout de suite 💀'}], vRight: 500, vWrong: 28000 },
-  { id: 104, text: "J'ai trompé mon copain… et aujourd'hui il m'a demandé de l'aider à choisir une bague pour ma propre demande en mariage.", cat: 'trahison', isWolof: false, likes: 8900, comments:[], vRight: 10, vWrong: 8500 },
-  { id: 105, text: "Une fille m'aime sincèrement depuis 2 ans… mais je préfère courir derrière celle qui me détruit mentalement.", cat: 'amour', isWolof: false, likes: 6700, comments:[], vRight: 400, vWrong: 6000 }
+  { id: 104, text: "J'ai trompé mon copain… et aujourd'hui il m'a demandé de l'aider à choisir une bague pour ma propre demande en mariage.", cat: 'trahison', isWolof: false, likes: 8900, comments:[], vRight: 10, vWrong: 8500 }
 ];
 
-let activePostId = null;
-
-// ==========================================
-// 2. GENERATION DU FEED (SCROLL TIKTOK)
-// ==========================================
+// RENDU DU FEED
 function renderFeed() {
-  const feed = document.getElementById('feed');
-  feed.innerHTML = '';
+  const container = document.getElementById('feed-container');
+  container.innerHTML = '';
   
-  let slideCount = 0;
-  confessions.forEach((c, index) => {
-    feed.appendChild(createSlide(c));
-    slideCount++;
-    
-    // MONÉTISATION : Insertion Pub tous les 3 posts
-    if (slideCount % 3 === 0 && slideCount < confessions.length) {
-      feed.appendChild(createAdSlide());
-    }
+  confessions.forEach((c) => {
+    container.appendChild(createSlide(c));
   });
 }
 
 function createSlide(c) {
   const div = document.createElement('div');
   div.className = `slide bg-${c.cat}`;
-  div.dataset.id = c.id;
   
   const isLiked = userData.liked.includes(c.id);
   const userVote = userData.voted[c.id];
@@ -284,195 +327,102 @@ function createSlide(c) {
         <span class="side-text">${formatNum(c.comments.length)}</span>
       </button>
       <button class="side-btn" onclick="shareWhatsApp(${c.id})">
-        <div class="side-icon icon-wa">📤</div>
+        <div class="side-icon" style="background:rgba(37,211,102,0.2); border-color:#25D366;">📤</div>
         <span class="side-text">Viral</span>
       </button>
       <button class="side-btn" onclick="openScriptMode(${c.id})">
         <div class="side-icon">🎥</div>
         <span class="side-text">Script</span>
       </button>
-      <button class="side-btn" onclick="openBoost()">
-        <div class="side-icon icon-boost">🚀</div>
-        <span class="side-text">Boost</span>
-      </button>
     </div>
   `;
   return div;
 }
 
-function createAdSlide() {
-  const div = document.createElement('div');
-  div.className = 'slide ad-slide';
-  div.innerHTML = `
-    <div class="ad-label">Publicité Partenaire</div>
-    <div class="ad-title">Gagne de l'argent<br>avec ton tel 💸</div>
-    <p style="color:var(--muted); max-width:80%;">Découvre l'application secrète qui te paye pour jouer.</p>
-    <button class="ad-btn" onclick="showToast('Ceci est une fausse pub pour la démo !')">Télécharger >></button>
-  `;
-  return div;
-}
-
-// ==========================================
-// 3. LOGIQUE VIRALE (PUNCHLINE & SCRIPT)
-// ==========================================
-function getPunchline(text) {
-  let short = text.split('.')[0]; 
-  if(short.length > 70) short = short.substring(0, 70) + '...';
-  return `😭 "${short}" 💀`;
-}
-
-function shareWhatsApp(id) {
-  const c = confessions.find(x => x.id === id);
-  const punchline = getPunchline(c.text);
-  const msg = `💀 SecretZone\n\n${punchline}\n\n👉 Tu ferais quoi à sa place ? Donne ton avis ici :\n👉 https://secretzone.app`;
-  window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
-}
-
-function openScriptMode(id) {
-  const c = confessions.find(x => x.id === id);
-  const hook = `😳 "Vous n'allez jamais y croire mais écoutez ça..."`;
-  const story = `"${c.text}"`;
-  const question = `👇 "Dites-moi en commentaire, vous auriez fait quoi à sa place ?"`;
-
-  document.getElementById('scriptContent').innerHTML = `
-    <div class="script-part"><div class="script-label">Accroche (Hook)</div><div class="script-text">${hook}</div></div>
-    <div class="script-part"><div class="script-label">L'Histoire</div><div class="script-text">${story}</div></div>
-    <div class="script-part"><div class="script-label">Question (Appel à l'action)</div><div class="script-text">${question}</div></div>
-  `;
-  openSheet('sheetScript');
-}
-
-function copyScript() {
-  const text = document.getElementById('scriptContent').innerText;
-  navigator.clipboard.writeText(text).then(() => {
-    closeAllSheets(); showToast('📋 Script copié ! Go faire 1M de vues.');
-  });
-}
-
-// ==========================================
-// 4. ACTIONS INTERACTIVES
-// ==========================================
+// LOGIQUE D'INTERACTIONS
 function toggleLike(id, btn) {
   const c = confessions.find(x => x.id === id);
   const span = btn.querySelector('.btn-count');
   if (userData.liked.includes(id)) {
-    userData.liked = userData.liked.filter(x => x !== id);
-    c.likes--; btn.classList.remove('liked');
+    userData.liked = userData.liked.filter(x => x !== id); c.likes--; btn.classList.remove('liked');
   } else {
-    userData.liked.push(id);
-    c.likes++; btn.classList.add('liked');
+    userData.liked.push(id); c.likes++; btn.classList.add('liked');
   }
-  span.textContent = formatNum(c.likes);
-  saveUser();
+  span.textContent = formatNum(c.likes); saveUser();
 }
 
 function vote(id, side) {
   if (userData.voted[id]) { showToast('Tu as déjà jugé cette histoire !'); return; }
   const c = confessions.find(x => x.id === id);
   if(side === 'yes') c.vRight++; else c.vWrong++;
-  userData.voted[id] = side;
-  saveUser();
-  renderFeed(); // Re-render to update UI
-  showToast(side === 'yes' ? '✅ Avis enregistré' : '❌ Avis enregistré');
+  userData.voted[id] = side; saveUser(); renderFeed();
+  showToast('✅ Avis enregistré');
 }
 
-// ==========================================
-// 5. BOTTOM SHEETS (MODALS)
-// ==========================================
-function openSheet(id) {
-  document.getElementById('sheetOverlay').classList.add('open');
-  document.getElementById(id).classList.add('open');
+// WHATSAPP PUNCHLINE
+function shareWhatsApp(id) {
+  const c = confessions.find(x => x.id === id);
+  let short = c.text.split('.')[0]; if(short.length > 70) short = short.substring(0, 70) + '...';
+  const punchline = `😭 "${short}" 💀`;
+  const msg = `💀 SecretZone\n\n${punchline}\n\n👉 Tu ferais quoi à sa place ? Donne ton avis ici :\n👉 https://secretzone.app`;
+  window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
 }
-function closeAllSheets() {
-  document.getElementById('sheetOverlay').classList.remove('open');
-  document.querySelectorAll('.bottom-sheet').forEach(s => s.classList.remove('open'));
+
+// SCRIPT MODE
+function openScriptMode(id) {
+  const c = confessions.find(x => x.id === id);
+  document.getElementById('scriptContent').innerHTML = `
+    <div class="script-part"><div class="script-label">Accroche (Hook)</div><div class="script-text">😳 "Vous n'allez jamais y croire..."</div></div>
+    <div class="script-part"><div class="script-label">L'Histoire</div><div class="script-text">"${c.text}"</div></div>
+    <div class="script-part"><div class="script-label">Appel à l'action</div><div class="script-text">👇 "Vous auriez fait quoi à sa place ?"</div></div>
+  `;
+  openSheet('sheetScript');
 }
+function copyScript() {
+  navigator.clipboard.writeText(document.getElementById('scriptContent').innerText).then(() => { closeAllSheets(); showToast('📋 Script copié !'); });
+}
+
+// MODALS / BOTTOM SHEETS
+function openSheet(id) { document.getElementById('sheetOverlay').classList.add('open'); document.getElementById(id).classList.add('open'); }
+function closeAllSheets() { document.getElementById('sheetOverlay').classList.remove('open'); document.querySelectorAll('.bottom-sheet').forEach(s => s.classList.remove('open')); }
 
 // COMMENTAIRES
+let activePostId = null;
 function openComments(id) {
-  activePostId = id;
-  const c = confessions.find(x => x.id === id);
+  activePostId = id; const c = confessions.find(x => x.id === id);
   document.getElementById('commentCountTitle').innerText = `${c.comments.length} Commentaires`;
-  
   const list = document.getElementById('commentList');
-  if(c.comments.length === 0) list.innerHTML = `<p style="color:#666; text-align:center; padding:20px;">Sois le premier à juger 👀</p>`;
-  else {
-    list.innerHTML = c.comments.map(cm => `
-      <div class="comment-item">
-        <div class="c-avatar">${cm.emoji || '👤'}</div>
-        <div class="c-body"><div class="c-name">@${cm.a}</div><div class="c-text">${cm.t}</div></div>
-      </div>
-    `).join('');
-  }
+  if(c.comments.length === 0) list.innerHTML = `<p style="color:#666; text-align:center;">Sois le premier à juger 👀</p>`;
+  else list.innerHTML = c.comments.map(cm => `<div class="comment-item"><div class="c-avatar">${cm.emoji||'👤'}</div><div class="c-body"><div class="c-name">@${cm.a}</div><div class="c-text">${cm.t}</div></div></div>`).join('');
   openSheet('sheetComments');
 }
-
 function postComment() {
-  const input = document.getElementById('commentInput');
-  const text = input.value.trim();
+  const text = document.getElementById('commentInput').value.trim();
   if(!text || !activePostId) return;
-  const c = confessions.find(x => x.id === activePostId);
-  c.comments.push({ a: 'Anon_' + Math.floor(Math.random()*999), t: text.replace(/</g,'&lt;'), emoji: '😈' });
-  input.value = '';
-  openComments(activePostId); // refresh
-  renderFeed(); // update count on sidebar
+  confessions.find(x => x.id === activePostId).comments.push({ a: 'Anon_' + Math.floor(Math.random()*999), t: text.replace(/</g,'&lt;'), emoji: '😈' });
+  document.getElementById('commentInput').value = ''; openComments(activePostId); renderFeed();
 }
 
 // CONFESSER
 let selCat = 'amour';
-function selectCat(btn, cat) {
-  document.querySelectorAll('.cat-tag').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active'); selCat = cat;
-}
+function selectCat(btn, cat) { document.querySelectorAll('.cat-tag').forEach(b => b.classList.remove('active')); btn.classList.add('active'); selCat = cat; }
 function openConfess() { openSheet('sheetConfess'); }
 function submitConfession() {
-  if (Date.now() - userData.lastPost < 60000) { showToast('⏳ Attends 1 min anti-spam.'); return; }
+  if (Date.now() - userData.lastPost < 60000) { showToast('⏳ Attends 1 min (anti-spam).'); return; }
   const text = document.getElementById('confessText').value.trim();
   if(!text) { showToast('⚠️ Écris un truc !'); return; }
-  
-  confessions.unshift({
-    id: Date.now(), text: text.replace(/</g,'&lt;'), cat: selCat, isWolof: false, likes: 0, comments:[], vRight: 0, vWrong: 0
-  });
-  
-  userData.lastPost = Date.now(); saveUser();
-  document.getElementById('confessText').value = '';
-  closeAllSheets(); renderFeed();
-  showToast('🔥 Confession en ligne ! Prépare-toi à être jugé.');
-  // Scroll to top
-  document.getElementById('feed').scrollTo(0,0);
-}
-
-// TOP VIRAL
-function openTopViral() {
-  const sorted = [...confessions].sort((a,b) => b.likes - a.likes).slice(0, 5);
-  const list = document.getElementById('viralList');
-  list.innerHTML = sorted.map((c, i) => `
-    <div class="viral-item" onclick="closeAllSheets(); showToast('Fais défiler pour la trouver !')">
-      <div class="viral-rank">#${i+1}</div>
-      <div class="viral-text">${c.text}</div>
-      <div style="font-size:0.7rem; color:var(--muted)">❤️ ${formatNum(c.likes)}</div>
-    </div>
-  `).join('');
-  openSheet('sheetTopViral');
-}
-
-// MONÉTISATION
-function openBoost() { openSheet('sheetBoost'); }
-function simulatePayment() {
-  closeAllSheets();
-  showToast('✅ Paiement validé. Ta confession est en orbite 🚀');
+  confessions.unshift({ id: Date.now(), text: text.replace(/</g,'&lt;'), cat: selCat, isWolof: false, likes: 0, comments:[], vRight: 0, vWrong: 0 });
+  userData.lastPost = Date.now(); saveUser(); document.getElementById('confessText').value = '';
+  closeAllSheets(); renderFeed(); showToast('🔥 Confession publiée !');
+  if(document.getElementById('feed-view').style.display === 'block') document.getElementById('feed-container').scrollTo(0,0);
 }
 
 // UTILS
 function formatNum(n) { return n >= 1000 ? (n/1000).toFixed(1).replace('.0','') + 'k' : n; }
-let tTo;
-function showToast(msg) {
-  const t = document.getElementById('toast'); t.innerText = msg; t.classList.add('show');
-  clearTimeout(tTo); tTo = setTimeout(() => t.classList.remove('show'), 3000);
-}
+let tTo; function showToast(msg) { const t = document.getElementById('toast'); t.innerText = msg; t.classList.add('show'); clearTimeout(tTo); tTo = setTimeout(() => t.classList.remove('show'), 3000); }
 
-// INIT
-renderFeed();
+// LIVE COUNTERS
+setInterval(() => { const el = document.getElementById('totalUsers'); el.textContent = (parseInt(el.textContent.replace(/[^0-9]/g,'')) + Math.floor(Math.random()*3)).toLocaleString('fr-FR'); }, 4000);
 </script>
 </body>
 </html>
